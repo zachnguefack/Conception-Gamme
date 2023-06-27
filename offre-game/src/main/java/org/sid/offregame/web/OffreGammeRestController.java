@@ -6,11 +6,8 @@ import org.sid.offregame.dto.OtherTaskDTO;
 import org.sid.offregame.entities.*;
 import org.sid.offregame.mappers.OffreGammeMapperImpl;
 import org.sid.offregame.services.OffreGameService;
-import org.sid.offregame.services.OffreGameServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -222,7 +219,6 @@ public class OffreGammeRestController {
         model.addAttribute("TaskSecond", ajusterLongueurListes(obtenirElements(listeDeListes2)));
         model.addAttribute("TaskThird", ajusterLongueurListes(obtenirElements(listeDeListes3)));
 
-
         return "index";
     }
 
@@ -283,28 +279,8 @@ public class OffreGammeRestController {
         return "index";
     }
 
-
-    @PostMapping("/task")
-    public String processSelection(@RequestParam("selectedCategory") String selectedCategoryId,Model model) {
-
-        TaskCategory taskCategory = taskCategoryRepository.findById(Long.parseLong(selectedCategoryId)).get();
-        List<Task> Tasks = taskCategory.getTasks();
-        List<OtherTask> otherTasks = new ArrayList<>();
-
-        Tasks.forEach(task ->{
-            if(task instanceof OtherTask){
-                System.out.println(task.getTaskName());
-                otherTasks.add((OtherTask) task);
-            }
-        });
-        model.addAttribute("tasks", otherTasks);
-        getCategory(model);
-
-        return "index";
-    }
-
     @PostMapping("/toggle")
-    public String toggleRow(@RequestParam("itemId") String itemId,
+    public String changeTaskStatus(@RequestParam("itemId") String itemId,
                             @RequestParam("isChecked") boolean isChecked, Model model) {
 
         offreGameService.updateTask(itemId,isChecked);

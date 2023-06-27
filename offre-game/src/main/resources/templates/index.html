@@ -3858,8 +3858,6 @@
 
 
 
-
-
                 if(timePrecision2 != null){
                 var checkbox03 = document.getElementById('checkbox03');
                 checkbox03.checked = timePrecision2.status;
@@ -4459,21 +4457,25 @@
     function calculCoutTotalOutils(){
 
       let  temporaire = 0;
+      let temporaire2 = 0;
 
       for(var i = 0; i < 10; i++){
 
         if (document.getElementById('checkboxTournageCol1' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTournage1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTournage1" + i).value);
           document.getElementById("nbTournageCol1" + i).innerHTML = "1";
         }else{
           document.getElementById("nbTournageCol1" + i).innerHTML = "0";
         }
         if (document.getElementById('checkboxTournageCol2' + i).checked) {
           temporaire += parseFloat(document.getElementById("coutMoyenOutilsTournage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTournage2" + i).value);
           document.getElementById("nbTournageCol2" + i).innerHTML = "1";
         }else{
           document.getElementById("nbTournageCol2" + i).innerHTML = "0";
         }
+
       }
 
 
@@ -4481,12 +4483,14 @@
 
         if (document.getElementById('checkboxTrouCol1' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTrou1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTrou1" + i).value);
           document.getElementById("nbTrouCol1" + i).innerHTML = "1";
         }else{
           document.getElementById("nbTrouCol1" + i).innerHTML = "0";
         }
         if (document.getElementById('checkboxTrouCol2' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTrou2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTrou2" + i).value);
           document.getElementById("nbTrouCol2" + i).innerHTML = "1";
         }else{
           document.getElementById("nbTrouCol2" + i).innerHTML = "0";
@@ -4495,13 +4499,15 @@
 
      for(var i = 0; i < 10; i++){
         if (document.getElementById('checkboxFraisageCol1' + i).checked) {
-          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsFraisage1" + i).value);
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsFraisage1" + i).value); 
+          temporaire2+= parseFloat(document.getElementById("tpsMontageFraisage1" + i).value);
           document.getElementById("nbFraisageCol1" + i).innerHTML = "1";
         }else{
           document.getElementById("nbFraisageCol1" + i).innerHTML = "0";
         }
         if (document.getElementById('checkboxFraisageCol2' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsFraisage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageFraisage2" + i).value);
           document.getElementById("nbFraisageCol2" + i).innerHTML = "1";
         }else{
           document.getElementById("nbFraisageCol2" + i).innerHTML = "0";
@@ -4511,12 +4517,14 @@
      for(var i = 0; i < 10; i++){
         if (document.getElementById('checkboxTaillageCol1' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTaillage1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTaillage1" + i).value);
           document.getElementById("nbTaillageCol1" + i).innerHTML = "1";
         } else{
           document.getElementById("nbTaillageCol1" + i).innerHTML = "0";
         }
         if (document.getElementById('checkboxTaillageCol2' + i).checked) {
           temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTaillage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTaillage2" + i).value);
           document.getElementById("nbTaillageCol2" + i).innerHTML = "1";
         }else{
           document.getElementById("nbTaillageCol2" + i).innerHTML = "0";
@@ -4524,8 +4532,9 @@
      }
 
      coutTotauxOutils.value = temporaire;
+     tpsPosageOutils.value = (temporaire2 + 3).toFixed(2);
      coutTotauxOutils.dispatchEvent(new Event('change'));
-
+     tpsPosageOutils.dispatchEvent(new Event('change'));
     }
 
 
@@ -4606,7 +4615,7 @@
       if(isNaN(param0) || isNaN(param5)){
         proportion1Input.value = '';
       }else{ 
-        proportion1Input.value = (param0/param5).toFixed(3);;
+        proportion1Input.value = (param0/param5).toFixed(3);
         proportion1Input.dispatchEvent(new Event('change'));
       }
       if(isNaN(param1) || isNaN(param5)){
@@ -4919,6 +4928,10 @@
       isHidden = !isHidden;
     });
 
+  </script>
+
+  <script>
+
     var buttonTournage = document.getElementById('showColumnsTournage');
     var hiddenColsTournage = document.querySelectorAll('.d-noneTournage');
     var isHiddenTournage = true;
@@ -4942,7 +4955,9 @@
       isHiddenTournage = !isHiddenTournage;
     });
 
+  </script>
 
+  <script>
 
     var buttonTrou = document.getElementById('showColumnsTrou');
     var hiddenColsTrou = document.querySelectorAll('.d-noneTrou');
@@ -4965,6 +4980,9 @@
       isHiddenTrou = !isHiddenTrou;
     });
 
+  </script>
+
+  <script>
 
     var buttonFraisage = document.getElementById('showColumnsFraisage');
     var hiddenColsFraisage = document.querySelectorAll('.d-noneFraisage');
@@ -4987,6 +5005,9 @@
       isHiddenFraisage = !isHiddenFraisage;
     });
 
+  </script>
+
+  <script>
 
     var buttonTaillage = document.getElementById('showColumnsTaillage');
     var hiddenColsTaillage = document.querySelectorAll('.d-noneTaillage');
@@ -5009,7 +5030,6 @@
       isHiddenTaillage = !isHiddenTaillage;
     });
 
-   
 
   </script>
 
