@@ -161,7 +161,7 @@
                 </div>
                 <div class="col-auto ms-auto">
                   <div id="table-purchases-replace-element">
-                    <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">New</span></button>
+                    <button class="btn btn-falcon-default btn-sm" onclick="ajouterQuantite()" style="background-color: #714B67;" type="button"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer</span></button>
                     <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Filter</span></button>
                     <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Export</span></button>
                   </div>
@@ -359,34 +359,34 @@
                       <td class="align-middle other-text custom-bold" th:text="${item.numero}"></td>
                       <td class="align-middle other-text custom-bold" th:text="${item.TaskName}"></td>
                       <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tempsDeReglageEnHeure' + ${iterStat.index}"  th:value="${item.tempsDeReglageEnHeure}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tempsDeReglageEnHeure')}" th:value="${item.tempsDeReglageEnHeure}"></input>
                       </td>
                       <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tempsDeProduction' + ${iterStat.index}" th:value="${item.tempsDeProduction}"></input>
+                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('tempsDeProduction')}" th:value="${item.tempsDeProduction}"></input>
                       </td>
                       <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tempsInterOperatoireEnHeure' + ${iterStat.index}"  th:value="${item.tempsInterOperatoireEnHeure}"></input>
+                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('tempsInterOperatoireEnHeure')}" th:value="${item.tempsInterOperatoireEnHeure}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tauxHoraireReglage' + ${iterStat.index}"  th:value="${item.tauxHoraireReglage}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tauxHoraireReglage')}" th:value="${item.tauxHoraireReglage}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tauxHoraireProduction' + ${iterStat.index}"  th:value="${item.tauxHoraireProduction}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tauxHoraireProduction')}"   th:value="${item.tauxHoraireProduction}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="'indirect' + ${iterStat.index}" th:value="${item.indirect}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('indirect')}" th:value="${item.indirect}"></input>
                       </td>
                       <td  class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="'marge' + ${iterStat.index}"  th:value="${item.marge}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('marge')}"   th:value="${item.marge}"></input>
                       </td>
                       <td class="align-middle  other-text">
-                        <input  type="number" class="form-control no-border" th:id="'calculPrEnCHF' + ${iterStat.index}"  th:value="${item.calculPrEnCHF}"></input>
+                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('calculPrEnCHF')}"  th:value="${item.calculPrEnCHF}"></input>
                       </td>
                       <td  class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="'tempsDePassageEnJour' + ${iterStat.index}"  th:value="${item.tempsDePassageEnJour}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tempsDePassageEnJour')}" th:value="${item.tempsDePassageEnJour}"></input>
                       </td>
                       <td class="text-middle  other-text">
-                        <input  type="number" class="form-control no-border" th:id="'calculPVenCHF' + ${iterStat.index}"  th:value="${item.calculPVenCHF}"></input>
+                        <input  type="number" class="form-control no-border" th:id="${#ids.next('calculPVenCHF')}" th:value="${item.calculPVenCHF}"></input>
                       </td>
                     </tr>    
                   </div>
@@ -408,73 +408,78 @@
                           <form class="row g-3 needs-validation" novalidate="">
 
                             <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom01">Quantité</label>
-                              <input class="form-control" id="validationCustom01" type="text" value="Mark" required="" />
+                              <label class="form-label other-text" for="qtePiecesFabric">Quantité pièce Fabrication</label>
+                              <input class="form-control" id="qtePiecesFabric" type="number" required="" readonly />
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom02">Rebut</label>
-                              <input class="form-control" id="validationCustom02" type="text" value="Otto" required="" />
+                              <label class="form-label other-text" for="rebutFabrik">Rebut de Fabrication</label>
+                              <input class="form-control" id="rebutFabrik" type="number" required="" readonly />
                               <div class="valid-feedback">Looks good!</div>
                               </div>  
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom03">Nombre de Jour Décolletage</label>
-                              <input class="form-control" id="validationCustom03" type="text" value="Otto" required="" />
+                              <label class="form-label other-text" for="nbreJourDecolletage">Nombre de Jour Décolletage</label>
+                              <input class="form-control" id="nbreJourDecolletage" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom04">Catégorie de la Pièce</label>
-                              <input class="form-control" id="validationCustom04" type="text" value="Mark" required="" />
+                              <label class="form-label other-text" for="categoriePiece">Catégorie de la Pièce</label>
+                              <select class="form-select"  id="categoriePiece" aria-label="Default select example">
+                                <option selected="">Categorie de la pièce</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                              </select>
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom05">Quantité Pièce Client</label>
-                              <input class="form-control" id="validationCustom05" type="text" value="Otto" required="" />
+                              <label class="form-label other-text" for="qtePiecesClient">Quantité Pièce Client</label>
+                              <input class="form-control" id="qtePiecesClient" onchange="calculQuantitPiecesFabrication()" type="number" value="0" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>  
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom06">Nom de la pièce</label>
-                              <input class="form-control" id="validationCustom06" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom06" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom07">Nom du plan</label>
-                              <input class="form-control" id="validationCustom07" type="text" value="Mark" required="" />
+                              <input class="form-control" id="validationCustom07" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom08">Prix/Pièce[CHF]</label>
-                              <input class="form-control" id="validationCustom08" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom08" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>  
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom09">Outillage</label>
-                              <input class="form-control" id="validationCustom09" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom09" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom09">Délai[semaines]</label>
-                              <input class="form-control" id="validationCustom09" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom09" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom08">Lot de Fabrication [Pcs]</label>
-                              <input class="form-control" id="validationCustom08" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom08" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>   
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom13">Lot Finance[pcs]</label>
-                              <input class="form-control" id="validationCustom09" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom09" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom10">Temps de passage</label>
-                              <input class="form-control" id="validationCustom10" type="text" value="Otto" required="" />
+                              <input class="form-control" id="validationCustom10" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                               <div class="col-md-2">
                               <label class="form-label other-text" for="validationCustom11">Prix de revient [CHF]</label>
-                              <input class="form-control" id="validationCustom11" type="text" value="Mark" required="" />
+                              <input class="form-control" id="validationCustom11" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                                    
@@ -4143,11 +4148,10 @@
   </script>
 
 
-  <script>
+  <script  th:inline="javascript">
 
 
     /* paramètre de décolletage*/
-
     const tpsDeReglage = document.getElementById('trdeco0');
     const tempsDeCycleDeBaseDecolletage = document.getElementById('cycleDecolletageSeconde');
     const tpsEmbarreurCanon = document.getElementById('tpsEmbarreurCanon');
@@ -4160,9 +4164,17 @@
     const moyenneProgrammationEnHeure = document.getElementById('tsmoyenneProgrammationEnHeure');
 
 
+    /* Ajustement des paramètres*/
+    const qtePiecesClient= document.getElementById('qtePiecesClient');
+    const categoriePiece= document.getElementById('categoriePiece');
+    const qtePiecesFabric = document.getElementById('qtePiecesFabric');
+    const rebutFabrik= document.getElementById('rebutFabrik');
+    const nbreJourDecolletage= document.getElementById('nbreJourDecolletage');
+
+    
     const tempscycles  = document.getElementById('tempscycles');
     const tempsDeCycleCalculerSecond = document.getElementById('tempscyclecs');
-
+    
     const num0 = document.getElementById('n0');
     const temps0 = document.getElementById('temps0');
     const total0 = document.getElementById('total0');
@@ -4220,6 +4232,113 @@
     const seq4 = document.getElementById('seq4');
     const tr4 = document.getElementById('tr4');
     const tp4 = document.getElementById('tp4');
+
+    function calculTempsDePassageEnJour(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsInterOperatoireEnHeureTab = document.querySelectorAll('[id^="tempsInterOperatoireEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < tempsDePassageEnJourTab.length; i++) {
+
+        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
+            tempsDePassageEnJourTab[i].value = 0;
+            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+          } else {
+            tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
+            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+          }
+
+      }
+
+    }
+
+    function calculPrEnCHF(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tauxHoraireReglageTab = document.querySelectorAll('[id^="tauxHoraireReglage"]');
+      var tauxHoraireProductionTab = document.querySelectorAll('[id^="tauxHoraireProduction"]');
+      var calculPrEnCHFtab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var calculPVenCHFtab = document.querySelectorAll('[id^="calculPVenCHF"]');
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < calculPrEnCHFtab.length; i++) {
+
+        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
+            calculPrEnCHFtab[i].value = 0;
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          } else {
+            calculPrEnCHFtab[i].value = (parseFloat(tempsDeReglageEnHeureTab[i].value) * parseFloat(tauxHoraireReglageTab[i].value) + (qteFabric * parseFloat(tempsDeProductionTab[i].value) * parseFloat(tauxHoraireProductionTab[i].value))).toFixed(2); 
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          }
+
+      }
+      
+    }
+
+
+    function calculeRebutDeFabrication(){
+      
+      const param1 = parseFloat(qtePiecesClient.value);
+      const param2 = parseFloat(qtePiecesFabric.value);
+
+      if (param2 !== 0) {
+        rebutFabrik.value = ((-param1 + param2) / param2).toFixed(2);
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }else{
+        rebutFabrik.value = 0;
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+    qtePiecesClient.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+    });
+    qtePiecesFabric.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+    });
+
+    categoriePiece.addEventListener('change', function(){
+      calculQuantitPiecesFabrication(); 
+      calculPrEnCHF();
+    });
+
+    
+
+
+    function calculQuantitPiecesFabrication(){
+
+      const param1 = parseFloat(categoriePiece.value);
+      const param2 = parseFloat(qtePiecesClient.value);
+
+      if (param2 !== 0) {
+        if (param1 === 1) {
+          qtePiecesFabric.value = Math.round(1.025 * param2 + 97);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 2) {
+          qtePiecesFabric.value = Math.round(1.0741 * param2 + 193);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 3) {
+          qtePiecesFabric.value = Math.round(1.118 * param2 + 326);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else {
+          qtePiecesFabric.value = 0;
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        }
+      } else {
+        qtePiecesFabric.value = 0;
+        qtePiecesFabric.dispatchEvent(new Event('change'));
+      } 
+      
+    }
 
 
     checkboxst1.addEventListener('change', function(){
@@ -4889,8 +5008,6 @@
 
   </script>
 
-
-
   <script>
 
 
@@ -5032,6 +5149,18 @@
 
 
   </script>
+
+<script th:inline="javascript">
+  function ajouterQuantite() {
+         var quantiteInputs = document.querySelectorAll('[id^="inputQuantity"]');
+         quantiteInputs.forEach(function(input) {
+             var currentValue = parseFloat(input.value);
+             if (!isNaN(currentValue)) {
+                 input.value = currentValue + 3;
+             }
+         });
+     }
+</script>
 
   </body>
 
