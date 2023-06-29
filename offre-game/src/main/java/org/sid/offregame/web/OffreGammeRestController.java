@@ -445,7 +445,7 @@ public class OffreGammeRestController {
             otherTask.setTaskName(subOtherTask.getName());
             otherTask.setStatus(subOtherTask.isStatus());
             otherTask.setNumero(subOtherTask.getNumeroSequence());
-            otherTask.setTempsDeReglageHeur(subOtherTask.getTempsDeReglage());
+            otherTask.setTempsDeReglageEnHeure(subOtherTask.getTempsDeReglage());
             otherTask.setTempsInterOperatoireEnHeure(subOtherTask.getTempsDeProduction());
             otherTask.setEdit(true);
             otherTask.setTempsInterOperatoireEnHeure(subOtherTask.getTempsInterOperatoireEnHeure());

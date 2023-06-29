@@ -357,36 +357,36 @@
                   <div>
                     <tr class="align-middle" th:each="item, iterStat : ${taskWithSubTasks}" th:class="${item.TaskName != 'Nettoyage Piece' && item.TaskName != 'Evaluation Qualite'} ? 'red-row'">
                       <td class="align-middle other-text custom-bold" th:text="${item.numero}"></td>
-                      <td class="align-middle other-text custom-bold" th:text="${item.TaskName}"></td>
+                      <td class="align-middle other-text custom-bold" th:id="${#ids.next('TaskName')}" th:text="${item.TaskName}"></td>
                       <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tempsDeReglageEnHeure')}" th:value="${item.tempsDeReglageEnHeure}"></input>
-                      </td>
-                      <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('tempsDeProduction')}" th:value="${item.tempsDeProduction}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPRetTempsDePassageEnjour()" th:id="${#ids.next('tempsDeReglageEnHeure')}" th:value="${item.tempsDeReglageEnHeure}"></input>
                       </td>
                       <td class="align-middle other-text">
-                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('tempsInterOperatoireEnHeure')}" th:value="${item.tempsInterOperatoireEnHeure}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPRetTempsDePassageEnjour()"  th:id="${#ids.next('tempsDeProduction')}" th:value="${item.tempsDeProduction}"></input>
+                      </td>
+                      <td class="align-middle other-text">
+                        <input  type="number" class="form-control no-border" onchange="calculTempsDePassageEnJour()"  th:id="${#ids.next('tempsInterOperatoireEnHeure')}" th:value="${item.tempsInterOperatoireEnHeure}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tauxHoraireReglage')}" th:value="${item.tauxHoraireReglage}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPrEnCHF()" th:id="${#ids.next('tauxHoraireReglage')}" th:value="${item.tauxHoraireReglage}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tauxHoraireProduction')}"   th:value="${item.tauxHoraireProduction}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPrEnCHF()" th:id="${#ids.next('tauxHoraireProduction')}"   th:value="${item.tauxHoraireProduction}"></input>
                       </td>
                       <td class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('indirect')}" th:value="${item.indirect}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPVenCHF()" th:id="${#ids.next('indirect')}" th:value="${item.indirect}"></input>
                       </td>
                       <td  class="align-middle d-none other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('marge')}"   th:value="${item.marge}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPVenCHF()" th:id="${#ids.next('marge')}"   th:value="${item.marge}"></input>
                       </td>
                       <td class="align-middle  other-text">
-                        <input  type="number" class="form-control no-border"  th:id="${#ids.next('calculPrEnCHF')}"  th:value="${item.calculPrEnCHF}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculPVetPrixDeRevient()"  th:id="${#ids.next('calculPrEnCHF')}"  th:value="${item.calculPrEnCHF}"></input>
                       </td>
                       <td  class="align-middle other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('tempsDePassageEnJour')}" th:value="${item.tempsDePassageEnJour}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculTempsDePassage()" th:id="${#ids.next('tempsDePassageEnJour')}" th:value="${item.tempsDePassageEnJour}"></input>
                       </td>
                       <td class="text-middle  other-text">
-                        <input  type="number" class="form-control no-border" th:id="${#ids.next('calculPVenCHF')}" th:value="${item.calculPVenCHF}"></input>
+                        <input  type="number" class="form-control no-border" onchange="calculDuPrixDeLaPiece()" th:id="${#ids.next('calculPVenCHF')}" th:value="${item.calculPVenCHF}"></input>
                       </td>
                     </tr>    
                   </div>
@@ -448,8 +448,8 @@
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom08">Prix/Pièce[CHF]</label>
-                              <input class="form-control" id="validationCustom08" type="number" required="" />
+                              <label class="form-label other-text" for="prixPiece">Prix/Pièce[CHF]</label>
+                              <input class="form-control" id="prixPiece" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div>  
                               <div class="col-md-2">
@@ -473,13 +473,13 @@
                               <div class="valid-feedback">Looks good!</div>
                               </div>
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom10">Temps de passage</label>
-                              <input class="form-control" id="validationCustom10" type="number" required="" />
+                              <label class="form-label other-text" for="tpsDePassage">Temps de passage</label>
+                              <input class="form-control" id="tpsDePassage" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                               <div class="col-md-2">
-                              <label class="form-label other-text" for="validationCustom11">Prix de revient [CHF]</label>
-                              <input class="form-control" id="validationCustom11" type="number" required="" />
+                              <label class="form-label other-text" for="prixDeRevient">Prix de revient [CHF]</label>
+                              <input class="form-control" id="prixDeRevient" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                                    
@@ -4170,8 +4170,12 @@
     const qtePiecesFabric = document.getElementById('qtePiecesFabric');
     const rebutFabrik= document.getElementById('rebutFabrik');
     const nbreJourDecolletage= document.getElementById('nbreJourDecolletage');
+    const prixPiece= document.getElementById('prixPiece');
+    const tpsDePassage= document.getElementById('tpsDePassage');
+    const prixDeRevient= document.getElementById('prixDeRevient');
 
     
+    const TaskName =  document.getElementById('TaskName');
     const tempscycles  = document.getElementById('tempscycles');
     const tempsDeCycleCalculerSecond = document.getElementById('tempscyclecs');
     
@@ -4233,25 +4237,154 @@
     const tr4 = document.getElementById('tr4');
     const tp4 = document.getElementById('tp4');
 
+
+    function calculPRetTempsDePassageEnjour(){
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+    }
+
+    function calculPVetPrixDeRevient(){
+      calculPVenCHF();
+      calculPrixDeRevient();
+    }
+
+
+
+
+
+
+
+    function calculPrixDeRevient(){
+
+      var J = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeJ = sommeRangee(J);
+      prixDeRevient.value = (arrondiPrixDeRevient(sommeJ / Y1, 0.005) || 0).toFixed(2);
+
+    }
+    function arrondiPrixDeRevient(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+
+
+
+
+
+
+    function calculTempsDePassage(){
+
+      var K = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
+      var sommeK = sommeRangee(K);
+      tpsDePassage.value = arrondiTempsDePassage(sommeK / 5, 0);
+      tpsDePassage.dispatchEvent(new Event('change'));
+    }
+
+    function arrondiTempsDePassage(nombre, decimales) {
+      return Math.round(nombre * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    }
+
+
+
+
+
+
+    function calculDuPrixDeLaPiece(){
+
+      var L = document.querySelectorAll('[id^="calculPVenCHF"]');
+      const Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeL = sommeRangee(L);
+      prixPiece.value = arrondiAuMultipleDuPrixDeLaPiece(sommeL / Y1, 0.005).toFixed(2);
+      prixPiece.dispatchEvent(new Event('change'));
+
+    }
+
+    function arrondiAuMultipleDuPrixDeLaPiece(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+    function sommeRangee(rangee) {
+
+      var somme = 0;
+
+      for (var i = 0; i < rangee.length; i++) {
+        if (!isNaN(rangee[i].value)) {
+          somme += parseFloat(rangee[i].value);
+        }
+      }
+      return somme;
+    }
+
+
+
+
+
+
+
+
+    function calculPVenCHF(){
+
+      var calculPrEnCHFTab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var indirectTab = document.querySelectorAll('[id^="indirect"]');
+      var margeTab = document.querySelectorAll('[id^="marge"]');
+      var calculPVenCHFTab = document.querySelectorAll('[id^="calculPVenCHF"]');
+
+      for (var i = 0; i < calculPVenCHFTab.length; i++) {
+        calculPVenCHFTab[i].value = arrondiAuMultiple((parseFloat(calculPrEnCHFTab[i].value) * (1 + parseFloat(indirectTab[i].value))) * (1 + parseFloat(margeTab[i].value)), 0.05);
+        calculPVenCHFTab[i].dispatchEvent(new Event('change'));
+
+      }
+
+    }
+
+    function arrondiAuMultiple(nombre, multiple) {
+        return (Math.ceil(nombre / multiple) * multiple).toFixed(2);
+    }
+
     function calculTempsDePassageEnJour(){
 
       var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
       var tempsInterOperatoireEnHeureTab = document.querySelectorAll('[id^="tempsInterOperatoireEnHeure"]');
       var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
-      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
+      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]'); 
+      var TaskNameTab = document.querySelectorAll('[id^="TaskName"]');
+
+      let index = 0;
 
       const qteFabric = parseFloat(qtePiecesFabric.value);
 
       for (var i = 0; i < tempsDePassageEnJourTab.length; i++) {
 
-        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
+        if (qteFabric === 0 || isNaN(qteFabric)) {
             tempsDePassageEnJourTab[i].value = 0;
             tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
           } else {
-            tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
-            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            
+            if(TaskNameTab[i].textContent.includes("Decolletage")){
+              tempsDePassageEnJourTab[i].value = ((((parseFloat(tempsInterOperatoireEnHeureTab[i].value) + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value)) / 3) / 8) || 0).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }else{
+              tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }
+           
           }
-
       }
 
     }
@@ -4263,7 +4396,7 @@
       var tauxHoraireReglageTab = document.querySelectorAll('[id^="tauxHoraireReglage"]');
       var tauxHoraireProductionTab = document.querySelectorAll('[id^="tauxHoraireProduction"]');
       var calculPrEnCHFtab = document.querySelectorAll('[id^="calculPrEnCHF"]');
-      var calculPVenCHFtab = document.querySelectorAll('[id^="calculPVenCHF"]');
+      
 
       const qteFabric = parseFloat(qtePiecesFabric.value);
 
@@ -4280,6 +4413,7 @@
       }
       
     }
+
 
 
     function calculeRebutDeFabrication(){
@@ -4299,11 +4433,22 @@
 
     qtePiecesClient.addEventListener('change', function(){
       calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
+      
     });
     qtePiecesFabric.addEventListener('change', function(){
       calculeRebutDeFabrication();
       calculPrEnCHF();
       calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
     });
 
     categoriePiece.addEventListener('change', function(){
