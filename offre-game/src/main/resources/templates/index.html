@@ -161,7 +161,7 @@
                 </div>
                 <div class="col-auto ms-auto">
                   <div id="table-purchases-replace-element">
-                    <button class="btn btn-falcon-default btn-sm" onclick="ajouterQuantite()" style="background-color: #714B67;" type="button"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer</span></button>
+                    <button class="btn btn-falcon-default btn-sm" onclick="window.location.href='/select_task'" style="background-color: #714B67;" type="button"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer</span></button>
                     <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Filter</span></button>
                     <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Export</span></button>
                   </div>
@@ -499,7 +499,10 @@
 
                   <div class="modal-content">
                       <div class="modal-header" style="background-color: #714B67; border-color: #714B67;">
-                          <h5 class="modal-title text-white" id="exampleModalLabel">Configuration de la tache</h5>
+                          <h5 class="modal-title text-white mr-3" id="exampleModalLabel">Configuration de la tache</h5>
+                          <button class="btn btn-falcon-default me-1 mb-1" type="button">
+                            <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Paramètre avancés
+                          </button>
                           <button type="button" class="btn-close btn btn-sm d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -609,7 +612,7 @@
                             <div class="row justify-content-end mt-2">
                               <div class="col-md-6">
                                 <div class="input-group"><span style="background-color: #77586f;" class="input-group-text text-white" id="basic-addon1">Proportion total de temps</span>
-                                  <input class="form-control other-text" id="proportionTpsTotal" style="border-color: #65465d;" type="number" aria-describedby="basic-addon1" readonly />
+                                  <input class="form-control other-text text-center" id="proportionTpsTotal" style="border-color: #65465d;" type="number" aria-describedby="basic-addon1" readonly />
                                 </div>
                               </div>
                             </div>

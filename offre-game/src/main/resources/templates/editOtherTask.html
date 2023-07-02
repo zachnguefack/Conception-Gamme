@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-bs-theme="light" lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Conception | Gamme &amp; Romain Gothier</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="assets/js/config.js"></script>
+    <script src="vendors/simplebar/simplebar.min.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link href="assets/css/theme-rtl.css" rel="stylesheet" id="style-rtl">
+    <link href="assets/css/theme.css" rel="stylesheet" id="style-default">
+    <link href="assets/css/user-rtl.css" rel="stylesheet" id="user-style-rtl">
+    <link href="assets/css/user.css" rel="stylesheet" id="user-style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+
+    </script>
+
+    <style>
+      table.table-bordered {
+        border-width: 2px;
+        border-color:black;
+      }
+      
+      table.table-bordered th,
+      table.table-bordered td {
+        border-width: 2px;
+        border-color:black;
+      }
+
+      .red-row {
+        background-color: rgb(178, 215, 144);
+        color: black;
+      }
+
+      .red-row input {
+        background-color: rgb(178, 215, 144);
+        border-color: rgb(178, 215, 144);
+        color: black;
+      }
+
+      .red-row input:focus,
+      .red-row input:active {
+        background-color: rgb(178, 215, 144);
+        border-color: rgb(178, 215, 144);
+        color: black;
+        box-shadow: none;
+        }
+
+        .custom-bold {
+            font-weight: bold;
+            font-weight: 800; 
+        }
+
+
+
+      .other-text {
+        color: black;
+      }
+
+      .no-border {
+            border: none;
+            box-shadow: none;
+      }
+
+
+      
+
+      
+    </style>
+
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+        <script>
+          var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+          if (isFluid) {
+            var container = document.querySelector('[data-layout]');
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+          }
+        </script>
+
+ 
+        
+        <div class="content">
+
+          <nav class="navbar navbar-expand-lg navbar text-white" style="background-color: #503047;" data-bs-theme="light">
+            <div class="container-fluid"><a class="navbar-brand text-light" href="#">Conception Gamme</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSuccessExample" aria-controls="navbarSuccessExample" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+              <div class="collapse navbar-collapse" id="navbarSuccessExample">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarSuccessExampleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span style="color: white;"class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span></a>
+                    <div class="dropdown-menu py-0" aria-labelledby="navbarSuccessExampleDropdown">
+                      <div class="bg-white dark__bg-1000 py-2 rounded-3"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a>
+                        <hr class="dropdown-divider" /><a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <form class="d-flex" th:action="@{/updateTasksStatusAndNumber}" method="post">
+                  <button class="btn" style="background-color: #714B67; border-color: #714B67;" type="submit"><span style="color: white;"class="fas fa-warning" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block  text-white ms-1">Annuler tout</span></button>
+                </form>
+                <button class="btn btn-lg btn-primary btn-sm mx-2" th:classappend="${taskWithSubTasks.isEmpty() ? 'btn-danger' : 'btn-success'}" id="syntheseconception" th:disabled="${taskWithSubTasks.isEmpty()}" onclick="toggleVisibility()"><span style="color: white;" class="fas fa-list-alt" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none text-white d-sm-inline-block ms-1">Synthèse Conception </span></button>
+                <span class="badge bg-success">Success</span>
+              </div>
+            </div>
+          </nav>
+
+          <div class="card">
+            <div class="card-header" >
+              <div class="row flex-between-end">
+                <div class="col-auto align-self-center">
+                  <h5 class="mb-0">Configuration de la tache</h5>
+                </div>
+                <div class="col-auto ms-auto">
+                  <div id="table-purchases-replace-element">
+                    <button class="btn btn-falcon-default btn-sm" onclick="window.location.href='/select_task'" style="background-color: #714B67;" type="button"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer</span></button>
+                    <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Filter</span></button>
+                    <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Export</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+
+                <form id="updateOtherTaskForm" class="row g-3 needs-validation" novalidate="" th:action="@{/othertask/update}" method="post">
+                  <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-a364a006-cb85-42a6-a60e-435255748a45" id="dom-a364a006-cb85-42a6-a60e-435255748a45">
+                    <div class="col-md-4 d-none">
+                      <label class="form-label other-text" for="idtask">Id Tâche</label>
+                      <input class="form-control other-text" id="idtask" name="id" type="text" required="" />
+                    </div>
+                    <div class="row g-3">
+                    <div class="col-md-4">
+                      <label class="form-label other-text" for="tempscycles">Temps de cycle de base [s]</label>
+                      <input class="form-control other-text" name="tempsCycleDeBaseSecond" id="tempscycles" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label other-text" for="tempscycleh">Temps de Réglage [H]</label>
+                      <input class="form-control other-text" name="tempsDeReglageHeur" id="tempscycleh" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>  
+                    <div class="col-md-4">
+                      <label class="form-label other-text" for="tempscyclecs">Temps de cycle de Calculé [s]</label>
+                      <input class="form-control other-text" name="tempsDeCycleCalculerSecond" id="tempscyclecs" type="number" required="" readonly />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div> 
+                    </div>
+                  </div>
+
+                  <div class="table-responsive scrollbar mt-3">
+                    <table class="table table-bordered table-sm table-hover table-striped mb-0 fs--1 mb-0 text-900 mytable">
+                    <thead class="text-white bg-200">
+                      <tr>
+                      <th style="background-color: #77586f;" class="align-middle white-space-nowrap">Status</th>
+                      <th style="background-color: #77586f;" class="align-middle">Opérations</th>
+                      <th style="background-color: #77586f;" class="align-middle">Nombre</th>
+                      <th style="background-color: #77586f;" class="align-middle">Temps[Min/H]</th>
+                      <th style="background-color: #77586f;" class="align-middle">Total [min]</th>
+                      <th style="background-color: #77586f;" class="align-middle">Proportion</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bulk-select-body">
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input " name="taskTimeParametersDTO[0].status"  type="checkbox" onchange="modifierUneSousTache1()" id="checkbox01" data-bulk-select-row="data-bulk-select-row" />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[0].name"  type="text" id="name0" required="" readonly /></th>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[0].nombreHeure"  type="number" id="n0" required="" readonly /></td>
+                        <td class="align-middlepe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[0].tempsMinParHeure"  type="number" id="temps0" required="" /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[0].totalTimeEnMin" type="number" id="total0" required="" readonly /></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[0].proportionTemps"  type="number" id="prop0" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input" name="taskTimeParametersDTO[1].status" type="checkbox" onchange="modifierUneSousTache2()" id="checkbox02" data-bulk-select-row="data-bulk-select-row" />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[1].name"  type="text" id="name1" required="" readonly /></th>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[1].nombreHeure" type="number" id="n1" required="" readonly /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[1].tempsMinParHeure" type="number" id="temps1" required="" /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[1].totalTimeEnMin" type="number" id="total1" required="" readonly /></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[1].proportionTemps"  type="number" id="prop1" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input" type="checkbox" name="taskTimeParametersDTO[2].status"   onchange="modifierUneSousTache3()" id="checkbox03" data-bulk-select-row="data-bulk-select-row" />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].name" type="text" id="name2" required=""  readonly/></th>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].nombreHeure"  type="number" id="n2" required=""  readonly/></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].tempsMinParHeure"  type="number" id="temps2" required="" /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].totalTimeEnMin" type="number" id="total2" required="" readonly  /></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].proportionTemps"  type="number" id="prop2" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input" type="checkbox" name="taskTimeParametersDTO[3].status"  onchange="modifierUneSousTache4()" id="checkbox04" data-bulk-select-row="data-bulk-select-row" />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].name" type="text"  id="name3" required=""  readonly/></th> 
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].nombreHeure" type="number" id="n3" required="" readonly /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].tempsMinParHeure" type="number" id="temps3" required="" /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].totalTimeEnMin" type="number" id="total3" required="" readonly /></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].proportionTemps"  type="number" id="prop3" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input" type="checkbox" name="taskTimeParametersDTO[4].status"  onchange="modifierUneSousTache5()" id="checkbox05" data-bulk-select-row="data-bulk-select-row" />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm other-text" type="text" name="taskTimeParametersDTO[4].name" id="name4" required=""  readonly/></label></th>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[4].nombreHeure" type="number" id="n4" required="" readonly /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[4].tempsMinParHeure"  type="number" id="temps4" required="" readonly /></td>
+                        <td class="align-middle pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[4].totalTimeEnMin"  type="number" id="total4" required="" readonly /></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[4].proportionTemps"  type="number" id="prop4" required="" readonly /></td>
+                      </tr>
+                    </tbody>
+                    </table>
+                    <div class="row justify-content-end mt-2">
+                      <div class="col-md-6">
+                        <div class="input-group"><span style="background-color: #77586f;" class="input-group-text text-white" id="basic-addon1">Proportion total de temps</span>
+                          <input class="form-control other-text" id="proportionTpsTotal" style="border-color: #65465d;" type="number" aria-describedby="basic-addon1" readonly />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="tab-pane preview-tab-pane active mt-2" role="tabpanel" aria-labelledby="tab-dom-a364a006-cb85-42a6-a60e-435255748a45" id="dom-a364a006-cb85-42a6-a60e-435255748a45">
+                    <div class="row g-3 other-text">
+                    <div class="col-md-4">
+                      <label class="form-label" for="val01">Temps d'ouverture[Min]</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].tempsOuvertureMin" id="val01" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="val02">Nbre Pcs/H</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].nombrePieceParHeure" id="val02" type="number" required="" readonly />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>  
+                    <div class="col-md-4">
+                      <label class="form-label" for="val03">Après Déduction</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].nombrePieceParHeureApresDeduction"  id="val03" type="number" required="" readonly />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div> 
+                    <div class="col-md-4">
+                      <label class="form-label" for="val04">Temps Cylcle Gamme [S]</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].tempsDeCycleGammeEnSeconde" id="val04" type="number" required="" readonly />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="val05">Pour 1000/Pcs [H]</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].pourMilParPcsEnHeure" id="val05" type="number" required="" readonly />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>  
+                    <div class="col-md-4">
+                      <label class="form-label" for="val06">Taux de rendment</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].TauxDeRendment" id="val06" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div> 
+                    <div class="col-md-4">
+                      <label class="form-label" for="val07">Efficience Poste</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].efficiencePoste" id="val07" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="val08">Calcul inverse Pièces /jour</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].calculInversePiecesParJour" id="val08" type="number" required="" />
+                      <div class="valid-feedback">Looks good!</div>
+                    </div>  
+                    <div class="col-md-4">
+                      <label class="form-label" for="val09">Pièces /jour</label>
+                      <input class="form-control other-text" name="taskPrecisionParametersDTO[0].PiecesParJour" id="val09" type="number" required="" readonly/>
+                      <div class="valid-feedback">Looks good!</div>
+                    </div> 
+                  </div>
+                  </div>
+
+                  <div class="table-responsive scrollbar mt-3">
+                    <table class="table table-bordered table-sm table-hover mb-0 fs--1 mb-0" >
+                    <thead class="text-white bg-200 text-900">
+                      <tr>
+                      <th style="background-color: #77586f;" class="align-middle white-space-nowrap">Status</th>
+                      <th style="background-color: #77586f;" class="align-middle">Tâche</th>
+                      <th style="background-color: #77586f;" class="align-middle">Sequence</th>
+                      <th style="background-color: #77586f;" class="align-middle">Temps Réglage [H]</th>
+                      <th style="background-color: #77586f;" class="align-middle white-space-nowrap pe-3">Inter-Operatoire [H]</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bulk-select-body">
+                      <tr>
+                        <td class="align-middle white-space-nowrap">
+                          <div class="form-check mb-0">
+                          <input class="form-check-input" name="subOtherTaskDTOS[0].status" type="checkbox" id="checkboxst0" data-bulk-select-row="data-bulk-select-row" disabled />
+                          </div>
+                        </td>
+                        <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[0].name" id="nameS0" type="text" required="" readonly /></th>
+                        <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[0].numeroSequence"  id="seq0" type="number" required="" readonly /></td>
+                        <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[0].tempsDeReglage" id="tr0" type="number" required="" readonly/></td>
+                        <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp0" name="subOtherTaskDTOS[0].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text" type="number" required="" readonly/></td>
+                      </tr>
+                      <tr>
+                      <td class="align-middle white-space-nowrap">
+                        <div class="form-check mb-0">
+                        <input class="form-check-input" name="subOtherTaskDTOS[1].status" type="checkbox" id="checkboxst1" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[1].name" id="nameS1" type="text" required="" readonly /></th> 
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[1].numeroSequence" id="seq1" type="number" required="" readonly /></td>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[1].tempsDeReglage" id="tr1" type="number" required="" readonly /></td>
+                      <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp1" name="subOtherTaskDTOS[1].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text" type="number" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                      <td class="align-middle white-space-nowrap">
+                        <div class="form-check mb-0">
+                        <input class="form-check-input"  name="subOtherTaskDTOS[2].status" type="checkbox" id="checkboxst2" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[2].name" id="nameS2" type="text" required="" readonly /></th>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[2].numeroSequence" id="seq2" type="number" required="" readonly /></td>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" id="tr2" name="subOtherTaskDTOS[2].tempsDeReglage" type="number" required="" readonly /></td>
+                      <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp2" name="subOtherTaskDTOS[2].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text" type="number" required="" readonly  /></td>
+                      </tr>
+                      <tr>
+                      <td class="align-middle white-space-nowrap">
+                        <div class="form-check mb-0">
+                        <input class="form-check-input" name="subOtherTaskDTOS[3].status" type="checkbox" id="checkboxst3" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].name" id="nameS3" type="text" required="" readonly /></th>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].numeroSequence" id="seq3" type="number" required="" readonly /></td>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].tempsDeReglage" id="tr3" type="number" required="" readonly /></td>
+                      <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].tempsInterOperatoireEnHeure" id="tp3" type="number" required="" readonly/></td>
+                      </tr>
+                      <tr>
+                      <td class="align-middle white-space-nowrap">
+                        <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="checkboxst4" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[4].name" id="nameS4" type="text" required="" readonly /></Label></th>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[4].numeroSequence" id="seq4" type="number" required="" readonly /></td>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[4].tempsDeReglage" id="tr4"  type="number" required="" readonly /></td>
+                      <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[4].tempsInterOperatoireEnHeure" id="tp4" type="number" required="" readonly /></td>
+                      </tr>
+                      <tr>
+                      <td class="align-middle white-space-nowrap">
+                        <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="checkboxst5" data-bulk-select-row="data-bulk-select-row" />
+                        </div>
+                      </td>
+                      <th><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[5].name" id="nameS5" type="text" required="" readonly /></th>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[5].numeroSequence" id="seq5" type="number" required="" readonly /></td>
+                      <td class="align-middle"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[5].tempsDeReglage" id="tr5" type="number" required="" readonly /></td>
+                      <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[5].tempsInterOperatoireEnHeure" id="tp5" type="number" required="" readonly /></td>
+                      </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <form th:action="@{/}" method="post">
+                  <button type="submit" class="btn btn-secondary" style="background-color: #714B67; border-color: #714B67;" id="annuler" data-dismiss="modal">Annuler</button>
+                </form>
+                  <button type="button" onclick="submitupdateOtherTaskForm()" class="btn btn-primary" style="background-color: #714B67; border-color: #714B67;" id="submitFormBtn">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+          
+          <footer class="footer">
+            <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2023 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+              </div>
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">v3.17.0</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+    <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1" aria-labelledby="settings-offcanvas">
+      <div class="offcanvas-header settings-panel-header bg-shape">
+        <div class="z-1 py-1" data-bs-theme="light">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <h5 class="text-white mb-0 me-2"><span class="fas fa-palette me-2 fs-0"></span>Settings</h5>
+            <button class="btn btn-primary btn-sm rounded-pill mt-0 mb-0" data-theme-control="reset" style="font-size:12px"> <span class="fas fa-redo-alt me-1" data-fa-transform="shrink-3"></span>Reset</button>
+          </div>
+          <p class="mb-0 fs--1 text-white opacity-75"> Set your own customized style</p>
+        </div>
+        <button class="btn-close btn-close-white z-1 mt-0" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body scrollbar-overlay px-x1 h-100" id="themeController">
+        <h5 class="fs-0">Color Scheme</h5>
+        <p class="fs--1">Choose the perfect color mode for your app.</p>
+        <div class="btn-group d-block w-100 btn-group-navbar-style">
+          <div class="row gx-2">
+            <div class="col-6">
+              <input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="theme" />
+              <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/falcon-mode-default.jpg" alt=""/></span><span class="label-text">Light</span></label>
+            </div>
+            <div class="col-6">
+              <input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="theme" />
+              <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/falcon-mode-dark.jpg" alt=""/></span><span class="label-text"> Dark</span></label>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/left-arrow-from-left.svg" width="20" alt="" />
+            <div class="flex-1">
+              <h5 class="fs-0">RTL Mode</h5>
+              <p class="fs--1 mb-0">Switch your language direction </p><a class="fs--1" href="documentation/customization/configuration.html">RTL Documentation</a>
+            </div>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input ms-0" id="mode-rtl" type="checkbox" data-theme-control="isRTL" />
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/arrows-h.svg" width="20" alt="" />
+            <div class="flex-1">
+              <h5 class="fs-0">Fluid Layout</h5>
+              <p class="fs--1 mb-0">Toggle container layout system </p><a class="fs--1" href="documentation/customization/configuration.html">Fluid Documentation</a>
+            </div>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input ms-0" id="mode-fluid" type="checkbox" data-theme-control="isFluid" />
+          </div>
+        </div>
+        <hr />
+        <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/paragraph.svg" width="20" alt="" />
+          <div class="flex-1">
+            <h5 class="fs-0 d-flex align-items-center">Navigation Position</h5>
+            <p class="fs--1 mb-2">Select a suitable navigation system for your web application </p>
+            <div>
+              <select class="form-select form-select-sm" aria-label="Navbar position" data-theme-control="navbarPosition">
+                <option value="vertical" data-page-url="modules/components/navs-and-tabs/vertical-navbar.html">Vertical</option>
+                <option value="top" data-page-url="modules/components/navs-and-tabs/top-navbar.html">Top</option>
+                <option value="combo" data-page-url="modules/components/navs-and-tabs/combo-navbar.html">Combo</option>
+                <option value="double-top" data-page-url="modules/components/navs-and-tabs/double-top-navbar.html">Double Top</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
+        <p class="fs--1 mb-0">Switch between styles for your vertical navbar </p>
+        <p> <a class="fs--1" href="modules/components/navs-and-tabs/vertical-navbar.html#navbar-styles">See Documentation</a></p>
+        <div class="btn-group d-block w-100 btn-group-navbar-style">
+          <div class="row gx-2">
+            <div class="col-6">
+              <input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle" value="transparent" data-theme-control="navbarStyle" />
+              <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-transparent"> <img class="img-fluid img-prototype" src="assets/img/generic/default.png" alt="" /><span class="label-text"> Transparent</span></label>
+            </div>
+            <div class="col-6">
+              <input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted" data-theme-control="navbarStyle" />
+              <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-inverted"> <img class="img-fluid img-prototype" src="assets/img/generic/inverted.png" alt="" /><span class="label-text"> Inverted</span></label>
+            </div>
+            <div class="col-6">
+              <input class="btn-check" id="navbar-style-card" type="radio" name="navbarStyle" value="card" data-theme-control="navbarStyle" />
+              <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-card"> <img class="img-fluid img-prototype" src="assets/img/generic/card.png" alt="" /><span class="label-text"> Card</span></label>
+            </div>
+            <div class="col-6">
+              <input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant" data-theme-control="navbarStyle" />
+              <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-vibrant"> <img class="img-fluid img-prototype" src="assets/img/generic/vibrant.png" alt="" /><span class="label-text"> Vibrant</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-5"><img class="mb-4" src="assets/img/icons/spot-illustrations/47.png" alt="" width="120" />
+          <h5>Like What You See?</h5>
+          <p class="fs--1">Get Falcon now and create beautiful dashboards with hundreds of widgets.</p><a class="mb-3 btn btn-primary" href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/" target="_blank">Purchase</a>
+        </div>
+      </div>
+    </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
+      <div class="card-body d-flex align-items-center py-md-2 px-2 py-1">
+        <div class="bg-primary-subtle position-relative rounded-start" style="height:34px;width:28px">
+          <div class="settings-popover"><span class="ripple"><span class="fa-spin position-absolute all-0 d-flex flex-center"><span class="icon-spin position-absolute all-0 d-flex flex-center">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.7369 12.3941L19.1989 12.1065C18.4459 11.7041 18.0843 10.8487 18.0843 9.99495C18.0843 9.14118 18.4459 8.28582 19.1989 7.88336L19.7369 7.59581C19.9474 7.47484 20.0316 7.23291 19.9474 7.03131C19.4842 5.57973 18.6843 4.28943 17.6738 3.20075C17.5053 3.03946 17.2527 2.99914 17.0422 3.12011L16.393 3.46714C15.6883 3.84379 14.8377 3.74529 14.1476 3.3427C14.0988 3.31422 14.0496 3.28621 14.0002 3.25868C13.2568 2.84453 12.7055 2.10629 12.7055 1.25525V0.70081C12.7055 0.499202 12.5371 0.297594 12.2845 0.257272C10.7266 -0.105622 9.16879 -0.0653007 7.69516 0.257272C7.44254 0.297594 7.31623 0.499202 7.31623 0.70081V1.23474C7.31623 2.09575 6.74999 2.8362 5.99824 3.25599C5.95774 3.27861 5.91747 3.30159 5.87744 3.32493C5.15643 3.74527 4.26453 3.85902 3.53534 3.45302L2.93743 3.12011C2.72691 2.99914 2.47429 3.03946 2.30587 3.20075C1.29538 4.28943 0.495411 5.57973 0.0322686 7.03131C-0.051939 7.23291 0.0322686 7.47484 0.242788 7.59581L0.784376 7.8853C1.54166 8.29007 1.92694 9.13627 1.92694 9.99495C1.92694 10.8536 1.54166 11.6998 0.784375 12.1046L0.242788 12.3941C0.0322686 12.515 -0.051939 12.757 0.0322686 12.9586C0.495411 14.4102 1.29538 15.7005 2.30587 16.7891C2.47429 16.9504 2.72691 16.9907 2.93743 16.8698L3.58669 16.5227C4.29133 16.1461 5.14131 16.2457 5.8331 16.6455C5.88713 16.6767 5.94159 16.7074 5.99648 16.7375C6.75162 17.1511 7.31623 17.8941 7.31623 18.7552V19.2891C7.31623 19.4425 7.41373 19.5959 7.55309 19.696C7.64066 19.7589 7.74815 19.7843 7.85406 19.8046C9.35884 20.0925 10.8609 20.0456 12.2845 19.7729C12.5371 19.6923 12.7055 19.4907 12.7055 19.2891V18.7346C12.7055 17.8836 13.2568 17.1454 14.0002 16.7312C14.0496 16.7037 14.0988 16.6757 14.1476 16.6472C14.8377 16.2446 15.6883 16.1461 16.393 16.5227L17.0422 16.8698C17.2527 16.9907 17.5053 16.9504 17.6738 16.7891C18.7264 15.7005 19.4842 14.4102 19.9895 12.9586C20.0316 12.757 19.9474 12.515 19.7369 12.3941ZM10.0109 13.2005C8.1162 13.2005 6.64257 11.7893 6.64257 9.97478C6.64257 8.20063 8.1162 6.74905 10.0109 6.74905C11.8634 6.74905 13.3792 8.20063 13.3792 9.97478C13.3792 11.7893 11.8634 13.2005 10.0109 13.2005Z" fill="#2A7BE4"></path>
+                  </svg></span></span></span></div>
+        </div><small class="text-uppercase text-primary fw-bold bg-primary-subtle py-2 pe-2 ps-1 rounded-end">customize</small>
+      </div>
+    </a>
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="vendors/popper/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/anchorjs/anchor.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="vendors/echarts/echarts.min.js"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="vendors/lodash/lodash.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="vendors/list.js/list.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+
+    <script>
+      const checkboxes = document.querySelectorAll('.my-checkbox');
+      checkboxes.forEach(function(checkbox) {
+          checkbox.addEventListener('change', function() {
+              checkboxes.forEach(function(cb) {
+                  if (cb !== checkbox) {
+                      cb.checked = false;
+                  }
+              });
+          });
+      });
+   </script>
+
+    <script>
+      function myFunction() {
+          document.getElementById("categoryForm").submit();
+      }
+    </script>
+
+  <script>
+        function toggleRow(checkbox) {
+        var itemId = checkbox.getAttribute('data-item-id0');
+        var isChecked = checkbox.checked;
+
+        //alert(itemId);
+        // Envoi de la requête AJAX
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/toggle',
+          data: {
+            itemId: itemId,
+            isChecked: isChecked
+          },
+          success: function(response) {
+            // Traitement réussi
+            document.getElementById("categoryForm0").submit();
+          },
+          error: function(xhr, status, error) {
+            // Traitement des erreurs
+            console.error('Erreur lors de la requête AJAX', error);
+          }
+        });
+      }
+      function toggleRow1(checkbox) {
+        var itemId = checkbox.getAttribute('data-item-id1');
+        var isChecked = checkbox.checked;
+
+        //alert(itemId);
+        // Envoi de la requête AJAX
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/toggle',
+          data: {
+            itemId: itemId,
+            isChecked: isChecked
+          },
+          success: function(response) {
+            // Traitement réussi
+            document.getElementById("categoryForm1").submit();
+          },
+          error: function(xhr, status, error) {
+            // Traitement des erreurs
+            console.error('Erreur lors de la requête AJAX', error);
+          }
+        });
+      }
+
+      function toggleRow2(checkbox) {
+        var itemId = checkbox.getAttribute('data-item-id2');
+        var isChecked = checkbox.checked;
+
+        //alert(itemId);
+        // Envoi de la requête AJAX
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/toggle',
+          data: {
+            itemId: itemId,
+            isChecked: isChecked
+          },
+          success: function(response) {
+            // Traitement réussi
+            document.getElementById("categoryForm2").submit();
+          },
+          error: function(xhr, status, error) {
+            // Traitement des erreurs
+            console.error('Erreur lors de la requête AJAX', error);
+          }
+        });
+      }
+
+      function toggleRow3(checkbox) {
+        var itemId = checkbox.getAttribute('data-item-id3');
+        var isChecked = checkbox.checked;
+
+        //alert(itemId);
+        // Envoi de la requête AJAX
+        $.ajax({
+          type: 'POST',
+          url: 'http://localhost:8080/toggle',
+          data: {
+            itemId: itemId,
+            isChecked: isChecked
+          },
+          success: function(response) {
+            // Traitement réussi
+            document.getElementById("categoryForm3").submit();
+          },
+          error: function(xhr, status, error) {
+            // Traitement des erreurs
+            console.error('Erreur lors de la requête AJAX', error);
+          }
+        });
+      }
+
+      function submitupdateOtherTaskForm() {
+        document.getElementById("updateOtherTaskForm").submit();
+      }
+
+      function submitupdateComplexTaskForm() {
+        document.getElementById("updateComplexTaskForm").submit();
+      }
+  </script>
+
+    <script>
+      $(document).ready(function() {
+          // Ouvrir le modal lorsque le document est prêt
+          //$('#myModal').modal('show');
+
+          // Ouvrir le modal lorsqu'on clique sur le bouton
+          $('.table .eBtn').click(function(event) {
+  
+            event.preventDefault();
+            var href = $(this).attr('href');
+            $.get(href ,function(task,status){
+
+
+              if(task.taskName == "Decolletage")
+              {
+
+
+                var idDecolletage = document.getElementById('idComplexTask');
+                idDecolletage.value = task.id;
+                
+
+                $('.myForm2 #cycleDecolletageSeconde').val(task.tempsDeCycleDeBase);
+                $('.myForm2 #tsmoyenneProgrammationEnHeure').val(task.moyenneProgrammationEnHeure);
+
+
+                var checkboxst0 = document.getElementById('checkboxstdeco0');
+                checkboxst0.checked = task.status;
+                var nameS0 = document.getElementById('nameSdeco0');
+                nameS0.innerHTML  = task.taskName;
+
+                $('#seqdeco0').val(task.numero);
+                $('#trdeco0').val(task.tempsDeReglageEnHeure);
+                $('#tpdeco0').val(task.tempsInterOperatoireEnHeure);
+
+
+
+                var myTasks0 = task.categoryParametreDecolletagesDTO[0].parametreDecolletagesDTO;
+                var halfLength = Math.ceil(myTasks0.length / 2);
+                var column1 = myTasks0.slice(0, halfLength);
+                var column2 = myTasks0.slice(halfLength);
+
+                for (var i = 0; i < Math.max(column1.length, column2.length); i++) {
+
+                    if (i < column1.length) {
+
+                        var idch1 = "checkboxTournageCol1" + i;
+                        var idna1 = "nameTournageCol1" + i;
+                
+                        document.getElementById(idch1).checked = column1[i].status;
+                        document.getElementById(idna1).textContent  = column1[i].name;
+                        document.getElementById("nbTournageCol1" + i).innerHTML = column1[i].status ? "1" : "0";
+                        document.getElementById("tpsMontageTournage1" + i).value  = column1[i].tempsDeMontage;
+                        document.getElementById("coutMoyenOutilsTournage1" + i).value  = column1[i].coutMoyenOutils;
+                       
+
+                    } 
+                    if (i < column2.length) {
+                      var idch2 = "checkboxTournageCol2" + i;
+                       var idna2 = "nameTournageCol2" + i;
+                      document.getElementById(idch2).checked = column2[i].status;
+                      document.getElementById(idna2).textContent  = column2[i].name;
+                      document.getElementById("nbTournageCol2" + i).innerHTML = column2[i].status ? "1" : "0";
+
+                      document.getElementById("tpsMontageTournage2" + i).value  = column2[i].tempsDeMontage;
+                      document.getElementById("coutMoyenOutilsTournage2" + i).value  = column2[i].coutMoyenOutils;
+                    }
+                }
+
+                
+
+                var myTasks1 = task.categoryParametreDecolletagesDTO[1].parametreDecolletagesDTO;
+                var halfLength1 = Math.ceil(myTasks1.length / 2);
+                var column11 = myTasks1.slice(0, halfLength1);
+                var column12 = myTasks1.slice(halfLength1);
+                
+
+                for (var i = 0; i < Math.max(column11.length, column12.length); i++) {
+
+                    if (i < column11.length) {
+                        var idch2 = 'checkboxTrouCol1' + i;
+                        var idna2 = 'nameTrouCol1' + i;
+                        document.getElementById(idch2).checked = column11[i].status;
+                        document.getElementById(idna2).textContent  = column11[i].name;
+                        document.getElementById("nbTrouCol1" + i).innerHTML = column11[i].status ? "1" : "0";
+                        document.getElementById("tpsMontageTrou1" + i).value  = column11[i].tempsDeMontage;
+                        document.getElementById("coutMoyenOutilsTrou1" + i).value  = column11[i].coutMoyenOutils;
+                    
+                    } 
+                    if (i < column12.length) {
+
+                      var idch2 = 'checkboxTrouCol2' + i;
+                      var idna2 = 'nameTrouCol2' + i;
+
+                      document.getElementById(idch2).checked = column12[i].status;
+                      document.getElementById(idna2).textContent  = column12[i].name;
+                      document.getElementById("nbTrouCol2" + i).innerHTML = column12[i].status ? "1" : "0";
+                      document.getElementById("tpsMontageTrou2" + i).value  = column12[i].tempsDeMontage;
+                      document.getElementById("coutMoyenOutilsTrou2" + i).value  = column12[i].coutMoyenOutils;
+                    }
+                }
+
+                var myTasks2 = task.categoryParametreDecolletagesDTO[2].parametreDecolletagesDTO;
+                var halfLength2 = Math.ceil(myTasks2.length / 2);
+                var column21 = myTasks2.slice(0, halfLength2);
+                var column22 = myTasks2.slice(halfLength2);
+
+                for (var i = 0; i < Math.max(column21.length, column22.length); i++) {
+
+                    if (i < column21.length) {
+
+                      var idch2 = 'checkboxFraisageCol1' + i;
+                      var idna2 = 'nameFraisageCol1' + i;
+
+                        document.getElementById(idch2).checked = column21[i].status;;
+                        document.getElementById(idna2).textContent  = column21[i].name;;
+                        document.getElementById("nbFraisageCol1" + i).innerHTML = column21[i].status ? "1" : "0";
+                        document.getElementById("tpsMontageFraisage1" + i).value  = column21[i].tempsDeMontage;
+                        document.getElementById("coutMoyenOutilsFraisage1" + i).value  = column21[i].coutMoyenOutils;
+                    } 
+                    if (i < column22.length) {
+
+                      var idch2 = 'checkboxFraisageCol2' + i;
+                      var idna2 = 'nameFraisageCol2' + i;
+
+                      document.getElementById(idch2).checked = column22[i].status;
+                      document.getElementById(idna2).textContent  = column22[i].name;
+                      document.getElementById("nbFraisageCol2" + i).innerHTML = column22[i].status ? "1" : "0";
+                      document.getElementById("tpsMontageFraisage2" + i).value  = column22[i].tempsDeMontage;
+                      document.getElementById("coutMoyenOutilsFraisage2" + i).value  = column22[i].coutMoyenOutils;
+                    }
+                }
+
+
+                var myTasks3 = task.categoryParametreDecolletagesDTO[3].parametreDecolletagesDTO;
+                var halfLength3 = Math.ceil(myTasks3.length / 2);
+                var column31 = myTasks3.slice(0, halfLength3);
+                var column32 = myTasks3.slice(halfLength3);
+
+                for (var i = 0; i < Math.max(column31.length, column32.length); i++) {
+
+                    if (i < column31.length) {
+
+                      var idch2 = 'checkboxTaillageCol1' + i;
+                      var idna2 = 'nameTaillageCol1' + i;
+
+                        document.getElementById(idch2).checked = column31[i].status;
+                        document.getElementById(idna2).textContent  = column31[i].name;
+                        document.getElementById("nbTaillageCol1" + i).innerHTML = column31[i].status ? "1" : "0";
+                        document.getElementById("tpsMontageTaillage1" + i).value  = column31[i].tempsDeMontage;
+                        document.getElementById("coutMoyenOutilsTaillage1" + i).value  = column31[i].coutMoyenOutils;
+                    
+                    } 
+                    if (i < column32.length) {
+
+                      var idch2 = 'checkboxTaillageCol2' + i;
+                      var idna2 = 'nameTaillageCol2' + i;
+
+                      document.getElementById(idch2).checked = column32[i].status;
+                      document.getElementById(idna2).textContent  = column32[i].name;
+                      document.getElementById("nbTaillageCol2" + i).innerHTML = column32[i].status ? "1" : "0";
+                      document.getElementById("tpsMontageTaillage2" + i).value  = column32[i].tempsDeMontage;
+                      document.getElementById("coutMoyenOutilsTaillage2" + i).value  = column32[i].coutMoyenOutils;
+                    }
+                }
+
+
+                $('.myForm2 #tpsEmbarreurCanon').val(task.tpsEmbarreurCanon);
+                $('.myForm2 #tpsPreparationOutils').val(task.tpsPreparationOutils);
+                $('.myForm2 #tpsMiseAuPoint').val(task.tpsMiseAuPoint);
+                $('.myForm2 #tpsTotalReglage').val(task.tpsTotalReglage);
+                $('.myForm2 #tpsPosageOutils').val(task.tpsPosageOutils);
+                $('.myForm2 #coutTotauxOutils').val(task.coutTotauxOutils);
+                $('.myForm2 #nbrePiecesParJour').val(task.nbrePiecesParJour);
+
+                var subTask1 = task.subOtherTaskDTOS[0];
+                var subTask2 = task.subOtherTaskDTOS[1];
+                //var subTask3=  task.subOtherTaskDTOS[2];
+
+
+                if(subTask1 != null){
+
+                var checkboxst1 = document.getElementById('checkboxstdeco1');
+                checkboxst1.checked = subTask1.status;
+                var nameS1 = document.getElementById('nameSdeco1');
+                nameS1.innerHTML  = subTask1.name;
+
+                $('#seqdeco1').val(task.numero + 1);
+                $('#trdeco1').val(subTask1.tempsDeReglage);
+                $('#tpdeco1').val(subTask1.tempsInterOperatoireEnHeure);
+
+                }
+
+                if(subTask2 != null){
+
+                var checkboxst2 = document.getElementById('checkboxstdeco2');
+                checkboxst2.checked = subTask2.status;
+                var nameS2 = document.getElementById('nameSdeco2');
+                nameS2.innerHTML  = subTask2.name;
+
+                $('#seqdeco2').val(task.numero + 2);
+                $('#trdeco2').val(subTask2.tempsDeReglage);
+                $('#tpdeco2').val(subTask2.tempsInterOperatoireEnHeure);
+
+                }
+                
+
+              }else{
+
+                $('.myForm #idtask').val(task.id);
+                $('.myForm #tempscycles').val(task.tempsCycleDeBaseSecond);
+                $('.myForm #tempscycleh').val(task.tempsDeReglageHeur);
+                $('.myForm #tempscyclecs').val(task.tempsDeCycleCalculerSecond);
+                $('.myForm #proportionTpsTotal').val(task.proportionTotalTemps) 
+
+
+                var checkboxst0 = document.getElementById('checkboxst0');
+                checkboxst0.checked = task.status;
+                var nameS0 = document.getElementById('nameS0');
+                nameS0.value  = task.taskName;
+                $('#seq0').val(task.numero);
+                $('#tr0').val(task.tempsDeReglageHeur);
+                $('#tp0').val(task.tempsInterOperatoireEnHeure);
+
+                var sizeTaskPrecision = task.taskTimeParametersDTO.length;
+
+                var timePrecision0 = task.taskTimeParametersDTO[0];
+                var timePrecision1 = task.taskTimeParametersDTO[1];
+                var timePrecision2 = task.taskTimeParametersDTO[2];
+                var timePrecision3 = task.taskTimeParametersDTO[3];
+                var timePrecision4 = task.taskTimeParametersDTO[4];
+
+                if(timePrecision0 != null){
+                var checkbox01 = document.getElementById('checkbox01');
+                checkbox01.checked = timePrecision0.status;
+                var name01 = document.getElementById('name0');
+                name01.value  = timePrecision0.name;
+                $('#n0').val(timePrecision0.nombreHeure);
+                $('#temps0').val(timePrecision0.tempsMinParHeure);
+                $('#total0').val(timePrecision0.totalTimeEnMin);
+                $('#prop0').val(timePrecision0.proportionTemps);
+                }else{
+                var checkbox01 = document.getElementById('checkbox01');
+                checkbox01.checked = false;
+                var name01 = document.getElementById('name0');
+                name01.value  = 'NAN'
+                $('#n0').val(0);
+                $('#temps0').val(0);
+                $('#total0').val(0);
+                $('#prop0').val(0);
+                
+                document.getElementById('name0').classList.add("d-none");
+                document.getElementById('n0').classList.add("d-none");
+                document.getElementById('temps0').classList.add("d-none");
+                document.getElementById('total0').classList.add("d-none");
+                document.getElementById('prop0').classList.add("d-none");
+
+                }
+
+                if(timePrecision1 != null){
+                var checkbox02 = document.getElementById('checkbox02');
+                checkbox02.checked = timePrecision1.status;
+                var name02 = document.getElementById('name1');
+                name02.value  = timePrecision1.name;
+                $('#n1').val(timePrecision1.nombreHeure);
+                $('#temps1').val(timePrecision1.tempsMinParHeure);
+                $('#total1').val(timePrecision1.totalTimeEnMin);
+                $('#prop1').val(timePrecision1.proportionTemps);
+                }else{
+                var checkbox02 = document.getElementById('checkbox02');
+                checkbox02.checked = false;
+                var name02 = document.getElementById('name1');
+                name02.value  = 'NAN'
+                $('#n1').val(0);
+                $('#temps1').val(0);
+                $('#total1').val(0);
+                $('#prop1').val(0);
+                
+                document.getElementById('name1').classList.add("d-none");
+                document.getElementById('n1').classList.add("d-none");
+                document.getElementById('temps1').classList.add("d-none");
+                document.getElementById('total1').classList.add("d-none");
+                document.getElementById('prop1').classList.add("d-none");
+
+                }
+
+
+
+                if(timePrecision2 != null){
+                var checkbox03 = document.getElementById('checkbox03');
+                checkbox03.checked = timePrecision2.status;
+                var name03 = document.getElementById('name2');
+                name03.value  = timePrecision2.name;
+                $('#n2').val(timePrecision2.nombreHeure);
+                $('#temps2').val(timePrecision2.tempsMinParHeure);
+                $('#total2').val(timePrecision2.totalTimeEnMin);
+                $('#prop2').val(timePrecision2.proportionTemps);
+                }else{
+                var checkbox03 = document.getElementById('checkbox03');
+                checkbox03.checked = false;
+                var name03 = document.getElementById('name2');
+                name03.value  = 'NAN'
+                $('#n2').val(0);
+                $('#temps2').val(0);
+                $('#total2').val(0);
+                $('#prop2').val(0);
+                
+                document.getElementById('name2').classList.add("d-none");
+                document.getElementById('n2').classList.add("d-none");
+                document.getElementById('temps2').classList.add("d-none");
+                document.getElementById('total2').classList.add("d-none");
+                document.getElementById('prop2').classList.add("d-none");
+
+                }
+
+                if(timePrecision3 != null){
+                var checkbox04 = document.getElementById('checkbox04');
+                checkbox04.checked = timePrecision3.status;
+                var name04 = document.getElementById('name3');
+                name04.value  = timePrecision3.name;
+                $('#n3').val(timePrecision3.nombreHeure);
+                $('#temps3').val(timePrecision3.tempsMinParHeure);
+                $('#total3').val(timePrecision3.totalTimeEnMin);
+                $('#prop3').val(timePrecision3.proportionTemps);
+                }else{
+                var checkbox04 = document.getElementById('checkbox04');
+                checkbox04.checked = false;
+                var name04 = document.getElementById('name3');
+                name04.value  = 'NAN'
+                $('#n3').val(0);
+                $('#temps3').val(0);
+                $('#total3').val(0);
+                $('#prop3').val(0);
+
+                document.getElementById('name3').classList.add("d-none");
+                document.getElementById('n3').classList.add("d-none");
+                document.getElementById('temps3').classList.add("d-none");
+                document.getElementById('total3').classList.add("d-none");
+                document.getElementById('prop3').classList.add("d-none");
+
+                }
+
+                if(timePrecision4 != null){
+                var checkbox05 = document.getElementById('checkbox05');
+                checkbox05.checked = timePrecision4.status;
+                var name05 = document.getElementById('name4');
+                name05.value  = timePrecision4.name;
+                $('#n4').val(timePrecision4.nombreHeure);
+                $('#temps4').val(timePrecision4.tempsMinParHeure);
+                $('#total4').val(timePrecision4.totalTimeEnMin);
+                $('#prop4').val(timePrecision4.proportionTemps);
+                }else{
+                var checkbox05 = document.getElementById('checkbox05');
+                checkbox05.checked = false;
+                var name05 = document.getElementById('name4');
+                name05.value  = 'NAN'
+                $('#n4').val(0);
+                $('#temps4').val(0);
+                $('#total4').val(0);
+                $('#prop4').val(0);
+
+                document.getElementById('name4').classList.add("d-none");
+                document.getElementById('n4').classList.add("d-none");
+                document.getElementById('temps4').classList.add("d-none");
+                document.getElementById('total4').classList.add("d-none");
+                document.getElementById('prop4').classList.add("d-none");
+
+                }
+
+
+                var precision = task.taskPrecisionParametersDTO[0];
+
+
+                if(precision != null){
+
+                  $('#val01').val(precision.tempsOuvertureMin);
+                  $('#val02').val(precision.nombrePieceParHeure);
+                  $('#val03').val(precision.nombrePieceParHeureApresDeduction);
+                  $('#val04').val(precision.tempsDeCycleGammeEnSeconde);
+                  $('#val05').val(precision.pourMilParPcsEnHeure);
+
+                  $('#val06').val(precision.tauxDeRendment);
+                  $('#val07').val(precision.efficiencePoste);
+                  $('#val08').val(precision.calculInversePiecesParJour);
+                  $('#val09').val(precision.piecesParJour);
+                }
+
+                var subTask1 = task.subOtherTaskDTOS[0];
+                var subTask2 = task.subOtherTaskDTOS[1];
+                var subTask3=  task.subOtherTaskDTOS[2];
+                var subTask4 = task.subOtherTaskDTOS[3];
+                var subTask5 = task.subOtherTaskDTOS[4];
+
+                if(subTask1 != null){
+
+                  var checkboxst1 = document.getElementById('checkboxst1');
+                  checkboxst1.checked = subTask1.status;
+                  var nameS1 = document.getElementById('nameS1');
+                  nameS1.value  = subTask1.name;
+
+                  $('#seq1').val(task.numero + 1);
+                  $('#tr1').val(subTask1.tempsDeReglage);
+                  $('#tp1').val(subTask1.tempsInterOperatoireEnHeure);
+                
+                }else{
+
+                  var checkboxst1 = document.getElementById('checkboxst1');
+                  checkboxst1.checked = false;
+                  var nameS1 = document.getElementById('nameS1');
+                  nameS1.value  = 'NAN';
+
+                  $('#seq1').val(0);
+                  $('#tr1').val(0);
+                  $('#tp1').val(0);
+
+                  document.getElementById('nameS1').classList.add("d-none");
+                  document.getElementById('seq1').classList.add("d-none");
+                  document.getElementById('tr1').classList.add("d-none");
+                  document.getElementById('tp1').classList.add("d-none");
+
+                }
+
+                if(subTask2 != null){
+
+                  var checkboxst2 = document.getElementById('checkboxst2');
+                  checkboxst2.checked = subTask2.status;
+                  var nameS2 = document.getElementById('nameS2');
+                  nameS2.value  = subTask2.name;
+
+                  $('#seq2').val(task.numero + 2);
+                  $('#tr2').val(subTask2.tempsDeReglage);
+                  $('#tp2').val(subTask2.tempsInterOperatoireEnHeure);
+                  
+                }else{
+
+                    var checkboxst2 = document.getElementById('checkboxst2');
+                    checkboxst2.checked = false;
+                    var nameS2 = document.getElementById('nameS2');
+                    nameS2.value  = 'NAN';
+
+                    $('#seq2').val(0);
+                    $('#tr2').val(0);
+                    $('#tp2').val(0);
+
+                    document.getElementById('nameS2').classList.add("d-none");
+                    document.getElementById('seq2').classList.add("d-none");
+                    document.getElementById('tr2').classList.add("d-none");
+                    document.getElementById('tp2').classList.add("d-none");
+
+                }
+
+                if(subTask3 != null){
+
+                  var checkboxst3 = document.getElementById('checkboxst3');
+                  checkboxst3.checked = subTask3.status;
+                  var nameS3 = document.getElementById('nameS3');
+                  nameS3.value  = subTask3.name;
+
+                  $('#seq3').val(task.numero + 3);
+                  $('#tr3').val(subTask3.tempsDeReglage);
+                  $('#tp3').val(subTask3.tempsInterOperatoireEnHeure);
+                }else{
+                  var checkboxst3 = document.getElementById('checkboxst3');
+                  checkboxst3.checked = false;
+                  var nameS3 = document.getElementById('nameS3');
+                  nameS3.value  = 'NAN';
+
+                  $('#seq3').val(0);
+                  $('#tr3').val(0);
+                  $('#tp3').val(0);
+
+                  document.getElementById('nameS3').classList.add("d-none");
+                  document.getElementById('seq3').classList.add("d-none");
+                  document.getElementById('tr3').classList.add("d-none");
+                  document.getElementById('tp3').classList.add("d-none");
+
+                }
+
+
+
+                if(subTask4 != null){
+
+                    var checkboxst4 = document.getElementById('checkboxst4');
+                    checkboxst4.checked = subTask4.status;
+                    var nameS4 = document.getElementById('nameS4');
+                    nameS4.value  = subTask4.name;
+
+                    $('#seq4').val(task.numero + 4);
+                    $('#tr4').val(subTask4.tempsDeReglage);
+                    $('#tp4').val(subTask4.tempsInterOperatoireEnHeure);
+                }else{
+                    var checkboxst4 = document.getElementById('checkboxst4');
+                    checkboxst4.checked = false;
+                    var nameS4 = document.getElementById('nameS4');
+                    nameS4.value  = 'NAN';
+
+                    $('#seq4').val(0);
+                    $('#tr4').val(0);
+                    $('#tp4').val(0);
+
+                    document.getElementById('nameS4').classList.add("d-none");
+                    document.getElementById('seq4').classList.add("d-none");
+                    document.getElementById('tr4').classList.add("d-none");
+                    document.getElementById('tp4').classList.add("d-none");
+                }
+
+
+
+                if(subTask5 != null){
+
+                  var checkboxst5 = document.getElementById('checkboxst5');
+                  checkboxst5.checked = subTask5.status;
+                  var nameS5 = document.getElementById('nameS5');
+                  nameS5.value  = subTask5.name;
+
+                  $('#seq5').val(task.numero + 5);
+                  $('#tr5').val(subTask5.tempsDeReglage);
+                  $('#tp5').val(subTask5.tempsInterOperatoireEnHeure);
+                }else{
+                    var checkboxst5 = document.getElementById('checkboxst5');
+                    checkboxst5.checked = false;
+                    var nameS5 = document.getElementById('nameS5');
+                    nameS5.value  = 'NAN';
+
+                    $('#seq5').val(0);
+                    $('#tr5').val(0);
+                    $('#tp5').val(0);
+
+                    document.getElementById('nameS5').classList.add("d-none");
+                    document.getElementById('seq5').classList.add("d-none");
+                    document.getElementById('tr5').classList.add("d-none");
+                    document.getElementById('tp5').classList.add("d-none");
+                }
+
+              }
+              
+            });
+            
+            if( $(this).attr('data-item-name') == 'Decolletage')
+            {
+              $('#staticBackdrop').modal('show');
+            }else
+            {
+              $('.myForm #exampleModal').modal('show');
+            }
+           
+
+          });
+          
+      });
+
+      $(document).ready(function() {
+            $("#submitFormBtn").click(function() {
+                // Soumettre le formulaire ici
+                // Vous pouvez ajouter votre logique de traitement du formulaire
+                // par exemple, récupérer les valeurs des champs et les envoyer via une requête AJAX
+
+                // Après avoir soumis le formulaire, vous pouvez fermer le modal
+                $("#exampleModal").modal("hide");
+            });
+            $("#annuler").click(function() {
+                // Soumettre le formulaire ici
+                // Vous pouvez ajouter votre logique de traitement du formulaire
+                // par exemple, récupérer les valeurs des champs et les envoyer via une requête AJAX
+
+                // Après avoir soumis le formulaire, vous pouvez fermer le modal
+                $("#exampleModal").modal("hide");
+            });
+            
+        });
+  </script>
+
+
+  <script  th:inline="javascript">
+
+
+    /* paramètre de décolletage*/
+    const tpsDeReglage = document.getElementById('trdeco0');
+    const tempsDeCycleDeBaseDecolletage = document.getElementById('cycleDecolletageSeconde');
+    const tpsEmbarreurCanon = document.getElementById('tpsEmbarreurCanon');
+    const tpsPreparationOutils = document.getElementById('tpsPreparationOutils');
+    const tpsMiseAuPoint = document.getElementById('tpsMiseAuPoint');
+    const tpsTotalReglage = document.getElementById('tpsTotalReglage');
+    const tpsPosageOutils = document.getElementById('tpsPosageOutils');
+    const coutTotauxOutils = document.getElementById('coutTotauxOutils');
+    const nbrePiecesParJour = document.getElementById('nbrePiecesParJour');
+    const moyenneProgrammationEnHeure = document.getElementById('tsmoyenneProgrammationEnHeure');
+
+
+    /* Ajustement des paramètres*/
+    const qtePiecesClient= document.getElementById('qtePiecesClient');
+    const categoriePiece= document.getElementById('categoriePiece');
+    const qtePiecesFabric = document.getElementById('qtePiecesFabric');
+    const rebutFabrik= document.getElementById('rebutFabrik');
+    const nbreJourDecolletage= document.getElementById('nbreJourDecolletage');
+    const prixPiece= document.getElementById('prixPiece');
+    const tpsDePassage= document.getElementById('tpsDePassage');
+    const prixDeRevient= document.getElementById('prixDeRevient');
+
+    
+    const TaskName =  document.getElementById('TaskName');
+    const tempscycles  = document.getElementById('tempscycles');
+    const tempsDeCycleCalculerSecond = document.getElementById('tempscyclecs');
+    
+    const num0 = document.getElementById('n0');
+    const temps0 = document.getElementById('temps0');
+    const total0 = document.getElementById('total0');
+    const proportion1Input = document.getElementById('prop0');
+
+    const num1 = document.getElementById('n1');
+    const temps1 = document.getElementById('temps1');
+    const total1 = document.getElementById('total1');
+    const proportion2Input = document.getElementById('prop1');
+
+    const num2 = document.getElementById('n2');
+    const temps2 = document.getElementById('temps2');
+    const total2 = document.getElementById('total2');
+    const proportion3Input = document.getElementById('prop2');
+
+    const num3 = document.getElementById('n3');
+    const temps3 = document.getElementById('temps3');
+    const total3 = document.getElementById('total3');
+    const proportion4Input = document.getElementById('prop3');
+
+    const num4 = document.getElementById('n4');
+    const temps4 = document.getElementById('temps4');
+    const total4 = document.getElementById('total4');
+    const proportion5Input = document.getElementById('prop4');
+    const proportionFinalInput = document.getElementById('proportionTpsTotal');
+
+    const ouverture = document.getElementById('val01');
+    const nombrePieceParHeure = document.getElementById('val02');
+    const nombrePieceParHeureApresDeduction = document.getElementById('val03');
+    const tempsDeCycleGammeEnSeconde = document.getElementById('val04');
+    const pourMilParPcsEnHeure = document.getElementById('val05');
+    const tauxDeRendment = document.getElementById('val06');
+    const efficiencePoste = document.getElementById('val07');
+    const calculInversePiecesParJour = document.getElementById('val08');
+    const piecesParJour = document.getElementById('val09');
+
+    const seq0 = document.getElementById('seq0');
+
+    const checkboxst1 = document.getElementById('checkboxst1');
+    const seq1 = document.getElementById('seq1');
+    const tr1 = document.getElementById('tr1');
+    const tp1 = document.getElementById('tp1');
+
+    const checkboxst2 = document.getElementById('checkboxst2');
+    const seq2 = document.getElementById('seq2');
+    const tr2 = document.getElementById('tr2');
+    const tp2 = document.getElementById('tp2');
+
+    const checkboxst3 = document.getElementById('checkboxst3');
+    const seq3 = document.getElementById('seq3');
+    const tr3 = document.getElementById('tr3');
+    const tp3 = document.getElementById('tp3');
+
+    const checkboxst4 = document.getElementById('checkboxst4');
+    const seq4 = document.getElementById('seq4');
+    const tr4 = document.getElementById('tr4');
+    const tp4 = document.getElementById('tp4');
+
+
+    function calculPRetTempsDePassageEnjour(){
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+    }
+
+    function calculPVetPrixDeRevient(){
+      calculPVenCHF();
+      calculPrixDeRevient();
+    }
+
+
+
+
+
+
+
+    function calculPrixDeRevient(){
+
+      var J = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeJ = sommeRangee(J);
+      prixDeRevient.value = (arrondiPrixDeRevient(sommeJ / Y1, 0.005) || 0).toFixed(2);
+
+    }
+    function arrondiPrixDeRevient(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+
+
+
+
+
+
+    function calculTempsDePassage(){
+
+      var K = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
+      var sommeK = sommeRangee(K);
+      tpsDePassage.value = arrondiTempsDePassage(sommeK / 5, 0);
+      tpsDePassage.dispatchEvent(new Event('change'));
+    }
+
+    function arrondiTempsDePassage(nombre, decimales) {
+      return Math.round(nombre * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    }
+
+
+
+
+
+
+    function calculDuPrixDeLaPiece(){
+
+      var L = document.querySelectorAll('[id^="calculPVenCHF"]');
+      const Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeL = sommeRangee(L);
+      prixPiece.value = arrondiAuMultipleDuPrixDeLaPiece(sommeL / Y1, 0.005).toFixed(2);
+      prixPiece.dispatchEvent(new Event('change'));
+
+    }
+
+    function arrondiAuMultipleDuPrixDeLaPiece(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+    function sommeRangee(rangee) {
+
+      var somme = 0;
+
+      for (var i = 0; i < rangee.length; i++) {
+        if (!isNaN(rangee[i].value)) {
+          somme += parseFloat(rangee[i].value);
+        }
+      }
+      return somme;
+    }
+
+
+
+
+
+
+
+
+    function calculPVenCHF(){
+
+      var calculPrEnCHFTab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var indirectTab = document.querySelectorAll('[id^="indirect"]');
+      var margeTab = document.querySelectorAll('[id^="marge"]');
+      var calculPVenCHFTab = document.querySelectorAll('[id^="calculPVenCHF"]');
+
+      for (var i = 0; i < calculPVenCHFTab.length; i++) {
+        calculPVenCHFTab[i].value = arrondiAuMultiple((parseFloat(calculPrEnCHFTab[i].value) * (1 + parseFloat(indirectTab[i].value))) * (1 + parseFloat(margeTab[i].value)), 0.05);
+        calculPVenCHFTab[i].dispatchEvent(new Event('change'));
+
+      }
+
+    }
+
+    function arrondiAuMultiple(nombre, multiple) {
+        return (Math.ceil(nombre / multiple) * multiple).toFixed(2);
+    }
+
+    function calculTempsDePassageEnJour(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsInterOperatoireEnHeureTab = document.querySelectorAll('[id^="tempsInterOperatoireEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]'); 
+      var TaskNameTab = document.querySelectorAll('[id^="TaskName"]');
+
+      let index = 0;
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < tempsDePassageEnJourTab.length; i++) {
+
+        if (qteFabric === 0 || isNaN(qteFabric)) {
+            tempsDePassageEnJourTab[i].value = 0;
+            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+          } else {
+            
+            if(TaskNameTab[i].textContent.includes("Decolletage")){
+              tempsDePassageEnJourTab[i].value = ((((parseFloat(tempsInterOperatoireEnHeureTab[i].value) + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value)) / 3) / 8) || 0).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }else{
+              tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }
+           
+          }
+      }
+
+    }
+
+    function calculPrEnCHF(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tauxHoraireReglageTab = document.querySelectorAll('[id^="tauxHoraireReglage"]');
+      var tauxHoraireProductionTab = document.querySelectorAll('[id^="tauxHoraireProduction"]');
+      var calculPrEnCHFtab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < calculPrEnCHFtab.length; i++) {
+
+        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
+            calculPrEnCHFtab[i].value = 0;
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          } else {
+            calculPrEnCHFtab[i].value = (parseFloat(tempsDeReglageEnHeureTab[i].value) * parseFloat(tauxHoraireReglageTab[i].value) + (qteFabric * parseFloat(tempsDeProductionTab[i].value) * parseFloat(tauxHoraireProductionTab[i].value))).toFixed(2); 
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          }
+
+      }
+      
+    }
+
+
+
+    function calculeRebutDeFabrication(){
+      
+      const param1 = parseFloat(qtePiecesClient.value);
+      const param2 = parseFloat(qtePiecesFabric.value);
+
+      if (param2 !== 0) {
+        rebutFabrik.value = ((-param1 + param2) / param2).toFixed(2);
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }else{
+        rebutFabrik.value = 0;
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+    qtePiecesClient.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
+      
+    });
+    qtePiecesFabric.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
+    });
+
+    categoriePiece.addEventListener('change', function(){
+      calculQuantitPiecesFabrication(); 
+      calculPrEnCHF();
+    });
+
+    
+
+
+    function calculQuantitPiecesFabrication(){
+
+      const param1 = parseFloat(categoriePiece.value);
+      const param2 = parseFloat(qtePiecesClient.value);
+
+      if (param2 !== 0) {
+        if (param1 === 1) {
+          qtePiecesFabric.value = Math.round(1.025 * param2 + 97);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 2) {
+          qtePiecesFabric.value = Math.round(1.0741 * param2 + 193);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 3) {
+          qtePiecesFabric.value = Math.round(1.118 * param2 + 326);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else {
+          qtePiecesFabric.value = 0;
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        }
+      } else {
+        qtePiecesFabric.value = 0;
+        qtePiecesFabric.dispatchEvent(new Event('change'));
+      } 
+      
+    }
+
+
+    checkboxst1.addEventListener('change', function(){
+
+      if (checkboxst1.checked) {
+        seq1.style.display = 'block';
+        tr1.style.display = 'block';
+        tp1.style.display = 'block';
+
+        seq1.value = parseFloat(seq1.value) + 1;
+
+        if(isNaN(parseFloat(seq2.value)) == false){
+          seq2.value = parseFloat(seq2.value) + 1;
+          seq2.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq3.value)) == false){
+          seq3.value = parseFloat(seq3.value) + 1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq4.value)) == false){
+          seq4.value = parseFloat(seq4.value) +1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+
+      } else {
+
+        seq1.style.display ='none';
+        tr1.style.display = 'none';
+        tp1.style.display = 'none';
+
+  
+        if(isNaN(parseFloat(seq2.value)) == false && parseFloat(seq2.value) > parseFloat(seq1.value) ){
+          seq2.value = parseFloat(seq2.value) - 1;
+          seq2.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq3.value)) == false && parseFloat(seq2.value) > parseFloat(seq1.value)){
+          seq3.value = parseFloat(seq3.value) - 1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq4.value)) == false && parseFloat(seq2.value) > parseFloat(seq1.value)){
+          seq4.value = parseFloat(seq4.value) -1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+
+        seq1.value = parseFloat(seq1.value) - 1;
+      } 
+
+    });
+
+    
+    checkboxst2.addEventListener('change', function(){
+
+      if (checkboxst2.checked) {
+        
+        seq2.style.display = 'block';
+        tr2.style.display = 'block';
+        tp2.style.display = 'block';
+
+
+        seq2.value = parseFloat(seq2.value) + 1;
+
+        if(isNaN(parseFloat(seq3.value)) == false){
+          seq3.value = parseFloat(seq3.value) +1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq4.value)) == false){
+          seq4.value = parseFloat(seq4.value) +1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+     
+      } else {
+
+        seq2.style.display ='none';
+        tr2.style.display = 'none';
+        tp2.style.display = 'none';
+
+        if(isNaN(parseFloat(seq3.value)) == false){
+          seq3.value = parseFloat(seq3.value) - 1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq4.value)) == false){
+          seq4.value = parseFloat(seq4.value) -1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+        
+
+        seq2.value = parseFloat(seq2.value) - 1;
+
+      } 
+
+    });
+
+
+    checkboxst3.addEventListener('change', function(){
+
+      if (checkboxst3.checked) {
+        
+        seq3.style.display = 'block';
+        tr3.style.display = 'block';
+        tp3.style.display = 'block';
+
+
+        if(isNaN(parseFloat(seq3.value)) == false){
+          seq2.value = parseFloat(seq2.value) + 1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+        if(isNaN(parseFloat(seq4.value)) == false){
+          seq4.value = parseFloat(seq4.value) +1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+
+      } else {
+
+        seq3.style.display ='none';
+        tr3.style.display = 'none';
+        tp3.style.display = 'none';
+
+     
+        if(isNaN(parseFloat(seq4.value)) == false){
+          seq4.value = parseFloat(seq4.value) -1;
+          seq4.dispatchEvent(new Event('change'));
+        }
+
+        if(isNaN(parseFloat(seq3.value)) == false){
+          seq3.value = parseFloat(seq3.value) - 1;
+          seq3.dispatchEvent(new Event('change'));
+        }
+
+      } 
+
+    });
+
+  
+    function CalculTempsDeReglage(){
+
+      const param0 = parseFloat(tpsTotalReglage.value);
+
+      if(isNaN(param0)){
+        tpsDeReglage.value = '';
+      }else{ 
+        tpsDeReglage.value = Math.round(param0/0.84);
+        tpsDeReglage.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+
+    function modifierUneSousTache1(){
+
+      const checkbox = document.getElementById('checkbox01');
+
+      if (checkbox.checked) {
+        num0.style.display = 'block';
+        total0.style.display = 'block';
+        proportion1Input.style.display = 'block';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion1Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+     
+      } else {
+        num0.style.display = 'none';
+        total0.style.display = 'none';
+        proportion1Input.style.display = 'none';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion1Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+    function modifierUneSousTache2(){
+
+      const checkbox = document.getElementById('checkbox02');
+
+      if (checkbox.checked) {
+        num1.style.display = 'block';
+        total1.style.display = 'block';
+        proportion2Input.style.display = 'block';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion2Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+     
+      } else {
+        num1.style.display = 'none';
+        total1.style.display = 'none';
+        proportion2Input.style.display = 'none';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion2Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+
+    function modifierUneSousTache3(){
+
+      const checkbox = document.getElementById('checkbox03');
+
+      if (checkbox.checked) {
+
+        num2.style.display = 'block';
+        total2.style.display = 'block';
+        proportion3Input.style.display = 'block';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion3Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+
+      } else {
+        num2.style.display = 'none';
+        total2.style.display = 'none';
+        proportion3Input.style.display = 'none';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion3Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+    function modifierUneSousTache4(){
+
+      const checkbox = document.getElementById('checkbox04');
+
+      if (checkbox.checked) {
+        num3.style.display = 'block';
+        total3.style.display = 'block';
+        proportion4Input.style.display = 'block';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion4Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+
+      } else {
+        num3.style.display = 'none';
+        total3.style.display = 'none';
+        proportion4Input.style.display = 'none';
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion4Input.value)).toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+
+    function calculCoutTotalOutils(){
+
+      let  temporaire = 0;
+      let temporaire2 = 0;
+
+      for(var i = 0; i < 10; i++){
+
+        if (document.getElementById('checkboxTournageCol1' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTournage1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTournage1" + i).value);
+          document.getElementById("nbTournageCol1" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbTournageCol1" + i).innerHTML = "0";
+        }
+        if (document.getElementById('checkboxTournageCol2' + i).checked) {
+          temporaire += parseFloat(document.getElementById("coutMoyenOutilsTournage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTournage2" + i).value);
+          document.getElementById("nbTournageCol2" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbTournageCol2" + i).innerHTML = "0";
+        }
+
+      }
+
+
+      for(var i = 0; i < 10; i++){
+
+        if (document.getElementById('checkboxTrouCol1' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTrou1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTrou1" + i).value);
+          document.getElementById("nbTrouCol1" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbTrouCol1" + i).innerHTML = "0";
+        }
+        if (document.getElementById('checkboxTrouCol2' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTrou2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTrou2" + i).value);
+          document.getElementById("nbTrouCol2" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbTrouCol2" + i).innerHTML = "0";
+        }
+     }
+
+     for(var i = 0; i < 10; i++){
+        if (document.getElementById('checkboxFraisageCol1' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsFraisage1" + i).value); 
+          temporaire2+= parseFloat(document.getElementById("tpsMontageFraisage1" + i).value);
+          document.getElementById("nbFraisageCol1" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbFraisageCol1" + i).innerHTML = "0";
+        }
+        if (document.getElementById('checkboxFraisageCol2' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsFraisage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageFraisage2" + i).value);
+          document.getElementById("nbFraisageCol2" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbFraisageCol2" + i).innerHTML = "0";
+        }
+     }
+
+     for(var i = 0; i < 10; i++){
+        if (document.getElementById('checkboxTaillageCol1' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTaillage1" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTaillage1" + i).value);
+          document.getElementById("nbTaillageCol1" + i).innerHTML = "1";
+        } else{
+          document.getElementById("nbTaillageCol1" + i).innerHTML = "0";
+        }
+        if (document.getElementById('checkboxTaillageCol2' + i).checked) {
+          temporaire+= parseFloat(document.getElementById("coutMoyenOutilsTaillage2" + i).value);
+          temporaire2+= parseFloat(document.getElementById("tpsMontageTaillage2" + i).value);
+          document.getElementById("nbTaillageCol2" + i).innerHTML = "1";
+        }else{
+          document.getElementById("nbTaillageCol2" + i).innerHTML = "0";
+        }
+     }
+
+     coutTotauxOutils.value = temporaire;
+     tpsPosageOutils.value = (temporaire2 + 3).toFixed(2);
+     coutTotauxOutils.dispatchEvent(new Event('change'));
+     tpsPosageOutils.dispatchEvent(new Event('change'));
+    }
+
+
+    function calculParametreSousTaches(){
+
+      const paramN0 = parseFloat(num0.value);
+      const paramN1 = parseFloat(num1.value);
+      const paramN2 = parseFloat(num2.value);
+      const paramN3 = parseFloat(num3.value);
+      const paramN4 = parseFloat(num4.value);
+
+      const paramT0 = parseFloat(temps0.value);
+      const paramT1 = parseFloat(temps1.value);
+      const paramT2 = parseFloat(temps2.value);
+      const paramT3 = parseFloat(temps3.value);
+      const paramT4 = parseFloat(temps4.value);
+
+      if(isNaN(paramT0) || isNaN(paramN0)){
+        total0.value = '';
+      }else{ 
+        total0.value = Math.floor(paramN0 * paramT0);
+        total0.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(paramT1) || isNaN(paramN1)){
+        total1.value = '';
+      }else{ 
+        total1.value = Math.floor(paramN1 * paramT1);
+        total1.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(paramT2) || isNaN(paramN2)){
+        total2.value = '';
+      }else{ 
+        total2.value = Math.floor(paramN2 * paramT2);
+        total2.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(paramT3) || isNaN(paramN3)){
+        total3.value = '';
+      }else{ 
+        total3.value = Math.floor(paramN3 * paramT3);
+        total3.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(paramT4) || isNaN(paramN4)){
+        total4.value = '';
+      }else{ 
+        total4.value = Math.floor(paramN4 * paramT4);
+        total4.dispatchEvent(new Event('change'));
+      }
+    }
+
+    temps0.addEventListener('change', function(){
+      calculParametreSousTaches();
+    });
+    temps1.addEventListener('change', function(){
+      calculParametreSousTaches();
+    });
+    temps2.addEventListener('change', function(){
+      calculParametreSousTaches();
+    });
+    temps3.addEventListener('change', function(){
+      calculParametreSousTaches();
+    });
+    temps4.addEventListener('change', function(){
+      calculParametreSousTaches();
+    });
+
+
+    function calculDeChaqueProportionDeTemps(){
+
+      const param0 = parseFloat(total0.value);
+      const param1 = parseFloat(total1.value);
+      const param2 = parseFloat(total2.value);
+      const param3 = parseFloat(total3.value);
+      const param4 = parseFloat(total4.value);
+
+      const param5 = parseFloat(ouverture.value);
+      
+
+      if(isNaN(param0) || isNaN(param5)){
+        proportion1Input.value = '';
+      }else{ 
+        proportion1Input.value = (param0/param5).toFixed(3);
+        proportion1Input.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(param1) || isNaN(param5)){
+        proportion2Input.value = '';
+      }else{ 
+        proportion2Input.value = (param1/param5).toFixed(3);;
+        proportion2Input.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(param2) || isNaN(param5)){
+        proportion3Input.value = '';
+      }else{ 
+        proportion3Input.value = (param2/param5).toFixed(3);;
+        proportion3Input.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(param3) || isNaN(param5)){
+        proportion4Input.value = '';
+      }else{ 
+        proportion4Input.value = (param3/param5).toFixed(3);;
+        proportion4Input.dispatchEvent(new Event('change'));
+      }
+      if(isNaN(param4) || isNaN(param5)){
+        proportion5Input.value = '';
+      }else{ 
+        proportion5Input.value = (param4/param5).toFixed(3);;
+        proportion5Input.dispatchEvent(new Event('change'));
+      }
+    }
+
+    total0.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+    total1.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+    total2.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+    total3.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+    total4.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+    ouverture.addEventListener('change', function(){
+      calculDeChaqueProportionDeTemps();
+    });
+
+
+        // calcule du total de reglage decollétage
+    function calculTotalReglagleEnHeureDecolletage(){
+      const param0 = parseFloat(tpsEmbarreurCanon.value);
+      const param1 = parseFloat(tpsPreparationOutils.value);
+      const param2 = parseFloat(tpsMiseAuPoint.value);
+      const param3 = parseFloat(tpsPosageOutils.value);
+      const param4 = parseFloat(moyenneProgrammationEnHeure.value);
+
+      if(isNaN(param0) || isNaN(param1) || isNaN(param2) || isNaN(param3) || isNaN(param4) ){
+        tpsTotalReglage.value = '';
+      }else{ 
+        tpsTotalReglage.value = param0 + param1 + param2 + param3 + param4;
+        tpsTotalReglage.dispatchEvent(new Event('change'));
+      }
+    }
+
+    tpsEmbarreurCanon.addEventListener('change', function(){
+      calculTotalReglagleEnHeureDecolletage();
+    });
+    tpsPreparationOutils.addEventListener('change', function(){
+      calculTotalReglagleEnHeureDecolletage();
+    });
+    tpsMiseAuPoint.addEventListener('change', function(){
+      calculTotalReglagleEnHeureDecolletage();
+    });
+    tpsPosageOutils.addEventListener('change', function(){
+      calculTotalReglagleEnHeureDecolletage();
+    });
+    moyenneProgrammationEnHeure.addEventListener('change', function(){
+      calculTotalReglagleEnHeureDecolletage();
+    });
+
+    tpsTotalReglage.addEventListener('change', function(){
+      CalculTempsDeReglage();
+    });
+
+        // calcule du temps de reglage decolletage
+      function calculTempsDeReglageDecolletage(){
+      const param = parseFloat(tempsDeCycleDeBaseDecolletage.value);
+      if(isNaN(param)){
+        nbrePiecesParJour.value = '';
+      }else{ 
+        nbrePiecesParJour.value =  Math.floor((24/(((1000*param)/3600)/1000)));
+        nbrePiecesParJour.dispatchEvent(new Event('change'));
+      }
+    }
+
+    tempsDeCycleDeBaseDecolletage.addEventListener('change', function(){
+      calculTempsDeReglageDecolletage();
+    });
+
+
+    // calcule du nombre de pièce par heure 
+    function calculNombrePiecesHeure(){
+      const param = parseFloat(tempscycles.value);
+      if(isNaN(param)){
+        nombrePieceParHeure.value = '';
+      }else{ 
+        nombrePieceParHeure.value = Math.floor(3600/param);
+        nombrePieceParHeure.dispatchEvent(new Event('change'));
+      }
+    }
+
+    tempscycles.addEventListener('change', function() {
+      // Appeler la première fonction
+      calculNombrePiecesHeure();
+
+      // Appeler la deuxième fonction
+      //calculNombrePieceParHeureApresDeduction();
+
+      // Appeler la troisième fonction
+      //calculTempsDeCycleGammeEnSeconde();
+
+      // ...
+    });
+
+    nombrePieceParHeure.addEventListener('change',function(){
+      calculNombrePieceParHeureApresDeduction();
+    });
+
+    // calcul du nombre de pièces par heure après deduction
+    function calculNombrePieceParHeureApresDeduction(){
+      const param1 = parseFloat(nombrePieceParHeure.value);
+      const param2 = parseFloat(proportionFinalInput.value);
+      if(isNaN(param1 || isNaN(param2))){
+        nombrePieceParHeureApresDeduction.value = '';
+      }else{ 
+        nombrePieceParHeureApresDeduction.value = Math.floor(param1 - (param1*param2));
+        nombrePieceParHeureApresDeduction.dispatchEvent(new Event('change'));
+      }
+    }
+
+    nombrePieceParHeureApresDeduction.addEventListener('change', function(){
+      calculTempsDeCycleGammeEnSeconde();
+    });
+
+
+    function calculTempsDeCycleGammeEnSeconde(){
+      const param = parseFloat(nombrePieceParHeureApresDeduction.value);
+      if(isNaN(param)){
+        tempsDeCycleGammeEnSeconde.value = '';
+      }else{ 
+        tempsDeCycleGammeEnSeconde.value = (3600/param).toFixed(1);
+        tempsDeCycleGammeEnSeconde.dispatchEvent(new Event('change'));
+      }
+    }
+
+    function calculPour1000PiecesParHeure(){
+      const param1 = parseFloat(piecesParJour.value);
+      const param2 = parseFloat(tauxDeRendment.value);
+      if(isNaN(param1) || isNaN(param2)){
+        pourMilParPcsEnHeure.value = '';
+      }else{ 
+        pourMilParPcsEnHeure.value = (8000/param1*param2).toFixed(2);
+        pourMilParPcsEnHeure.dispatchEvent(new Event('change'));
+      }
+    }
+
+    piecesParJour.addEventListener('change', function(){
+      calculPour1000PiecesParHeure();
+    });
+
+
+    function calculNombreDePiecesParJour(){
+      const param1 = parseFloat(tempsDeCycleGammeEnSeconde.value);
+      const param2 = parseFloat(tauxDeRendment.value);
+      const param3 = parseFloat(efficiencePoste.value);
+      if(isNaN(param1) || isNaN(param2) || isNaN(param3)){
+        piecesParJour.value = '';
+      }else{ 
+        piecesParJour.value = Math.floor((3600/param1) * 8 * param2 * param3);
+        piecesParJour.dispatchEvent(new Event('change'));
+      }
+    }
+
+    tempsDeCycleGammeEnSeconde.addEventListener('change', function(){
+      calculNombreDePiecesParJour();
+    });
+ 
+
+    //nombrePieceParHeure.addEventListener('input', calculNombrePiecesHeure);
+
+  
+    // calculer proportion total de temps
+    function calculerProportionTotalTemps() {
+      const prop1 = parseFloat(proportion1Input.value);
+      const prop2 = parseFloat(proportion2Input.value);
+      const prop3 = parseFloat(proportion3Input.value);
+      const prop4 = parseFloat(proportion4Input.value);
+      const prop5 = parseFloat(proportion5Input.value);
+   
+      
+      // Vérifier si les valeurs des cellules existent
+      if (isNaN(prop1) || isNaN(prop2) ||isNaN(prop3) || isNaN(prop4)) {
+        proportionFinalInput.value = ''; // Effacer le résultat s'il y a des valeurs manquantes
+      } else {
+        const resultat = prop1 + prop2 + prop3 + prop4;
+        proportionFinalInput.value = resultat.toFixed(3);
+        proportionFinalInput.dispatchEvent(new Event('change'));
+      }
+    }
+
+    proportion1Input.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+    });
+    proportion2Input.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+    });
+    proportion3Input.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+    });
+    proportion4Input.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+    });
+
+
+    function calculDuTempsDeCycleCalculer() {
+      const param1 = parseFloat(calculInversePiecesParJour.value);
+      const param2 = parseFloat(tauxDeRendment.value);
+      const param3 = parseFloat(efficiencePoste.value);
+      const param4 = parseFloat(proportionFinalInput.value);
+      if (isNaN(param1) || isNaN(param2) ||isNaN(param3) || isNaN(param4)) {
+        tempsDeCycleCalculerSecond.value = '';
+      } else {
+          const resultat = ((3600 * 8 * (1 - param4) / param1) * param2 * param3);
+          tempsDeCycleCalculerSecond.value = resultat.toFixed(2);
+          tempsDeCycleCalculerSecond.dispatchEvent(new Event('change'));
+      }
+    }
+
+    calculInversePiecesParJour.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+    });
+
+    tauxDeRendment.addEventListener('change', function(){
+      calculPour1000PiecesParHeure();
+      calculNombreDePiecesParJour();
+    });
+
+
+    efficiencePoste.addEventListener('change', function(){
+      calculerProportionTotalTemps();
+      calculNombreDePiecesParJour();
+    });
+
+
+    proportionFinalInput.addEventListener('change', function() {
+
+      calculDuTempsDeCycleCalculer();
+      // Appeler la première fonction
+      calculNombrePieceParHeureApresDeduction();
+
+      // Appeler la deuxième fonction
+      calculNombrePiecesHeure();
+
+      // Appeler la troisième fonction
+      //calculerProportionTotalTemps();
+
+      // ...
+    });
+
+
+
+  </script>
+
+  <script>
+
+
+  function toggleVisibility() {
+    var div1 = document.getElementById("maDiv1");
+    var div2 = document.getElementById("maDiv2");
+    if (div1.style.display === "none") {
+      div1.style.display = "block";
+    } else {
+      div1.style.display = "none";
+    }
+    if (div2.style.display === "none") {
+      div2.style.display = "block";
+    } else {
+      div2.style.display = "none";
+    }
+  }
+   
+    var button = document.getElementById('showColumnsBtn');
+    var tableSynthese = document.getElementById('tableSynthese');
+    var hiddenCols = document.querySelectorAll('.d-none');
+    var isHidden = true;
+
+    button.addEventListener('click', function() {
+      hiddenCols.forEach(function(col) {
+        if (isHidden) {
+          col.classList.remove('d-none');
+          //tableSynthese.classList.add('table-sm');
+        } else {
+          col.classList.add('d-none');
+          //tableSynthese.classList.remove('table-sm');
+        }
+      });
+
+      isHidden = !isHidden;
+    });
+
+  </script>
+
+  <script>
+
+    var buttonTournage = document.getElementById('showColumnsTournage');
+    var hiddenColsTournage = document.querySelectorAll('.d-noneTournage');
+    var isHiddenTournage = true;
+
+    hiddenColsTournage.forEach(function(col) {
+          col.classList.add('d-none');
+    });
+   
+
+    buttonTournage.addEventListener('click', function() {
+      hiddenColsTournage.forEach(function(col) {
+        if (isHiddenTournage) {
+          col.classList.remove('d-none');
+          //tableSynthese.classList.add('table-sm');
+        } else {
+          col.classList.add('d-none');
+          //tableSynthese.classList.remove('table-sm');
+        }
+      });
+
+      isHiddenTournage = !isHiddenTournage;
+    });
+
+  </script>
+
+  <script>
+
+    var buttonTrou = document.getElementById('showColumnsTrou');
+    var hiddenColsTrou = document.querySelectorAll('.d-noneTrou');
+    hiddenColsTrou.forEach(function(col) {
+          col.classList.add('d-none');
+    });
+    var isHiddenTrou = true;
+
+    buttonTrou.addEventListener('click', function() {
+      hiddenColsTrou.forEach(function(col) {
+        if (isHiddenTrou) {
+          col.classList.remove('d-none');
+          //tableSynthese.classList.add('table-sm');
+        } else {
+          col.classList.add('d-none');
+          //tableSynthese.classList.remove('table-sm');
+        }
+      });
+
+      isHiddenTrou = !isHiddenTrou;
+    });
+
+  </script>
+
+  <script>
+
+    var buttonFraisage = document.getElementById('showColumnsFraisage');
+    var hiddenColsFraisage = document.querySelectorAll('.d-noneFraisage');
+    hiddenColsFraisage.forEach(function(col) {
+          col.classList.add('d-none');
+    });
+    var isHiddenFraisage = true;
+
+    buttonFraisage.addEventListener('click', function() {
+      hiddenColsFraisage.forEach(function(col) {
+        if (isHiddenFraisage) {
+          col.classList.remove('d-none');
+          //tableSynthese.classList.add('table-sm');
+        } else {
+          col.classList.add('d-none');
+          //tableSynthese.classList.remove('table-sm');
+        }
+      });
+
+      isHiddenFraisage = !isHiddenFraisage;
+    });
+
+  </script>
+
+  <script>
+
+    var buttonTaillage = document.getElementById('showColumnsTaillage');
+    var hiddenColsTaillage = document.querySelectorAll('.d-noneTaillage');
+    hiddenColsTaillage.forEach(function(col) {
+          col.classList.add('d-none');
+    });
+    var isHiddenTaillage = true;
+
+    buttonTaillage.addEventListener('click', function() {
+      hiddenColsTaillage.forEach(function(col) {
+        if (isHiddenTaillage) {
+          col.classList.remove('d-none');
+          //tableSynthese.classList.add('table-sm');
+        } else {
+          col.classList.add('d-none');
+          //tableSynthese.classList.remove('table-sm');
+        }
+      });
+
+      isHiddenTaillage = !isHiddenTaillage;
+    });
+
+
+  </script>
+
+<script th:inline="javascript">
+  function ajouterQuantite() {
+         var quantiteInputs = document.querySelectorAll('[id^="inputQuantity"]');
+         quantiteInputs.forEach(function(input) {
+             var currentValue = parseFloat(input.value);
+             if (!isNaN(currentValue)) {
+                 input.value = currentValue + 3;
+             }
+         });
+     }
+</script>
+
+  </body>
+
+</html>
