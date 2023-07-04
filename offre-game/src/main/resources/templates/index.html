@@ -4241,254 +4241,6 @@
     const tp4 = document.getElementById('tp4');
 
 
-    function calculPRetTempsDePassageEnjour(){
-      calculPrEnCHF();
-      calculTempsDePassageEnJour();
-    }
-
-    function calculPVetPrixDeRevient(){
-      calculPVenCHF();
-      calculPrixDeRevient();
-    }
-
-
-
-
-
-
-
-    function calculPrixDeRevient(){
-
-      var J = document.querySelectorAll('[id^="calculPrEnCHF"]');
-      var Y1 = parseFloat(qtePiecesClient.value);
-
-      var sommeJ = sommeRangee(J);
-      prixDeRevient.value = (arrondiPrixDeRevient(sommeJ / Y1, 0.005) || 0).toFixed(2);
-
-    }
-    function arrondiPrixDeRevient(nombre, multiple) {
-      var quotient = Math.floor(nombre / multiple);
-      var reste = nombre % multiple;
-      
-      if (reste > 0) {
-        return (quotient + 1) * multiple;
-      } else {
-        return quotient * multiple;
-      }
-    }
-
-
-
-
-
-
-
-    function calculTempsDePassage(){
-
-      var K = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
-      var sommeK = sommeRangee(K);
-      tpsDePassage.value = arrondiTempsDePassage(sommeK / 5, 0);
-      tpsDePassage.dispatchEvent(new Event('change'));
-    }
-
-    function arrondiTempsDePassage(nombre, decimales) {
-      return Math.round(nombre * Math.pow(10, decimales)) / Math.pow(10, decimales);
-    }
-
-
-
-
-
-
-    function calculDuPrixDeLaPiece(){
-
-      var L = document.querySelectorAll('[id^="calculPVenCHF"]');
-      const Y1 = parseFloat(qtePiecesClient.value);
-
-      var sommeL = sommeRangee(L);
-      prixPiece.value = arrondiAuMultipleDuPrixDeLaPiece(sommeL / Y1, 0.005).toFixed(2);
-      prixPiece.dispatchEvent(new Event('change'));
-
-    }
-
-    function arrondiAuMultipleDuPrixDeLaPiece(nombre, multiple) {
-      var quotient = Math.floor(nombre / multiple);
-      var reste = nombre % multiple;
-      
-      if (reste > 0) {
-        return (quotient + 1) * multiple;
-      } else {
-        return quotient * multiple;
-      }
-    }
-
-    function sommeRangee(rangee) {
-
-      var somme = 0;
-
-      for (var i = 0; i < rangee.length; i++) {
-        if (!isNaN(rangee[i].value)) {
-          somme += parseFloat(rangee[i].value);
-        }
-      }
-      return somme;
-    }
-
-
-
-
-
-
-
-
-    function calculPVenCHF(){
-
-      var calculPrEnCHFTab = document.querySelectorAll('[id^="calculPrEnCHF"]');
-      var indirectTab = document.querySelectorAll('[id^="indirect"]');
-      var margeTab = document.querySelectorAll('[id^="marge"]');
-      var calculPVenCHFTab = document.querySelectorAll('[id^="calculPVenCHF"]');
-
-      for (var i = 0; i < calculPVenCHFTab.length; i++) {
-        calculPVenCHFTab[i].value = arrondiAuMultiple((parseFloat(calculPrEnCHFTab[i].value) * (1 + parseFloat(indirectTab[i].value))) * (1 + parseFloat(margeTab[i].value)), 0.05);
-        calculPVenCHFTab[i].dispatchEvent(new Event('change'));
-
-      }
-
-    }
-
-    function arrondiAuMultiple(nombre, multiple) {
-        return (Math.ceil(nombre / multiple) * multiple).toFixed(2);
-    }
-
-    function calculTempsDePassageEnJour(){
-
-      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
-      var tempsInterOperatoireEnHeureTab = document.querySelectorAll('[id^="tempsInterOperatoireEnHeure"]');
-      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
-      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]'); 
-      var TaskNameTab = document.querySelectorAll('[id^="TaskName"]');
-
-      let index = 0;
-
-      const qteFabric = parseFloat(qtePiecesFabric.value);
-
-      for (var i = 0; i < tempsDePassageEnJourTab.length; i++) {
-
-        if (qteFabric === 0 || isNaN(qteFabric)) {
-            tempsDePassageEnJourTab[i].value = 0;
-            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
-          } else {
-            
-            if(TaskNameTab[i].textContent.includes("Decolletage")){
-              tempsDePassageEnJourTab[i].value = ((((parseFloat(tempsInterOperatoireEnHeureTab[i].value) + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value)) / 3) / 8) || 0).toFixed(2);
-              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
-            }else{
-              tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
-              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
-            }
-           
-          }
-      }
-
-    }
-
-    function calculPrEnCHF(){
-
-      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
-      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
-      var tauxHoraireReglageTab = document.querySelectorAll('[id^="tauxHoraireReglage"]');
-      var tauxHoraireProductionTab = document.querySelectorAll('[id^="tauxHoraireProduction"]');
-      var calculPrEnCHFtab = document.querySelectorAll('[id^="calculPrEnCHF"]');
-      
-
-      const qteFabric = parseFloat(qtePiecesFabric.value);
-
-      for (var i = 0; i < calculPrEnCHFtab.length; i++) {
-
-        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
-            calculPrEnCHFtab[i].value = 0;
-            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
-          } else {
-            calculPrEnCHFtab[i].value = (parseFloat(tempsDeReglageEnHeureTab[i].value) * parseFloat(tauxHoraireReglageTab[i].value) + (qteFabric * parseFloat(tempsDeProductionTab[i].value) * parseFloat(tauxHoraireProductionTab[i].value))).toFixed(2); 
-            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
-          }
-
-      }
-      
-    }
-
-
-
-    function calculeRebutDeFabrication(){
-      
-      const param1 = parseFloat(qtePiecesClient.value);
-      const param2 = parseFloat(qtePiecesFabric.value);
-
-      if (param2 !== 0) {
-        rebutFabrik.value = ((-param1 + param2) / param2).toFixed(2);
-        rebutFabrik.dispatchEvent(new Event('change'));
-      }else{
-        rebutFabrik.value = 0;
-        rebutFabrik.dispatchEvent(new Event('change'));
-      }
-
-    }
-
-    qtePiecesClient.addEventListener('change', function(){
-      calculeRebutDeFabrication();
-      calculPrEnCHF();
-      calculTempsDePassageEnJour();
-      calculPVenCHF();
-      calculDuPrixDeLaPiece();
-      calculTempsDePassage();
-      calculPrixDeRevient();
-      
-    });
-    qtePiecesFabric.addEventListener('change', function(){
-      calculeRebutDeFabrication();
-      calculPrEnCHF();
-      calculTempsDePassageEnJour();
-      calculPVenCHF();
-      calculDuPrixDeLaPiece();
-      calculTempsDePassage();
-      calculPrixDeRevient();
-    });
-
-    categoriePiece.addEventListener('change', function(){
-      calculQuantitPiecesFabrication(); 
-      calculPrEnCHF();
-    });
-
-    
-
-
-    function calculQuantitPiecesFabrication(){
-
-      const param1 = parseFloat(categoriePiece.value);
-      const param2 = parseFloat(qtePiecesClient.value);
-
-      if (param2 !== 0) {
-        if (param1 === 1) {
-          qtePiecesFabric.value = Math.round(1.025 * param2 + 97);
-          qtePiecesFabric.dispatchEvent(new Event('change'));
-        } else if (param1 === 2) {
-          qtePiecesFabric.value = Math.round(1.0741 * param2 + 193);
-          qtePiecesFabric.dispatchEvent(new Event('change'));
-        } else if (param1 === 3) {
-          qtePiecesFabric.value = Math.round(1.118 * param2 + 326);
-          qtePiecesFabric.dispatchEvent(new Event('change'));
-        } else {
-          qtePiecesFabric.value = 0;
-          qtePiecesFabric.dispatchEvent(new Event('change'));
-        }
-      } else {
-        qtePiecesFabric.value = 0;
-        qtePiecesFabric.dispatchEvent(new Event('change'));
-      } 
-      
-    }
-
-
     checkboxst1.addEventListener('change', function(){
 
       if (checkboxst1.checked) {
@@ -5151,6 +4903,235 @@
 
       // ...
     });
+
+
+
+    function calculPRetTempsDePassageEnjour(){
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+    }
+
+    function calculPVetPrixDeRevient(){
+      calculPVenCHF();
+      calculPrixDeRevient();
+    }
+
+
+
+    function calculPrixDeRevient(){
+
+      var J = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeJ = sommeRangee(J);
+      prixDeRevient.value = (arrondiPrixDeRevient(sommeJ / Y1, 0.005) || 0).toFixed(2);
+
+    }
+    function arrondiPrixDeRevient(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+
+    function calculTempsDePassage(){
+
+      var K = document.querySelectorAll('[id^="tempsDePassageEnJour"]');
+      var sommeK = sommeRangee(K);
+      tpsDePassage.value = arrondiTempsDePassage(sommeK / 5, 0);
+      tpsDePassage.dispatchEvent(new Event('change'));
+    }
+
+    function arrondiTempsDePassage(nombre, decimales) {
+      return Math.round(nombre * Math.pow(10, decimales)) / Math.pow(10, decimales);
+    }
+
+    function calculDuPrixDeLaPiece(){
+
+      var L = document.querySelectorAll('[id^="calculPVenCHF"]');
+      const Y1 = parseFloat(qtePiecesClient.value);
+
+      var sommeL = sommeRangee(L);
+      prixPiece.value = arrondiAuMultipleDuPrixDeLaPiece(sommeL / Y1, 0.005).toFixed(2);
+      prixPiece.dispatchEvent(new Event('change'));
+
+    }
+
+    function arrondiAuMultipleDuPrixDeLaPiece(nombre, multiple) {
+      var quotient = Math.floor(nombre / multiple);
+      var reste = nombre % multiple;
+      
+      if (reste > 0) {
+        return (quotient + 1) * multiple;
+      } else {
+        return quotient * multiple;
+      }
+    }
+
+    function sommeRangee(rangee) {
+
+      var somme = 0;
+
+      for (var i = 0; i < rangee.length; i++) {
+        if (!isNaN(rangee[i].value)) {
+          somme += parseFloat(rangee[i].value);
+        }
+      }
+      return somme;
+    }
+
+    function calculPVenCHF(){
+
+      var calculPrEnCHFTab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      var indirectTab = document.querySelectorAll('[id^="indirect"]');
+      var margeTab = document.querySelectorAll('[id^="marge"]');
+      var calculPVenCHFTab = document.querySelectorAll('[id^="calculPVenCHF"]');
+
+      for (var i = 0; i < calculPVenCHFTab.length; i++) {
+        calculPVenCHFTab[i].value = arrondiAuMultiple((parseFloat(calculPrEnCHFTab[i].value) * (1 + parseFloat(indirectTab[i].value))) * (1 + parseFloat(margeTab[i].value)), 0.05);
+        calculPVenCHFTab[i].dispatchEvent(new Event('change'));
+
+      }
+
+    }
+
+    function arrondiAuMultiple(nombre, multiple) {
+        return (Math.ceil(nombre / multiple) * multiple).toFixed(2);
+    }
+
+    function calculTempsDePassageEnJour(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsInterOperatoireEnHeureTab = document.querySelectorAll('[id^="tempsInterOperatoireEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tempsDePassageEnJourTab = document.querySelectorAll('[id^="tempsDePassageEnJour"]'); 
+      var TaskNameTab = document.querySelectorAll('[id^="TaskName"]');
+
+      let index = 0;
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < tempsDePassageEnJourTab.length; i++) {
+
+        if (qteFabric === 0 || isNaN(qteFabric)) {
+            tempsDePassageEnJourTab[i].value = 0;
+            tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+          } else {
+            
+            if(TaskNameTab[i].textContent.includes("Decolletage")){
+              tempsDePassageEnJourTab[i].value = ((((parseFloat(tempsInterOperatoireEnHeureTab[i].value) + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value)) / 3) / 8) || 0).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }else{
+              tempsDePassageEnJourTab[i].value = (((parseFloat(tempsInterOperatoireEnHeureTab[i].value)  + parseFloat(tempsDeReglageEnHeureTab[i].value)) + (qteFabric * parseFloat(tempsDeProductionTab[i].value))) / 8).toFixed(2);
+              tempsDePassageEnJourTab[i].dispatchEvent(new Event('change'));
+            }
+           
+          }
+      }
+
+    }
+
+    function calculPrEnCHF(){
+
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      var tauxHoraireReglageTab = document.querySelectorAll('[id^="tauxHoraireReglage"]');
+      var tauxHoraireProductionTab = document.querySelectorAll('[id^="tauxHoraireProduction"]');
+      var calculPrEnCHFtab = document.querySelectorAll('[id^="calculPrEnCHF"]');
+      
+
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < calculPrEnCHFtab.length; i++) {
+
+        if (parseFloat(qtePiecesFabric.value) === 0 || isNaN(parseFloat(qtePiecesFabric.value))) {
+            calculPrEnCHFtab[i].value = 0;
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          } else {
+            calculPrEnCHFtab[i].value = (parseFloat(tempsDeReglageEnHeureTab[i].value) * parseFloat(tauxHoraireReglageTab[i].value) + (qteFabric * parseFloat(tempsDeProductionTab[i].value) * parseFloat(tauxHoraireProductionTab[i].value))).toFixed(2); 
+            calculPrEnCHFtab[i].dispatchEvent(new Event('change'));
+          }
+
+      }
+      
+    }
+
+
+
+    function calculeRebutDeFabrication(){
+      
+      const param1 = parseFloat(qtePiecesClient.value);
+      const param2 = parseFloat(qtePiecesFabric.value);
+
+      if (param2 !== 0) {
+        rebutFabrik.value = ((-param1 + param2) / param2).toFixed(2);
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }else{
+        rebutFabrik.value = 0;
+        rebutFabrik.dispatchEvent(new Event('change'));
+      }
+
+    }
+
+    qtePiecesClient.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
+      
+    });
+    qtePiecesFabric.addEventListener('change', function(){
+      calculeRebutDeFabrication();
+      calculPrEnCHF();
+      calculTempsDePassageEnJour();
+      calculPVenCHF();
+      calculDuPrixDeLaPiece();
+      calculTempsDePassage();
+      calculPrixDeRevient();
+    });
+
+    categoriePiece.addEventListener('change', function(){
+      calculQuantitPiecesFabrication(); 
+      calculPrEnCHF();
+    });
+
+    
+
+
+    function calculQuantitPiecesFabrication(){
+
+      const param1 = parseFloat(categoriePiece.value);
+      const param2 = parseFloat(qtePiecesClient.value);
+
+      if (param2 !== 0) {
+        if (param1 === 1) {
+          qtePiecesFabric.value = Math.round(1.025 * param2 + 97);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 2) {
+          qtePiecesFabric.value = Math.round(1.0741 * param2 + 193);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else if (param1 === 3) {
+          qtePiecesFabric.value = Math.round(1.118 * param2 + 326);
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        } else {
+          qtePiecesFabric.value = 0;
+          qtePiecesFabric.dispatchEvent(new Event('change'));
+        }
+      } else {
+        qtePiecesFabric.value = 0;
+        qtePiecesFabric.dispatchEvent(new Event('change'));
+      } 
+      
+    }
+
 
 
 

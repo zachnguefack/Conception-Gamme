@@ -36,31 +36,6 @@ public class OffreGammeRestController {
     private ParametreDecolletageRepository parametreDecolletageRepository;
 
 
-
-    @GetMapping("/select_task")
-    public String getSelectTasks(Model model) {
-
-        List<Task> taskChoice = offreGameService.findByStatusTrueOrderByNumeroAsc();
-        List<Task> listTaskEdit = new ArrayList<>();
-
-        for (Task task: taskChoice){
-            if(task.isEdit()){
-                listTaskEdit.add(task);
-            }
-        }
-
-        List<Task> taskList = listeDesTachesEtSousTche(listTaskEdit);
-        model.addAttribute("otherTaskListCheck", taskChoice);
-        model.addAttribute("taskWithSubTasks", taskList);
-
-        return "config_task";
-    }
-
-    @GetMapping("/edit_other_task")
-    public String editOtherTask(Model model) {
-        return "editOtherTask";
-    }
-
     @PostMapping("/othertask/update")
     public String updateSubTasks(@ModelAttribute("otherTaskDTO") OtherTaskDTO otherTaskDTO) {
 
