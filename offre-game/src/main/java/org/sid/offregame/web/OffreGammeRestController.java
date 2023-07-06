@@ -42,7 +42,12 @@ public class OffreGammeRestController {
         OtherTask otherTask = (OtherTask) offreGameService.getTaskById(otherTaskDTO.getId());
         otherTask.setEdit(true);
         otherTask.setTempsDeReglageEnHeure(otherTask.getTempsDeReglageHeur());
-
+        int count = 0;
+        for (SubOtherTask subOtherTask: otherTask.getSubOtherTasks()){
+            count = count + 1;
+            subOtherTask.setNumeroSequence(otherTask.getNumero() + count);
+            subOtherTaskRepository.save(subOtherTask);
+        }
         BigDecimal roundedNumber = BigDecimal.valueOf((otherTaskDTO.getTaskPrecisionParametersDTO().get(0).getPourMilParPcsEnHeure()/1000)).setScale(4, RoundingMode.HALF_UP);
         double roundedValue = roundedNumber.doubleValue();
         otherTask.setTempsDeProduction(roundedValue);
@@ -55,11 +60,33 @@ public class OffreGammeRestController {
 
         Task task = (ComplexTask) offreGameService.getTaskById(complexTaskDTO.getId());
         task.setEdit(true);
+        if(complexTaskDTO.isPoolA()){
+            task.setTaskName(task.getTaskName() + " POOL A");
+        }else if (complexTaskDTO.isPoolB()){
+            task.setTaskName(task.getTaskName() + " POOL B");
+        }else if (complexTaskDTO.isPoolC()){
+            task.setTaskName(task.getTaskName() + " POOL C");
+        }else if (complexTaskDTO.isPoolD()){
+            task.setTaskName(task.getTaskName() + " POOL D");
+        }else if (complexTaskDTO.isPoolE()){
+            task.setTaskName(task.getTaskName() + " POOL E");
+        }else if (complexTaskDTO.isPoolF()){
+            task.setTaskName(task.getTaskName() + " POOL F");
+        }else if (complexTaskDTO.isPoolH()){
+            task.setTaskName(task.getTaskName() + " POOL H");
+        }
+
+        int count = 0;
+        for (SubOtherTask subOtherTask: task.getSubOtherTasks()){
+            count = count + 1;
+            subOtherTask.setNumeroSequence(task.getNumero() + count);
+            subOtherTaskRepository.save(subOtherTask);
+        }
+
         BigDecimal roundedNumber = BigDecimal.valueOf((((1000 * complexTaskDTO.getTempsDeCycleDeBase()) / 3600) / 1000)).setScale(4, RoundingMode.HALF_UP);
         double roundedValue = roundedNumber.doubleValue();
         task.setTempsDeProduction(roundedValue);
         task.setTempsDeReglageEnHeure(complexTaskDTO.getTempsDeReglageEnHeure());
-
         taskRepository.save(task);
 
         return "redirect:/";
@@ -91,7 +118,7 @@ public class OffreGammeRestController {
             otherTaskDTO.setTempsCycleDeBaseSecond(otherTask.getTempsCycleDeBaseSecond());
             otherTaskDTO.setTempsDeCycleCalculerSecond(otherTask.getTempsDeCycleCalculerSecond());
             otherTaskDTO.setProportionTotalTemps(otherTask.getProportionTotalTemps());
-
+            otherTaskDTO.setDecolletage(otherTask.isDecolletage());
 
             List<TaskPrecisionParameterDTO> taskPrecisionParameterDTOS = new ArrayList<>();
             List<TaskTimeParameterDTO> taskTimeParameterDTOS = new ArrayList<>();
@@ -152,7 +179,6 @@ public class OffreGammeRestController {
         model.addAttribute("pagecat",new int[taskCategoryPage.getTotalPages()]);
 
         model.addAttribute("categories", taskCategoryRepository.findAll());
-
         return "index";
     }
 
@@ -289,6 +315,9 @@ public class OffreGammeRestController {
         if(!isChecked){
             task1.setEdit(false);
             task1.setTempsDeProduction(0);
+            if(task1 instanceof ComplexTask){
+                task1.setTaskName("Decolletage");
+            }
             taskRepository.save(task1);
         }
         return "redirect:/";
@@ -299,6 +328,9 @@ public class OffreGammeRestController {
         Task task = taskRepository.findById(id).get();
         task.setEdit(false);
         task.setTempsDeProduction(0);
+        if(task instanceof ComplexTask){
+            task.setTaskName("Decolletage");
+        }
         taskRepository.save(task);
 
         int nb = taskRepository.findById(id).get().getNumero();

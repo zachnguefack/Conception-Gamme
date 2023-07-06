@@ -18,6 +18,8 @@ public abstract class Task {
     private boolean status;
     private boolean edit;
 
+    private boolean decolletage;
+
     private  double tempsDeProduction;
     private double tempsDeReglageEnHeure;
     private double tempsPourPcsEnHeureParPiece;

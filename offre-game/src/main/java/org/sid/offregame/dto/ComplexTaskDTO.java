@@ -13,6 +13,15 @@ public class ComplexTaskDTO extends TaskDTO{
     private int numero;
     private boolean status;
     private boolean edit;
+    private boolean decolletage;
+    private boolean poolA;
+    private boolean poolB;
+    private boolean poolC;
+    private boolean poolD;
+    private boolean poolE;
+    private boolean poolF;
+    private boolean poolH;
+
 
     private  double tempsDeProduction;
     private double tempsDeReglageEnHeure;
