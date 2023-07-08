@@ -49,17 +49,19 @@ public class OffreGameApplication {
             offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",1,8,"6a1dd975-b63a-473d-8f22-1151bb1c9be0");
             */
 
-            /*offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,12,96,0.2,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
-            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,4,32,0.067,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
-            offreGameService.saveTaskTimeParameter(true,"Nettoyage Place De Travail",8,3,24,0.05,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
-            offreGameService.saveTaskTimeParameter(true,"Nettoyage Posage",8,3,24,0.05,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
 
-            offreGameService.saveTaskPrecisionParameter(true,480,6,4,983.7,
-                    80.37,0.84,0.85,63,84,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
+            /*offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,6,48,0.10,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,3,24,0.05,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            offreGameService.saveTaskTimeParameter(true,"Caoutchouc",8,7.5,60,0.125,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            //offreGameService.saveTaskTimeParameter(true,"Affutage burin, 2fois/jour",8,5,40,0.083,"bcea3c6f-0678-4ff8-8ec1-b52cd3014fa6");
 
-            offreGameService.saveSubOtherTask(true,20,"Nettoyage Piece",0.5,8,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
-            offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",0.42,8,"cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9");
+            offreGameService.saveTaskPrecisionParameter(true,480,433,314,11.5,
+                    3.75,0.84,0.85,100,1794,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+
+            offreGameService.saveSubOtherTask(true,20,"Nettoyage Piece",0.5,8,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",0.42,8,"0cdd9dcd-37f5-4943-82e5-657798baf709");
 */
+
 		};
 
     }

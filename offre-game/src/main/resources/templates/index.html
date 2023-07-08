@@ -500,9 +500,12 @@
                             <!-- Bouton centré -->
                             <button class="btn btn-falcon-default btn-sm mx-2" id="showSimpleTaskParamts" type="button"><span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">paramètres avancés</span></button>
                           </div>
-                          <button type="button" class="btn-close btn btn-sm d-flex flex-center transition-base" style="background-color: red; border-color: white;" data-bs-dismiss="modal" aria-label="Close">
+                          <form th:action="@{/}" method="post">
+                            <button type="submit" class="btn-close btn btn-sm d-flex flex-center transition-base" style="background-color: red; border-color: white;" data-bs-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
+                          </form>
+                          
                       </div>
                       <div class="modal-body">
                           
@@ -770,7 +773,9 @@
                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                   <div class="modal-content border-0">
                     <div class="position-absolute top-0 end-0 mt-3 me-3 z-1">
-                      <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" style="background-color: red; border-color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <form th:action="@{/}" method="post">
+                        <button type="submit" class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" style="background-color: red; border-color: white;" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </form>
                     </div>
                     <div class="modal-body p-0">
                       <div class="rounded-top-3 py-3 ps-4 pe-6" style="background-color: #714B67; border-color: #714B67;">
