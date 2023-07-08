@@ -15,6 +15,7 @@ public class OtherTask extends Task implements Serializable {
 
     private double tempsCycleDeBaseSecond;
     private double tempsDeReglageHeur;
+    private double nbrePosageParPiece;
     private double tempsDeCycleCalculerSecond;
     private double proportionTotalTemps;
     @OneToMany(mappedBy = "otherTask")

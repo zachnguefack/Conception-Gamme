@@ -491,7 +491,7 @@
           <div class="myForm bg-light">
             <!-- Modal -->
             <div class="modal" id="exampleModal" tabindex="-1" role="dialog" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+              <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  modal-lg">
 
                   <div class="modal-content">
                       <div class="modal-header" style="background-color: #714B67; border-color: #714B67;">
@@ -519,8 +519,8 @@
                               <div class="valid-feedback">Looks good!</div>
                             </div>
                             <div class="col-md-4">
-                              <label class="form-label other-text" for="tempscycleh">Temps de Réglage [H]</label>
-                              <input class="form-control other-text" name="tempsDeReglageHeur" id="tempscycleh" type="number" required="" />
+                              <label class="form-label other-text" for="tempscycleh" id="distinction">Temps de Réglage [H]</label>
+                              <input class="form-control other-text" name="tempsDeReglageHeur" onchange="tempsPosageChange()" id="tempscycleh" type="number" required="" />
                               <div class="valid-feedback">Looks good!</div>
                             </div>  
                             <div class="col-md-4">
@@ -550,7 +550,7 @@
                                   <input class="form-check-input text-center" name="taskTimeParametersDTO[0].status"  type="checkbox" onchange="modifierUneSousTache1()" id="checkbox01" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm  other-text text-center" name="taskTimeParametersDTO[0].name"  type="text" id="name0" required="" readonly /></td>
+                                <td><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[0].name"  type="text" id="name0" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm  other-text text-center" name="taskTimeParametersDTO[0].nombreHeure"  type="number" id="n0" required="" readonly /></td>
                                 <td class="align-middlepe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].tempsMinParHeure"  type="number" id="temps0" required="" /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].totalTimeEnMin" type="number" id="total0" required="" readonly /></td>
@@ -562,7 +562,7 @@
                                   <input class="form-check-input text-center" name="taskTimeParametersDTO[1].status" type="checkbox" onchange="modifierUneSousTache2()" id="checkbox02" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm  other-text text-center" name="taskTimeParametersDTO[1].name"  type="text" id="name1" required="" readonly /></td>
+                                <td><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[1].name"  type="text" id="name1" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].nombreHeure" type="number" id="n1" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].tempsMinParHeure" type="number" id="temps1" required="" /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].totalTimeEnMin" type="number" id="total1" required="" readonly /></td>
@@ -574,7 +574,7 @@
                                   <input class="form-check-input text-center" type="checkbox" name="taskTimeParametersDTO[2].status"   onchange="modifierUneSousTache3()" id="checkbox03" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].name" type="text" id="name2" required=""  readonly/></td>
+                                <td><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].name" type="text" id="name2" required=""  readonly/></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].nombreHeure"  type="number" id="n2" required=""  readonly/></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].tempsMinParHeure"  type="number" id="temps2" required="" /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].totalTimeEnMin" type="number" id="total2" required="" readonly  /></td>
@@ -586,7 +586,7 @@
                                   <input class="form-check-input text-center" type="checkbox" name="taskTimeParametersDTO[3].status"  onchange="modifierUneSousTache4()" id="checkbox04" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].name" type="text"  id="name3" required=""  readonly/></td> 
+                                <td><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].name" type="text"  id="name3" required=""  readonly/></td> 
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].nombreHeure" type="number" id="n3" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].tempsMinParHeure" type="number" id="temps3" required="" /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].totalTimeEnMin" type="number" id="total3" required="" readonly /></td>
@@ -598,7 +598,7 @@
                                   <input class="form-check-input text-center" type="checkbox" name="taskTimeParametersDTO[4].status"  onchange="modifierUneSousTache5()" id="checkbox05" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm other-text text-center" type="text" name="taskTimeParametersDTO[4].name" id="name4" required=""  readonly/></td>
+                                <td><input class="form-control form-control-sm other-text" type="text" name="taskTimeParametersDTO[4].name" id="name4" required=""  readonly/></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].nombreHeure" type="number" id="n4" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].tempsMinParHeure"  type="number" id="temps4" required="" readonly /></td>
                                 <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].totalTimeEnMin"  type="number" id="total4" required="" readonly /></td>
@@ -688,7 +688,7 @@
                                   <input class="form-check-input text-center" name="subOtherTaskDTOS[0].status" type="checkbox" id="checkboxst0" data-bulk-select-row="data-bulk-select-row" disabled />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[0].name" id="nameS0" type="text" required="" readonly /></td>
+                                <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[0].name" id="nameS0" type="text" required="" readonly /></td>
                                 <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[0].numeroSequence"  id="seq0" type="number" required="" readonly /></td>
                                 <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[0].tempsDeReglage" id="tr0" type="number" required="" readonly/></td>
                                 <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp0" name="subOtherTaskDTOS[0].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text text-center" type="number" required="" readonly/></td>
@@ -699,7 +699,7 @@
                                 <input class="form-check-input text-center" name="subOtherTaskDTOS[1].status" type="checkbox" id="checkboxst1" data-bulk-select-row="data-bulk-select-row" />
                                 </div>
                               </td>
-                              <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[1].name" id="nameS1" type="text" required="" readonly /></td> 
+                              <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[1].name" id="nameS1" type="text" required="" readonly /></td> 
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[1].numeroSequence" id="seq1" type="number" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[1].tempsDeReglage" id="tr1" type="number" required="" readonly /></td>
                               <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp1" name="subOtherTaskDTOS[1].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text text-center" type="number" required="" readonly /></td>
@@ -710,7 +710,7 @@
                                 <input class="form-check-input text-center"  name="subOtherTaskDTOS[2].status" type="checkbox" id="checkboxst2" data-bulk-select-row="data-bulk-select-row" />
                                 </div>
                               </td>
-                              <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[2].name" id="nameS2" type="text" required="" readonly /></td>
+                              <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[2].name" id="nameS2" type="text" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[2].numeroSequence" id="seq2" type="number" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" id="tr2" name="subOtherTaskDTOS[2].tempsDeReglage" type="number" required="" readonly /></td>
                               <td class="align-middle white-space-nowrap text-end pe-2"><input id="tp2" name="subOtherTaskDTOS[2].tempsInterOperatoireEnHeure" class="form-control form-control-sm other-text text-center" type="number" required="" readonly  /></td>
@@ -721,7 +721,7 @@
                                 <input class="form-check-input text-center" name="subOtherTaskDTOS[3].status" type="checkbox" id="checkboxst3" data-bulk-select-row="data-bulk-select-row" />
                                 </div>
                               </td>
-                              <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[3].name" id="nameS3" type="text" required="" readonly /></td>
+                              <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].name" id="nameS3" type="text" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[3].numeroSequence" id="seq3" type="number" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[3].tempsDeReglage" id="tr3" type="number" required="" readonly /></td>
                               <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[3].tempsInterOperatoireEnHeure text-center" id="tp3" type="number" required="" readonly/></td>
@@ -732,7 +732,7 @@
                                 <input class="form-check-input text-center" name="subOtherTaskDTOS[4].status" type="checkbox" id="checkboxst4" data-bulk-select-row="data-bulk-select-row" />
                                 </div>
                               </td>
-                              <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[4].name" id="nameS4" type="text" required="" readonly /></td>
+                              <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[4].name" id="nameS4" type="text" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[4].numeroSequence" id="seq4" type="number" required="" readonly /></td>
                               <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[4].tempsDeReglage" id="tr4"  type="number" required="" readonly /></td>
                               <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[4].tempsInterOperatoireEnHeure" id="tp4" type="number" required="" readonly /></td>
@@ -743,7 +743,7 @@
                                   <input class="form-check-input text-center" name="subOtherTaskDTOS[5].status"  type="checkbox" id="checkboxst5" data-bulk-select-row="data-bulk-select-row" />
                                   </div>
                                 </td>
-                                <td><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[5].name" id="nameS5" type="text" required="" readonly /></td>
+                                <td><input class="form-control form-control-sm other-text" name="subOtherTaskDTOS[5].name" id="nameS5" type="text" required="" readonly /></td>
                                 <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[5].numeroSequence" id="seq5" type="number" required="" readonly /></td>
                                 <td class="align-middle"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[5].tempsDeReglage" id="tr5" type="number" required="" readonly /></td>
                                 <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" name="subOtherTaskDTOS[5].tempsInterOperatoireEnHeure" id="tp5" type="number" required="" readonly /></td>
@@ -3474,11 +3474,11 @@
       });
    </script>
 
-    <script>
-      function myFunction() {
-          document.getElementById("categoryForm").submit();
-      }
-    </script>
+  <script>
+    function myFunction() {
+        document.getElementById("categoryForm").submit();
+    }
+  </script>
 
   <script>
         function toggleRow(checkbox) {
@@ -3825,10 +3825,16 @@
 
                 $('.myForm #idtask').val(task.id);
                 $('.myForm #tempscycles').val(task.tempsCycleDeBaseSecond);
-                $('.myForm #tempscycleh').val(task.tempsDeReglageHeur);
                 $('.myForm #tempscyclecs').val(task.tempsDeCycleCalculerSecond);
-                $('.myForm #proportionTpsTotal').val(task.proportionTotalTemps) 
+                $('.myForm #proportionTpsTotal').val(task.proportionTotalTemps);
 
+                if(task.cateName.includes("Decolletage/Reprise")){
+                  document.getElementById('distinction').innerText  = "Nombre Pièce/Posage"; 
+                  $('.myForm #tempscycleh').val(task.nbrePosageParPiece);
+                }else{
+                  document.getElementById('distinction').innerText  = "Temps de Réglage [H]";
+                  $('.myForm #tempscycleh').val(task.tempsDeReglageHeur);
+                }
                 document.getElementById('nonDeLaTacheOther').textContent = task.taskName; 
                 
 
@@ -4242,6 +4248,11 @@
     const TaskName =  document.getElementById('TaskName');
     const tempscycles  = document.getElementById('tempscycles');
     const tempsDeCycleCalculerSecond = document.getElementById('tempscyclecs');
+    const tempsDeReglageHeur = document.getElementById('tempscycleh');
+
+   
+
+   
     
     const num0 = document.getElementById('n0');
     const temps0 = document.getElementById('temps0');
@@ -4802,7 +4813,7 @@
       if(isNaN(param)){
         nombrePieceParHeure.value = '';
       }else{ 
-        nombrePieceParHeure.value = Math.floor(3600/param);
+        nombrePieceParHeure.value =Math.ceil(3600/param);
         nombrePieceParHeure.dispatchEvent(new Event('change'));
       }
     }
@@ -4827,11 +4838,14 @@
     // calcul du nombre de pièces par heure après deduction
     function calculNombrePieceParHeureApresDeduction(){
       const param1 = parseFloat(nombrePieceParHeure.value);
+
+      const paramTempsDeCycle = parseFloat(tempscycles.value);
       const param2 = parseFloat(proportionFinalInput.value);
       if(isNaN(param1 || isNaN(param2))){
         nombrePieceParHeureApresDeduction.value = '';
       }else{ 
-        nombrePieceParHeureApresDeduction.value = Math.floor(param1 - (param1*param2));
+
+        nombrePieceParHeureApresDeduction.value = Math.ceil(3600/paramTempsDeCycle -(3600/paramTempsDeCycle) * param2);
         nombrePieceParHeureApresDeduction.dispatchEvent(new Event('change'));
       }
     }
@@ -4842,11 +4856,14 @@
 
 
     function calculTempsDeCycleGammeEnSeconde(){
+      const paramTempsDeCycle = parseFloat(tempscycles.value);
+      const param2 = parseFloat(proportionFinalInput.value);
       const param = parseFloat(nombrePieceParHeureApresDeduction.value);
       if(isNaN(param)){
         tempsDeCycleGammeEnSeconde.value = '';
-      }else{ 
-        tempsDeCycleGammeEnSeconde.value = (3600/param).toFixed(1);
+      }else{
+
+        tempsDeCycleGammeEnSeconde.value = (3600/(3600/paramTempsDeCycle -(3600/paramTempsDeCycle) * param2)).toFixed(1);
         tempsDeCycleGammeEnSeconde.dispatchEvent(new Event('change'));
       }
     }
@@ -4854,10 +4871,22 @@
     function calculPour1000PiecesParHeure(){
       const param1 = parseFloat(piecesParJour.value);
       const param2 = parseFloat(tauxDeRendment.value);
+
+      const paramTempsDeCycle = parseFloat(tempscycles.value);
+      const param2Prop = parseFloat(proportionFinalInput.value);
+      const param3 = parseFloat(efficiencePoste.value);
+
+      var  param5 = 0; 
+      if(document.getElementById('distinction').textContent.includes("Nombre Pièce/Posage")){
+        param5 = parseFloat(tempsDeReglageHeur.value);
+      }else{
+        param5 = 1;
+      }
+
       if(isNaN(param1) || isNaN(param2)){
         pourMilParPcsEnHeure.value = '';
       }else{ 
-        pourMilParPcsEnHeure.value = (8000/param1*param2).toFixed(2);
+        pourMilParPcsEnHeure.value = (8000/((3600/(3600/(3600/paramTempsDeCycle -(3600/paramTempsDeCycle) * param2Prop))) * 8 * param2 * param3 * param5)*param2).toFixed(2);
         pourMilParPcsEnHeure.dispatchEvent(new Event('change'));
       }
     }
@@ -4871,13 +4900,26 @@
       const param1 = parseFloat(tempsDeCycleGammeEnSeconde.value);
       const param2 = parseFloat(tauxDeRendment.value);
       const param3 = parseFloat(efficiencePoste.value);
+
+      const paramTempsDeCycle = parseFloat(tempscycles.value);
+      const param2Prop = parseFloat(proportionFinalInput.value);
+
+      var  param5 = 0; 
+      if(document.getElementById('distinction').textContent.includes("Nombre Pièce/Posage")){
+        param5 = parseFloat(tempsDeReglageHeur.value);
+      }else{
+        param5 = 1;
+      }
+
       if(isNaN(param1) || isNaN(param2) || isNaN(param3)){
         piecesParJour.value = '';
       }else{ 
-        piecesParJour.value = Math.floor((3600/param1) * 8 * param2 * param3);
+       
+        piecesParJour.value = Math.ceil((3600/(3600/(3600/paramTempsDeCycle -(3600/paramTempsDeCycle) * param2Prop))) * 8 * param2 * param3 * param5);
         piecesParJour.dispatchEvent(new Event('change'));
       }
     }
+
 
     function tempsDeCycleGammeEnSecondeChange(){
       calculNombreDePiecesParJour();
@@ -4923,10 +4965,19 @@
       const param2 = parseFloat(tauxDeRendment.value);
       const param3 = parseFloat(efficiencePoste.value);
       const param4 = parseFloat(proportionFinalInput.value);
+      var  param5 = 0; 
+
+      if(document.getElementById('distinction').textContent.includes("Nombre Pièce/Posage")){
+        param5 = parseFloat(tempsDeReglageHeur.value);
+      }else{
+        param5 = 1;
+      }
+
       if (isNaN(param1) || isNaN(param2) ||isNaN(param3) || isNaN(param4)) {
         tempsDeCycleCalculerSecond.value = '';
       } else {
-          const resultat = ((3600 * 8 * (1 - param4) / param1) * param2 * param3);
+
+          const resultat = (((3600 * 8 * (1 - param4)) / param1) * param2 * param3) * param5 || "";
           tempsDeCycleCalculerSecond.value = resultat.toFixed(2);
           tempsDeCycleCalculerSecond.dispatchEvent(new Event('change'));
       }
@@ -4947,10 +4998,37 @@
     }
 
     function proportionTotalTempsChange(){
-      calculDuTempsDeCycleCalculer();
-      calculNombrePieceParHeureApresDeduction();
       calculNombrePiecesHeure();
+      calculNombrePieceParHeureApresDeduction();
+      calculTempsDeCycleGammeEnSeconde();
+      calculNombreDePiecesParJour();
+      calculPour1000PiecesParHeure();
+      calculDuTempsDeCycleCalculer();
+     
+      //calculNombrePiecesHeure();
     }
+
+    function tempsPosageChange(){
+      calculNombreDePiecesParJour();
+      calculPour1000PiecesParHeure();
+      calculDuTempsDeCycleCalculer();
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function calculPRetTempsDePassageEnjour(){
       calculPrEnCHF();

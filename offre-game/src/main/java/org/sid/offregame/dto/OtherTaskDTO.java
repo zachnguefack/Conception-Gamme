@@ -12,7 +12,10 @@ public class OtherTaskDTO  extends TaskDTO{
     private int numero;
     private boolean status;
 
+    private double nbrePosageParPiece;
     private boolean decolletage;
+
+    private String cateName;
 
     private boolean edit;
     private double tempsDeReglageEnHeure;

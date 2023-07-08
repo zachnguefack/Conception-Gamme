@@ -119,6 +119,8 @@ public class OffreGammeRestController {
             otherTaskDTO.setTempsDeCycleCalculerSecond(otherTask.getTempsDeCycleCalculerSecond());
             otherTaskDTO.setProportionTotalTemps(otherTask.getProportionTotalTemps());
             otherTaskDTO.setDecolletage(otherTask.isDecolletage());
+            otherTaskDTO.setCateName(otherTask.getTaskCategory().getCategoryName());
+            otherTaskDTO.setNbrePosageParPiece(otherTask.getNbrePosageParPiece());
 
             List<TaskPrecisionParameterDTO> taskPrecisionParameterDTOS = new ArrayList<>();
             List<TaskTimeParameterDTO> taskTimeParameterDTOS = new ArrayList<>();
@@ -168,18 +170,6 @@ public class OffreGammeRestController {
     public String updateTasksStatusAndNumber() {
         offreGameService.updateTasksStatusAndNumber();
         return "redirect:/";
-    }
-
-
-    @GetMapping("/categories")
-    public String getCategoryTest(Model model, @RequestParam(name = "page",defaultValue = "0") int page,
-                                  @RequestParam(name = "size",defaultValue = "5") int size) {
-
-        Page<TaskCategory> taskCategoryPage = taskCategoryRepository.findAll(PageRequest.of(page, size));
-        model.addAttribute("pagecat",new int[taskCategoryPage.getTotalPages()]);
-
-        model.addAttribute("categories", taskCategoryRepository.findAll());
-        return "index";
     }
 
     @GetMapping("/")
