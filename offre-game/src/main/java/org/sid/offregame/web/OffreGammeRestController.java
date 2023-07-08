@@ -195,7 +195,6 @@ public class OffreGammeRestController {
         model.addAttribute("categories", categories);
         model.addAttribute("otherTaskListCheck", taskChoice);
         model.addAttribute("taskWithSubTasks", taskList);
-        model.addAttribute("allTask", ajusterLongueurListes(obtenirElements(listeDeListes)) );
 
         List<List<TaskCategory>> groupes = diviserEnGroupes(categories);
         List<TaskCategory> categories1= groupes.get(0);
@@ -220,9 +219,9 @@ public class OffreGammeRestController {
         model.addAttribute("categories2", categories2);
         model.addAttribute("categories3", categories3);
 
-        model.addAttribute("TaskFirst", ajusterLongueurListes(obtenirElements(listeDeListes1)));
-        model.addAttribute("TaskSecond", ajusterLongueurListes(obtenirElements(listeDeListes2)));
-        model.addAttribute("TaskThird", ajusterLongueurListes(obtenirElements(listeDeListes3)));
+        model.addAttribute("TaskFirst", transposerMatrice( obtenirMatriceModifiee(listeDeListes1)));
+        model.addAttribute("TaskSecond",transposerMatrice( obtenirMatriceModifiee(listeDeListes2)));
+        model.addAttribute("TaskThird", transposerMatrice( obtenirMatriceModifiee(listeDeListes3)));
 
         return "index";
     }
@@ -251,7 +250,6 @@ public class OffreGammeRestController {
         model.addAttribute("categories", categories);
         model.addAttribute("otherTaskListCheck", taskChoice);
         model.addAttribute("taskWithSubTasks", taskList);
-        model.addAttribute("allTask", ajusterLongueurListes(obtenirElements(listeDeListes)) );
 
         List<List<TaskCategory>> groupes = diviserEnGroupes(categories);
         List<TaskCategory> categories1= groupes.get(0);
@@ -276,9 +274,9 @@ public class OffreGammeRestController {
         model.addAttribute("categories2", categories2);
         model.addAttribute("categories3", categories3);
 
-        model.addAttribute("TaskFirst", ajusterLongueurListes(obtenirElements(listeDeListes1)) );
-        model.addAttribute("TaskSecond", ajusterLongueurListes(obtenirElements(listeDeListes2)) );
-        model.addAttribute("TaskThird", ajusterLongueurListes(obtenirElements(listeDeListes3)) );
+        model.addAttribute("TaskFirst", transposerMatrice( obtenirMatriceModifiee(listeDeListes1)));
+        model.addAttribute("TaskSecond",transposerMatrice( obtenirMatriceModifiee(listeDeListes2)));
+        model.addAttribute("TaskThird", transposerMatrice( obtenirMatriceModifiee(listeDeListes3)));
 
 
         return "index";
@@ -332,34 +330,6 @@ public class OffreGammeRestController {
 
 
 
-    public static List<List<Task>> obtenirElements(List<List<Task>> listeDeListes) {
-        int maxSize = 0;
-
-        // Trouver la taille maximale parmi les listes de tâches
-        for (List<Task> liste : listeDeListes) {
-            if (liste.size() > maxSize) {
-                maxSize = liste.size();
-            }
-        }
-
-        List<List<Task>> resultat = new ArrayList<>();
-
-        // Construire les listes résultantes
-        for (int i = 0; i < maxSize; i++) {
-            List<Task> nouvelleListe = new ArrayList<>();
-
-            for (List<Task> liste : listeDeListes) {
-                if (i < liste.size()) {
-                    nouvelleListe.add(liste.get(i));
-                }
-            }
-
-            resultat.add(nouvelleListe);
-        }
-
-        return resultat;
-    }
-
     public static List<List<Task>> obtenirMatriceCarree(List<List<Task>> listeDeListes) {
         int maxSize = 0;
 
@@ -394,32 +364,6 @@ public class OffreGammeRestController {
         }
 
         return resultat;
-    }
-
-
-    public static List<List<Task>> ajusterLongueurListes(List<List<Task>> listes) {
-        int longueurMax = 0;
-
-        // Trouver la longueur maximale parmi toutes les listes
-        for (List<Task> lst : listes) {
-            if (lst.size() > longueurMax) {
-                longueurMax = lst.size();
-            }
-        }
-
-        List<List<Task>> nouvellesListes = new ArrayList<>();
-        for (List<Task> lst : listes) {
-            List<Task> nouvelleLst = new ArrayList<>(lst);
-
-            // Ajouter des éléments null pour atteindre la longueur maximale
-            while (nouvelleLst.size() < longueurMax) {
-                nouvelleLst.add(null);
-            }
-
-            nouvellesListes.add(nouvelleLst);
-        }
-
-        return nouvellesListes;
     }
 
     public static List<List<TaskCategory>> diviserEnGroupes(List<TaskCategory> categories) {
@@ -474,6 +418,67 @@ public class OffreGammeRestController {
 
         return  tasks;
     }
+
+    public static List<List<Task>> transposerMatrice(List<List<Task>> matrice) {
+        List<List<Task>> matriceTransposee = new ArrayList<>();
+
+        int nbLignes = matrice.size();
+        int nbColonnes = matrice.get(0).size();
+
+        for (int j = 0; j < nbColonnes; j++) {
+            List<Task> colonne = new ArrayList<>();
+
+            for (int i = 0; i < nbLignes; i++) {
+                List<Task> ligne = matrice.get(i);
+                Task produit = ligne.get(j);
+
+                colonne.add(produit);
+            }
+
+            matriceTransposee.add(colonne);
+        }
+
+        return matriceTransposee;
+    }
+
+    public static List<List<Task>> obtenirMatriceModifiee(List<List<Task>> listeMatrice) {
+        int tailleMax = obtenirTailleMax(listeMatrice);
+
+        List<List<Task>> matriceModifiee = new ArrayList<>();
+
+        for (List<Task> liste : listeMatrice) {
+            int tailleListe = liste.size();
+            List<Task> listeModifiee = new ArrayList<>(liste);
+
+            while (tailleListe < tailleMax) {
+                OtherTask otherTask = new OtherTask();
+                otherTask.setId("-1");
+                otherTask.setTaskName("NAN");
+                otherTask.setStatus(false);
+                listeModifiee.add(otherTask);
+                tailleListe++;
+            }
+
+            matriceModifiee.add(listeModifiee);
+        }
+
+        return matriceModifiee;
+    }
+
+    public static int obtenirTailleMax(List<List<Task>> listeMatrice) {
+        int tailleMax = 0;
+
+        for (List<Task> liste : listeMatrice) {
+            int tailleListe = liste.size();
+            if (tailleListe > tailleMax) {
+                tailleMax = tailleListe;
+            }
+        }
+
+        return tailleMax;
+    }
+
+
 
 
 }

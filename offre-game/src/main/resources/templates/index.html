@@ -3486,99 +3486,80 @@
   </script>
 
   <script>
-        function toggleRow(checkbox) {
-        var itemId = checkbox.getAttribute('data-item-id0');
-        var isChecked = checkbox.checked;
-
-        //alert(itemId);
-        // Envoi de la requête AJAX
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/toggle',
-          data: {
-            itemId: itemId,
-            isChecked: isChecked
-          },
-          success: function(response) {
-            // Traitement réussi
-            document.getElementById("categoryForm0").submit();
-          },
-          error: function(xhr, status, error) {
-            // Traitement des erreurs
-            console.error('Erreur lors de la requête AJAX', error);
-          }
-        });
-      }
+  
       function toggleRow1(checkbox) {
         var itemId = checkbox.getAttribute('data-item-id1');
         var isChecked = checkbox.checked;
 
-        //alert(itemId);
-        // Envoi de la requête AJAX
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/toggle',
-          data: {
-            itemId: itemId,
-            isChecked: isChecked
-          },
-          success: function(response) {
-            // Traitement réussi
-            document.getElementById("categoryForm1").submit();
-          },
-          error: function(xhr, status, error) {
-            // Traitement des erreurs
-            console.error('Erreur lors de la requête AJAX', error);
-          }
-        });
+        if(itemId != "-1"){
+             // Envoi de la requête AJAX
+          $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/toggle',
+            data: {
+              itemId: itemId,
+              isChecked: isChecked
+            },
+            success: function(response) {
+              // Traitement réussi
+              document.getElementById("categoryForm1").submit();
+            },
+            error: function(xhr, status, error) {
+              // Traitement des erreurs
+              console.error('Erreur lors de la requête AJAX', error);
+            }
+          });
+        }
+
       }
 
       function toggleRow2(checkbox) {
         var itemId = checkbox.getAttribute('data-item-id2');
         var isChecked = checkbox.checked;
 
-        //alert(itemId);
-        // Envoi de la requête AJAX
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/toggle',
-          data: {
-            itemId: itemId,
-            isChecked: isChecked
-          },
-          success: function(response) {
-            // Traitement réussi
-            document.getElementById("categoryForm2").submit();
-          },
-          error: function(xhr, status, error) {
-            // Traitement des erreurs
-            console.error('Erreur lors de la requête AJAX', error);
-          }
-        });
+        if(itemId != "-1"){
+              $.ajax({
+              type: 'POST',
+              url: 'http://localhost:8080/toggle',
+              data: {
+                itemId: itemId,
+                isChecked: isChecked
+              },
+              success: function(response) {
+                // Traitement réussi
+                document.getElementById("categoryForm2").submit();
+              },
+              error: function(xhr, status, error) {
+                // Traitement des erreurs
+                console.error('Erreur lors de la requête AJAX', error);
+              }
+            });
+        }
       }
 
       function toggleRow3(checkbox) {
         var itemId = checkbox.getAttribute('data-item-id3');
         var isChecked = checkbox.checked;
 
-        //alert(itemId);
-        // Envoi de la requête AJAX
-        $.ajax({
-          type: 'POST',
-          url: 'http://localhost:8080/toggle',
-          data: {
-            itemId: itemId,
-            isChecked: isChecked
-          },
-          success: function(response) {
-            // Traitement réussi
-            document.getElementById("categoryForm3").submit();
-          },
-          error: function(xhr, status, error) {
-            // Traitement des erreurs
-            console.error('Erreur lors de la requête AJAX', error);
-          }
-        });
+        if(itemId != "-1"){
+              $.ajax({
+              type: 'POST',
+              url: 'http://localhost:8080/toggle',
+              data: {
+                itemId: itemId,
+                isChecked: isChecked
+              },
+              success: function(response) {
+                // Traitement réussi
+                document.getElementById("categoryForm3").submit();
+              },
+              error: function(xhr, status, error) {
+                // Traitement des erreurs
+                console.error('Erreur lors de la requête AJAX', error);
+              }
+            });
+        }
+        
       }
 
       function submitupdateOtherTaskForm() {
@@ -4993,8 +4974,10 @@
     }
 
     function tauxDeRendmentChange(){
-      calculPour1000PiecesParHeure();
       calculNombreDePiecesParJour();
+      calculPour1000PiecesParHeure();
+      calculDuTempsDeCycleCalculer();
+
     }
 
     function efficiencePosteChange(){
@@ -5017,8 +5000,6 @@
       calculNombreDePiecesParJour();
       calculPour1000PiecesParHeure();
       calculDuTempsDeCycleCalculer();
-
-
     }
 
 

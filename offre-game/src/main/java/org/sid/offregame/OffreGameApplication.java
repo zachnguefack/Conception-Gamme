@@ -50,16 +50,17 @@ public class OffreGameApplication {
             */
 
 
-            /*offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,6,48,0.10,"0cdd9dcd-37f5-4943-82e5-657798baf709");
-            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,3,24,0.05,"0cdd9dcd-37f5-4943-82e5-657798baf709");
-            offreGameService.saveTaskTimeParameter(true,"Caoutchouc",8,7.5,60,0.125,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+
+          /*  offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,5.6,44.8,0.093,"b7be9643-09d1-45c0-be00-87d69b3d2463");
+            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,3,24,0.05,"b7be9643-09d1-45c0-be00-87d69b3d2463");
+            offreGameService.saveTaskTimeParameter(true,"Caoutchouc",8,7.5,60,0.125,"b7be9643-09d1-45c0-be00-87d69b3d2463");
             //offreGameService.saveTaskTimeParameter(true,"Affutage burin, 2fois/jour",8,5,40,0.083,"bcea3c6f-0678-4ff8-8ec1-b52cd3014fa6");
 
-            offreGameService.saveTaskPrecisionParameter(true,480,433,314,11.5,
-                    3.75,0.84,0.85,100,1794,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            offreGameService.saveTaskPrecisionParameter(true,480,724,530,6.8,
+                    2.22,0.84,0.85,2200,3027,"b7be9643-09d1-45c0-be00-87d69b3d2463");
 
-            offreGameService.saveSubOtherTask(true,20,"Nettoyage Piece",0.5,8,"0cdd9dcd-37f5-4943-82e5-657798baf709");
-            offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",0.42,8,"0cdd9dcd-37f5-4943-82e5-657798baf709");
+            offreGameService.saveSubOtherTask(true,20,"Nettoyage Piece",0.5,8,"b7be9643-09d1-45c0-be00-87d69b3d2463");
+            offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",0.42,8,"b7be9643-09d1-45c0-be00-87d69b3d2463");
 */
 
 		};
