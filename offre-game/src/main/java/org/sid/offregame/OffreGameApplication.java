@@ -1,5 +1,6 @@
 package org.sid.offregame;
 
+import org.sid.offregame.dao.SubOtherTaskRepository;
 import org.sid.offregame.dao.TaskCategoryRepository;
 import org.sid.offregame.dao.TaskRepository;
 import org.sid.offregame.services.OffreGameService;
@@ -23,6 +24,8 @@ public class OffreGameApplication {
     private TaskCategoryRepository taskCategoryRepository;
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private SubOtherTaskRepository subOtherTaskRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OffreGameApplication.class, args);
@@ -51,17 +54,27 @@ public class OffreGameApplication {
 
 
 
-          /*  offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,5.6,44.8,0.093,"b7be9643-09d1-45c0-be00-87d69b3d2463");
-            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,3,24,0.05,"b7be9643-09d1-45c0-be00-87d69b3d2463");
-            offreGameService.saveTaskTimeParameter(true,"Caoutchouc",8,7.5,60,0.125,"b7be9643-09d1-45c0-be00-87d69b3d2463");
-            //offreGameService.saveTaskTimeParameter(true,"Affutage burin, 2fois/jour",8,5,40,0.083,"bcea3c6f-0678-4ff8-8ec1-b52cd3014fa6");
+            /*offreGameService.saveTaskTimeParameter(true,"Auto Controle",8,9,72,0.15,"d048bedb-d593-46e9-b8c4-0c04a65cd17a");
+            offreGameService.saveTaskTimeParameter(true,"Manipulation",8,6,48,0.10,"d048bedb-d593-46e9-b8c4-0c04a65cd17a");
+            offreGameService.saveTaskTimeParameter(true,"Nettoyage Posage,separation piece",8,3,24,0.05,"d048bedb-d593-46e9-b8c4-0c04a65cd17a");
+            offreGameService.saveTaskTimeParameter(true,"Affutage burin",8,2.5,20,0.042,"d048bedb-d593-46e9-b8c4-0c04a65cd17a");
 
-            offreGameService.saveTaskPrecisionParameter(true,480,724,530,6.8,
-                    2.22,0.84,0.85,2200,3027,"b7be9643-09d1-45c0-be00-87d69b3d2463");
+            offreGameService.saveTaskPrecisionParameter(true,480,1731,1139,3.2,
+                    3.01,0.84,0.85,100,6508,"d048bedb-d593-46e9-b8c4-0c04a65cd17a");
+            */
 
-            offreGameService.saveSubOtherTask(true,20,"Nettoyage Piece",0.5,8,"b7be9643-09d1-45c0-be00-87d69b3d2463");
-            offreGameService.saveSubOtherTask(true,21,"Evaluation Qualite",0.42,8,"b7be9643-09d1-45c0-be00-87d69b3d2463");
-*/
+           // offreGameService.findByTask("categorie test");
+           // offreGameService.saveSubOtherTask();
+
+           /* Task task = taskRepository.findById("cb6b5fd5-8b55-490e-b5bf-cf1d82e637d9").orElse(null);
+            List<SubOtherTask> subOtherTasks = new ArrayList<>();
+            SubOtherTask netttoyage = subOtherTaskRepository.findByName("Nettoyage");
+            SubOtherTask evaluationQualite = subOtherTaskRepository.findByName("Evaluation Qualite");
+            subOtherTasks.add(netttoyage);
+            subOtherTasks.add(evaluationQualite);
+            task.setSubOtherTasks(subOtherTasks);
+            taskRepository.save(task);
+            */
 
 		};
 

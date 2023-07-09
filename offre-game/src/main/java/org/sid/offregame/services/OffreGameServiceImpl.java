@@ -33,22 +33,8 @@ public class OffreGameServiceImpl implements OffreGameService{
         return taskCategoryRepository.save(taskCategory);
     }
 
-    public SubOtherTask saveSubOtherTask(boolean status, int numeroSequence, String name, double tempsDeReglage, double tempsDeProduction, String taskId) throws TasKNotFindException {
 
-        Task task = taskRepository.findById(taskId).orElse(null);
-        if(task == null){
-            throw  new TasKNotFindException("Task Not Find!");
-        }
-
-        SubOtherTask subOtherTask = new SubOtherTask();
-        subOtherTask.setStatus(status);
-        subOtherTask.setNumeroSequence(numeroSequence);
-        subOtherTask.setName(name);
-        subOtherTask.setTempsDeReglage(tempsDeReglage);
-        subOtherTask.setTempsDeProduction(tempsDeProduction);
-        subOtherTask.setTask(task);
-
-
+    public SubOtherTask saveSubOtherTask(SubOtherTask subOtherTask) {
         return subOtherTaskRepository.save(subOtherTask);
     }
 

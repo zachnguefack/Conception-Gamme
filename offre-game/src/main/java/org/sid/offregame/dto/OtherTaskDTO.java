@@ -17,6 +17,7 @@ public class OtherTaskDTO  extends TaskDTO{
 
     private String cateName;
 
+    private Long CategoryId;
     private boolean edit;
     private double tempsDeReglageEnHeure;
     private  double tempsDeProduction;
@@ -34,6 +35,9 @@ public class OtherTaskDTO  extends TaskDTO{
     private double tempsDeReglageHeur;
     private double tempsDeCycleCalculerSecond;
     private double proportionTotalTemps;
+    private boolean nettoyage;
+    private boolean evaluationQualite;
+    private boolean evaluationQualitePlusMiseEnPlateau;
     private List<SubOtherTaskDTO> subOtherTaskDTOS;
     private List<TaskTimeParameterDTO> taskTimeParametersDTO;
 

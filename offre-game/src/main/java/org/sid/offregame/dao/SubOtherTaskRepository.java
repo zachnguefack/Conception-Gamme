@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SubOtherTaskRepository extends JpaRepository<SubOtherTask,Long> {
-    List<SubOtherTask> findByTaskId(String taskId);
+    List<SubOtherTask> findByTasksId(String taskId);
+    SubOtherTask findByName(String name);
 }

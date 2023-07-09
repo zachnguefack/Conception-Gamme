@@ -17,7 +17,6 @@ public abstract class Task {
     private int numero;
     private boolean status;
     private boolean edit;
-
     private boolean decolletage;
 
     private  double tempsDeProduction;
@@ -36,7 +35,7 @@ public abstract class Task {
     private Piece piece;
     @ManyToOne
     private TaskCategory taskCategory;
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<SubOtherTask> subOtherTasks;
 
 }

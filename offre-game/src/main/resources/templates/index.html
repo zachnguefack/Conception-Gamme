@@ -137,7 +137,9 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarSuccessExampleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span style="color: white;"class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span></a>
                     <div class="dropdown-menu py-0" aria-labelledby="navbarSuccessExampleDropdown">
-                      <div class="bg-white dark__bg-1000 py-2 rounded-3"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a>
+                      <div class="bg-white dark__bg-1000 py-2 rounded-3">
+                        <a class="dropdown-item" href="#">Creer une Catégorie</a>
+                        <a class="dropdown-item" href="#">Creer une Tâche</a>
                         <hr class="dropdown-divider" /><a class="dropdown-item" href="#">Something else here</a>
                       </div>
                     </div>
@@ -157,15 +159,17 @@
          
           <div class="card mb-3 mt-3">
             <div class="card-header" >
-              <div class="row flex-between-end">
+              <div  class="row flex-between-end">
                 <div class="col-auto align-self-center">
                   <h5 class="mb-0">Catégories et Tâches</h5>
                 </div>
                 <div class="col-auto ms-auto">
                   <div id="table-purchases-replace-element">
-                    <button class="btn btn-falcon-default btn-sm" onclick="window.location.href='/select_task'" style="background-color: #714B67;" type="button"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer</span></button>
-                    <button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Filter</span></button>
-                    <button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Export</span></button>
+                    <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#createTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Creer Tâche</span></button>
+                    <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#configTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer Tâche</span></button>
+                    <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#createSubTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Creer Sous-Tâches</span></button>
+                    <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#createCategorie" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Creer une Catégorie</span></button>
+                    <button style="background-color: #714B67; border-color: #714B67;" class="btn btn-falcon-default btn-sm" type="button"><span style="color: white;" class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Paramètres</span></button>
                   </div>
                 </div>
               </div>
@@ -3275,7 +3279,293 @@
                   </div>
                 </div>
               </div>
+          </div>
+
+          <div class="modal fade" id="createTask" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabelCreateTask" aria-hidden="true">
+            <div class="modal-dialog modal-lg mt-6" role="document">
+              <div class="modal-content border-0">
+                <div class="position-absolute top-0 end-0 mt-2 me-3 z-1">
+                  <button style="background-color: red; border-color: white;" class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div style="background-color: #714B67; border-color: #714B67;" class="rounded-top-3 py-3 ps-4 pe-6">
+                    <h4 class="mb-1 text-white" id="staticBackdropLabelCreateTask">Creer une nouvelle Tâche</h4>
+                  </div>
+                  <div class="p-4">
+
+                    <form class="row needs-validation" novalidate="" th:action="@{/createTask}" method="post">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom01">Nom</label>
+                          <input class="form-control" name="TaskName" id="validationCustom01" type="text" required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom02">Temps de Réglage</label>
+                          <input class="form-control" name="tempsDeReglageEnHeure" id="validationCustom02" type="number" step="0.01"   required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom04">Inter-Operatoire [H]</label>
+                          <input class="form-control" id="validationCustom04" name="tempsInterOperatoireEnHeure" type="number" step="0.01"   required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+  
+                      <div class="row mt-2">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom05">Taux Horaire Réglage</label>
+                          <input class="form-control" id="validationCustom05" name="tauxHoraireReglage" step="0.01"  type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom06">Taux H. Production</label>
+                          <input class="form-control" id="validationCustom06" name="tauxHoraireProduction" step="0.01"  type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom07">Indirect</label>
+                          <input class="form-control" id="validationCustom07" name="indirect" type="number" step="0.01"   required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+  
+                      <div class="row mt-2">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom08">Marge</label>
+                          <input class="form-control" id="validationCustom08" step="0.01"  name="marge" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+  
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom9">Tps cycle de base [s]</label>
+                          <input class="form-control" step="0.01"  id="validationCustom9" name="tempsCycleDeBaseSecond" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                          <label class="form-label" for="validationCustom10">Catégorie</label>
+                          <select class="form-select" name="CategoryId" id="validationCustom10" required="">
+                            <option selected="" disabled="" value="">Choisi la catégorie</option>
+                            <option  th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+                          </select>
+                          <div class="invalid-feedback">Please select a valid state.</div>   
+                        </div>
+                      </div>
+
+                      <div class="row mt-2">
+                        <div class="col-12 mt-3">
+                          <div class="card" >
+                            <div class="card-header align-items-center" style="background-color: #77586f;">
+                              <h6 class="mb-0 text-white">Choisi les Sous-Tâches</h6>
+                            </div>
+                            <div class="card-body">
+                              <div class="row align-items-end">
+                                <div class="tab-content">
+                                  <div class="row">
+                                    <div class="col">
+                                      <input class="form-check-input"  type="checkbox" name="nettoyage" data-bulk-select-row="data-bulk-select-row" >
+                                      <label class="form-label other-text">Nettoyage</label>
+                                    </div>
+                                    <div class="col">
+                                      <input class="form-check-input" name="evaluationQualite" data-bulk-select-row="data-bulk-select-row" type="checkbox">
+                                      <label  class="form-label other-text" >Evaluation Qualité</label>
+                                    </div>
+                                    <div class="col">
+                                      <input class="form-check-input" name="evaluationQualitePlusMiseEnPlateau" data-bulk-select-row="data-bulk-select-row" type="checkbox">
+                                      <label  class="form-label other-text">Eval Q.+ Mise en Plateau</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <button  style="background-color: #714B67; border-color: #714B67;" class="btn btn-primary text-white" type="submit">Enregistrer</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="modal fade" id="configTask" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabelConfigTask" aria-hidden="true">
+            <div class="modal-dialog modal-lg mt-6" role="document">
+              <div class="modal-content border-0">
+                <div class="position-absolute top-0 end-0 mt-2 me-3 z-1">
+                  <button style="background-color: red; border-color: white;" class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div style="background-color: #714B67; border-color: #714B67;" class="rounded-top-3 py-3 ps-4 pe-6">
+                    <h4 class="mb-1 text-white" id="staticBackdropLabelConfigTask">Configuration de la tâche</h4>
+                  </div>
+                  <div class="p-4">
+
+                    <form class="row needs-validation" novalidate="">
+                      <div class="row">
+                        <div class="col-12">
+                          <label class="form-label" for="validationCustom11">Tâche</label>
+                          <select class="form-select" id="validationCustom11" required="">
+                            <option selected=""  disabled="" value="">Choisi la tâche à configurer</option>
+                            <option  th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.TaskName}">tache 1</option>
+                           
+                          </select>
+                          <div class="invalid-feedback">Please select a valid state.</div>   
+                        </div>
+                      </div>
+  
+                      <div class="row mt-3">
+                        <div class="col-4">
+                          <label class="form-label" for="validationCustom12">Nom du Paramètre</label>
+                          <input class="form-control" id="validationCustom12" type="text" required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-4">
+                          <label class="form-label" for="validationCustom13">Nombre [H/J]</label>
+                          <input class="form-control" id="validationCustom13" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-4">
+                          <label class="form-label" for="validationCustom14">Temps [Min/H]</label>
+                          <input class="form-control" id="validationCustom14" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+  
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <div class="form-check">
+                            <input class="form-check-input" id="invalidCheck" type="checkbox" value="" required="" />
+                            <label class="form-check-label mb-0" for="invalidCheck">Statut du paramètre</label>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <button  style="background-color: #714B67; border-color: #714B67;" class="btn btn-primary text-white" type="submit">Enregistrer</button>
+                        </div>
+                      </div>
+                    </form>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="modal fade" id="createSubTask" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabelCreateSubTask" aria-hidden="true">
+            <div class="modal-dialog modal-lg mt-6" role="document">
+              <div class="modal-content border-0">
+                <div class="position-absolute top-0 end-0 mt-2 me-3 z-1">
+                  <button style="background-color: red; border-color: white;" class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div style="background-color: #714B67; border-color: #714B67;" class="rounded-top-3 py-3 ps-4 pe-6">
+                    <h4 class="mb-1 text-white" id="staticBackdropLabelCreateSubTask">Creer une nouvelle Tâche</h4>
+                  </div>
+                  <div class="p-4">
+
+                    <form class="row needs-validation" novalidate="" th:action="@{/createSubTask}" method="post">
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation01">Nom</label>
+                          <input class="form-control" name="name" id="validation01" type="text" required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation02">Temps de Réglage</label>
+                          <input class="form-control" name="tempsDeReglage" id="validation02" type="number" step="0.01"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation04">Inter-Operatoire [H]</label>
+                          <input class="form-control" id="validation04" name="tempsInterOperatoireEnHeure" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation05">Taux Horaire Réglage</label>
+                          <input class="form-control" id="validation05" name="tauxHoraireReglage" type="number" step="0.01"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation06">Taux H. Production</label>
+                          <input class="form-control" id="validation06" name="tauxHoraireProduction" type="number"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation07">Indirect</label>
+                          <input class="form-control" id="validation07" name="indirect" type="number" step="0.01"  required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-md-4">
+                          <label class="form-label" for="validation08">Marge</label>
+                          <input class="form-control" id="validation08" name="marge" type="number" step="0.01" required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <button  style="background-color: #714B67; border-color: #714B67;" class="btn btn-primary text-white" type="submit">Enregistrer</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="createCategorie" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabelcreateCategorie" aria-hidden="true">
+            <div class="modal-dialog modal-lg mt-6" role="document">
+              <div class="modal-content border-0">
+                <div class="position-absolute top-0 end-0 mt-2 me-3 z-1">
+                  <button style="background-color: red; border-color: white;" class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                  <div style="background-color: #714B67; border-color: #714B67;" class="rounded-top-3 py-3 ps-4 pe-6">
+                    <h4 class="mb-1 text-white" id="staticBackdropLabelConfigTask">Creer une nouvelle Catégorie</h4>
+                  </div>
+                  <div class="p-4">
+
+                    <form class="row needs-validation" novalidate="" th:action="@{/createCategory}" method="post">
+                      <div class="row mt-2">
+                        <div class="col-12">
+                          <label class="form-label" for="categoryName0">Nom de la Catégorie</label>
+                          <input class="form-control" id="categoryName0" type="text" name="categoryName" required="" />
+                          <div class="valid-feedback">Looks good!</div>
+                        </div>
+                      </div>
+  
+                      <div class="row mt-3">
+                        <div class="col-12">
+                          <button  style="background-color: #714B67; border-color: #714B67;" class="btn btn-primary text-white" type="submit">Enregistrer</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           
           <footer class="footer">
             <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
@@ -4452,14 +4742,14 @@
         num0.style.display = 'block';
         total0.style.display = 'block';
         proportion1Input.style.display = 'block';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion1Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion1Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
      
       } else {
         num0.style.display = 'none';
         total0.style.display = 'none';
         proportion1Input.style.display = 'none';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion1Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion1Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
       }
 
@@ -4473,14 +4763,14 @@
         num1.style.display = 'block';
         total1.style.display = 'block';
         proportion2Input.style.display = 'block';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion2Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion2Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
      
       } else {
         num1.style.display = 'none';
         total1.style.display = 'none';
         proportion2Input.style.display = 'none';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion2Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion2Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
       }
 
@@ -4496,14 +4786,14 @@
         num2.style.display = 'block';
         total2.style.display = 'block';
         proportion3Input.style.display = 'block';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion3Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion3Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
 
       } else {
         num2.style.display = 'none';
         total2.style.display = 'none';
         proportion3Input.style.display = 'none';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion3Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion3Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
       }
 
@@ -4517,14 +4807,14 @@
         num3.style.display = 'block';
         total3.style.display = 'block';
         proportion4Input.style.display = 'block';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion4Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) + parseFloat(proportion4Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
 
       } else {
         num3.style.display = 'none';
         total3.style.display = 'none';
         proportion4Input.style.display = 'none';
-        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion4Input.value)).toFixed(3);
+        proportionFinalInput.value = (parseFloat(proportionFinalInput.value) - parseFloat(proportion4Input.value)).toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
       }
 
@@ -4924,7 +5214,7 @@
         proportionFinalInput.value = ''; // Effacer le résultat s'il y a des valeurs manquantes
       } else {
         const resultat = prop1 + prop2 + prop3 + prop4;
-        proportionFinalInput.value = resultat.toFixed(3);
+        proportionFinalInput.value = resultat.toFixed(4);
         proportionFinalInput.dispatchEvent(new Event('change'));
       }
     }

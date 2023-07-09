@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.sid.offregame.dao.*;
 import org.sid.offregame.dto.OtherTaskDTO;
 import org.sid.offregame.entities.*;
+import org.sid.offregame.exceptions.TasKCategoryNotFindException;
 import org.sid.offregame.mappers.OffreGammeMapperImpl;
 import org.sid.offregame.services.OffreGameService;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.UUID;
 
 
 @Controller
@@ -34,6 +36,72 @@ public class OffreGammeRestController {
     private SubOtherTaskRepository subOtherTaskRepository;
     private CategoryParametreDecolletageRepository cateParamDecolletageRepository;
     private ParametreDecolletageRepository parametreDecolletageRepository;
+
+
+    @PostMapping("/createCategory")
+    public String createCategory(@ModelAttribute("TaskCategoryDTO") TaskCategoryDTO taskCategoryDTO){
+        TaskCategory taskCategory = new TaskCategory();
+        taskCategory.setCategoryName(taskCategoryDTO.getCategoryName());
+        offreGameService.saveTaskCategory(taskCategory);
+        return "redirect:/";
+    }
+
+    @PostMapping("/createTask")
+    public String createTask(@ModelAttribute("OtherTaskDTO") OtherTaskDTO otherTaskDTO){
+
+        TaskCategory taskCategory = taskCategoryRepository.findById(otherTaskDTO.getCategoryId()).orElse(null);
+        OtherTask otherTask = new OtherTask();
+        otherTask.setId(UUID.randomUUID().toString());
+        otherTask.setTaskName(otherTaskDTO.getTaskName());
+        otherTask.setStatus(false);
+        otherTask.setNumero(0);
+        otherTask.setTempsCycleDeBaseSecond(otherTaskDTO.getTempsCycleDeBaseSecond());
+        otherTask.setIndirect(otherTaskDTO.getIndirect());
+        otherTask.setMarge(otherTaskDTO.getMarge());
+        otherTask.setTauxHoraireProduction(otherTaskDTO.getTauxHoraireProduction());
+        otherTask.setTauxHoraireReglage(otherTaskDTO.getTauxHoraireReglage());
+        otherTask.setTempsDeReglageEnHeure(otherTaskDTO.getTempsDeReglageEnHeure());
+        otherTask.setTempsInterOperatoireEnHeure(otherTaskDTO.getTempsInterOperatoireEnHeure());
+
+        otherTask.setTaskCategory(taskCategory);
+        List<SubOtherTask> subOtherTasks = new ArrayList<>();
+
+        if(otherTaskDTO.isNettoyage()){
+            SubOtherTask netttoyage = subOtherTaskRepository.findByName("Nettoyage");
+            subOtherTasks.add(netttoyage);
+        }
+        if (otherTaskDTO.isEvaluationQualite()){
+            SubOtherTask evaluationQualite = subOtherTaskRepository.findByName("Evaluation Qualite");
+            subOtherTasks.add(evaluationQualite);
+        }
+
+        if(otherTaskDTO.isEvaluationQualitePlusMiseEnPlateau()){
+            SubOtherTask evaluationQualitePlusMisePlateau = new SubOtherTask();
+        }
+        otherTask.setSubOtherTasks(subOtherTasks);
+        taskRepository.save(otherTask);
+
+        return "redirect:/";
+    }
+
+
+    @PostMapping("/createSubTask")
+    public String createSubTask(@ModelAttribute("SubOtherTaskDTO") SubOtherTaskDTO subOtherTaskDTO){
+
+
+        SubOtherTask subOtherTask = new SubOtherTask();
+        subOtherTask.setName(subOtherTaskDTO.getName());
+        subOtherTask.setStatus(true);
+        subOtherTask.setNumeroSequence(0);
+        subOtherTask.setMarge(subOtherTaskDTO.getMarge());
+        subOtherTask.setTauxHoraireProduction(subOtherTaskDTO.getTauxHoraireProduction());
+        subOtherTask.setTauxHoraireReglage(subOtherTaskDTO.getTauxHoraireReglage());
+        subOtherTask.setTempsDeReglage(subOtherTaskDTO.getTempsDeReglage());
+
+        offreGameService.saveSubOtherTask(subOtherTask);
+
+        return "redirect:/";
+    }
 
 
     @PostMapping("/othertask/update")
@@ -99,7 +167,7 @@ public class OffreGammeRestController {
         Task task = taskRepository.findById(id).get();
 
         List<SubOtherTaskDTO> subOtherTaskDTOS = new ArrayList<>();
-        for (SubOtherTask subOtherTask: subOtherTaskRepository.findByTaskId(task.getId())) {
+        for (SubOtherTask subOtherTask: subOtherTaskRepository.findByTasksId(task.getId())) {
             subOtherTaskDTOS.add(dto.toSubOtherTaskDTO(subOtherTask));
         }
 
@@ -173,10 +241,12 @@ public class OffreGammeRestController {
     }
 
     @GetMapping("/")
-    public String getCategory(Model model) {
+    public String homePageGet(Model model) {
 
         List<TaskCategory> categories = taskCategoryRepository.findAll();
         List<List<Task>> listeDeListes = new ArrayList<>();
+
+        List<Task> tasks = taskRepository.findAll();
 
         for (TaskCategory cate: categories) {
             listeDeListes.add(cate.getTasks());
@@ -193,6 +263,7 @@ public class OffreGammeRestController {
 
         List<Task> taskList = listeDesTachesEtSousTche(listTaskEdit);
         model.addAttribute("categories", categories);
+        model.addAttribute("tasks", tasks);
         model.addAttribute("otherTaskListCheck", taskChoice);
         model.addAttribute("taskWithSubTasks", taskList);
 
@@ -227,10 +298,10 @@ public class OffreGammeRestController {
     }
 
     @PostMapping("/")
-    public String getCategorypost(Model model) {
+    public String homePagePost(Model model) {
 
         List<TaskCategory> categories = taskCategoryRepository.findAll();
-
+        List<Task> tasks = taskRepository.findAll();
         List<List<Task>> listeDeListes = new ArrayList<>();
 
         for (TaskCategory cate: categories) {
@@ -248,6 +319,7 @@ public class OffreGammeRestController {
 
         List<Task> taskList = listeDesTachesEtSousTche(listTaskEdit);
         model.addAttribute("categories", categories);
+        model.addAttribute("tasks", tasks);
         model.addAttribute("otherTaskListCheck", taskChoice);
         model.addAttribute("taskWithSubTasks", taskList);
 

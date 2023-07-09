@@ -26,7 +26,7 @@ public interface OffreGameService {
     void updateTaskNumber(String id,Integer nouveauNumero);
     void updateTasksStatusAndNumber();
     TaskCategory saveTaskCategory(TaskCategory taskCategory);
-    SubOtherTask saveSubOtherTask(boolean status,int numeroSequence, String name, double tempsDeReglage,double tempsDeProduction, String taskId) throws TasKNotFindException;
+    SubOtherTask saveSubOtherTask(SubOtherTask subOtherTask);
     TaskPrecisionParameter saveTaskPrecisionParameter(boolean status,double tempsOuvertureMin,double nombrePieceParHeure
     ,double nombrePieceParHeureApresDeduction, double tempsDeCycleGammeEnSeconde, double pourMilParPcsEnHeure,
                                                       double tauxDeRendment, double efficiencePoste,double calculInversePiecesParJour,

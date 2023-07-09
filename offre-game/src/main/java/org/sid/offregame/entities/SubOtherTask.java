@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class SubOtherTask {
@@ -25,6 +27,6 @@ public class SubOtherTask {
     private double calculPVenCHF;
     private double tempsDeReglage;
     private  double tempsDeProduction;
-    @ManyToOne
-    private Task task;
+    @ManyToMany(mappedBy = "subOtherTasks",cascade = CascadeType.ALL)
+    private List<Task> tasks;
 }
