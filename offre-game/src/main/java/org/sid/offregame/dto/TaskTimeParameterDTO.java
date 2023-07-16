@@ -6,6 +6,7 @@ import lombok.Data;
 public class TaskTimeParameterDTO {
 
     private Long id;
+    private String taskId;
     private boolean status;
     private String name;
     private double nombreHeure;

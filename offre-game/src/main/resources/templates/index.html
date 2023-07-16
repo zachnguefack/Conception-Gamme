@@ -138,9 +138,10 @@
                   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarSuccessExampleDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span style="color: white;"class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span></a>
                     <div class="dropdown-menu py-0" aria-labelledby="navbarSuccessExampleDropdown">
                       <div class="bg-white dark__bg-1000 py-2 rounded-3">
-                        <a class="dropdown-item" href="#">Creer une Catégorie</a>
-                        <a class="dropdown-item" href="#">Creer une Tâche</a>
-                        <hr class="dropdown-divider" /><a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#" th:text="${#authentication.name}"></a>
+                        <form th:action="@{/logout}" method="post">
+                          <button type="submit" class="dropdown-item" href="#">Logout</button>
+                        </form>
                       </div>
                     </div>
                   </li>
@@ -158,13 +159,13 @@
 
          
           <div class="card mb-3 mt-3">
-            <div class="card-header" >
+            <div class="card-header" style="background-color: #503047;">
               <div  class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                  <h5 class="mb-0">Catégories et Tâches</h5>
+                  <h5 class="mb-0 text-white">Catégories et Tâches</h5>
                 </div>
                 <div class="col-auto ms-auto">
-                  <div id="table-purchases-replace-element">
+                  <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}" id="table-purchases-replace-element">
                     <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#createTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Creer Tâche</span></button>
                     <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#configTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Configurer Tâche</span></button>
                     <button style="background-color: #714B67; border-color: #714B67;" data-bs-toggle="modal" data-bs-target="#createSubTask" class="btn btn-falcon-default btn-sm mx-2" type="button"><span style="color: white;" class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span><span style="color: white;" class="d-none d-sm-inline-block ms-1">Creer Sous-Tâches</span></button>
@@ -355,7 +356,7 @@
                 </thead>
                 <tbody class="matable" >
                   <div>
-                    <tr class="align-middle" th:each="item, iterStat : ${taskWithSubTasks}" th:class="${item.TaskName != 'Nettoyage Piece' && item.TaskName != 'Evaluation Qualite'} ? 'red-row'">
+                    <tr class="align-middle" th:each="item, iterStat : ${taskWithSubTasks}" th:class="${item.TaskName != 'Nettoyage' && item.TaskName != 'Evaluation Qualite'} ? 'red-row'">
                       <td class="align-middle other-text custom-bold" th:text="${item.numero}"></td>
                       <td class="align-middle other-text custom-bold" th:id="${#ids.next('TaskName')}" th:text="${item.TaskName}"></td>
                       <td class="align-middle other-text">
@@ -419,12 +420,12 @@
                               </div>  
                               <div class="col-md-2">
                               <label class="form-label other-text" for="nbreJourDecolletage">Nombre de Jour Décolletage</label>
-                              <input class="form-control" id="nbreJourDecolletage" type="number" required="" />
+                              <input class="form-control" id="nbreJourDecolletage" type="number" required="" readonly />
                               <div class="valid-feedback">Looks good!</div>
                               </div> 
                               <div class="col-md-2">
                               <label class="form-label other-text" for="categoriePiece">Catégorie de la Pièce</label>
-                              <select class="form-select"  id="categoriePiece" aria-label="Default select example">
+                              <select class="form-select"  id="categoriePiece" onchange="selectCategoryChange()" aria-label="Default select example">
                                 <option selected="">Categorie de la pièce</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -558,10 +559,10 @@
                                   </div>
                                 </td>
                                 <td><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[0].name"  type="text" id="name0" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm  other-text text-center" name="taskTimeParametersDTO[0].nombreHeure"  type="number" id="n0" required="" readonly /></td>
-                                <td class="align-middlepe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].tempsMinParHeure"  type="number" id="temps0" required="" /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].totalTimeEnMin" type="number" id="total0" required="" readonly /></td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" onchange="proportion1InputChange()" name="taskTimeParametersDTO[0].proportionTemps"  type="number" id="prop0" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm  other-text text-center" name="taskTimeParametersDTO[0].nombreHeure"  type="number" id="n0" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].tempsMinParHeure"  type="number" id="temps0" required="" /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[0].totalTimeEnMin" type="number" id="total0" required="" readonly /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text text-center" onchange="proportion1InputChange()" name="taskTimeParametersDTO[0].proportionTemps"  type="number" id="prop0" required="" readonly /></td>
                               </tr>
                               <tr id="paramTaskLigne2">
                                 <td class="align-middle white-space-nowrap">
@@ -570,10 +571,10 @@
                                   </div>
                                 </td>
                                 <td><input class="form-control form-control-sm  other-text" name="taskTimeParametersDTO[1].name"  type="text" id="name1" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].nombreHeure" type="number" id="n1" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].tempsMinParHeure" type="number" id="temps1" required="" /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].totalTimeEnMin" type="number" id="total1" required="" readonly /></td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" onchange="proportion2InputChange()" name="taskTimeParametersDTO[1].proportionTemps"  type="number" id="prop1" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].nombreHeure" type="number" id="n1" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].tempsMinParHeure" type="number" id="temps1" required="" /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[1].totalTimeEnMin" type="number" id="total1" required="" readonly /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text text-center" onchange="proportion2InputChange()" name="taskTimeParametersDTO[1].proportionTemps"  type="number" id="prop1" required="" readonly /></td>
                               </tr>
                               <tr id="paramTaskLigne3">
                                 <td class="align-middle white-space-nowrap">
@@ -582,10 +583,10 @@
                                   </div>
                                 </td>
                                 <td><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[2].name" type="text" id="name2" required=""  readonly/></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].nombreHeure"  type="number" id="n2" required=""  readonly/></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].tempsMinParHeure"  type="number" id="temps2" required="" /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].totalTimeEnMin" type="number" id="total2" required="" readonly  /></td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" onchange="proportion3InputChange()" name="taskTimeParametersDTO[2].proportionTemps"  type="number" id="prop2" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].nombreHeure"  type="number" id="n2" required=""  readonly/></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].tempsMinParHeure"  type="number" id="temps2" required="" /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[2].totalTimeEnMin" type="number" id="total2" required="" readonly  /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text text-center" onchange="proportion3InputChange()" name="taskTimeParametersDTO[2].proportionTemps"  type="number" id="prop2" required="" readonly /></td>
                               </tr>
                               <tr id="paramTaskLigne4">
                                 <td class="align-middle white-space-nowrap">
@@ -594,10 +595,10 @@
                                   </div>
                                 </td>
                                 <td><input class="form-control form-control-sm other-text" name="taskTimeParametersDTO[3].name" type="text"  id="name3" required=""  readonly/></td> 
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].nombreHeure" type="number" id="n3" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].tempsMinParHeure" type="number" id="temps3" required="" /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].totalTimeEnMin" type="number" id="total3" required="" readonly /></td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" onchange="proportion4InputChange()" name="taskTimeParametersDTO[3].proportionTemps"  type="number" id="prop3" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].nombreHeure" type="number" id="n3" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].tempsMinParHeure" type="number" id="temps3" required="" /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[3].totalTimeEnMin" type="number" id="total3" required="" readonly /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text text-center" onchange="proportion4InputChange()" name="taskTimeParametersDTO[3].proportionTemps"  type="number" id="prop3" required="" readonly /></td>
                               </tr>
                               <tr id="paramTaskLigne5">
                                 <td class="align-middle white-space-nowrap">
@@ -606,10 +607,10 @@
                                   </div>
                                 </td>
                                 <td><input class="form-control form-control-sm other-text" type="text" name="taskTimeParametersDTO[4].name" id="name4" required=""  readonly/></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].nombreHeure" type="number" id="n4" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].tempsMinParHeure"  type="number" id="temps4" required="" readonly /></td>
-                                <td class="align-middle pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].totalTimeEnMin"  type="number" id="total4" required="" readonly /></td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].proportionTemps"  type="number" id="prop4" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].nombreHeure" type="number" id="n4" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].tempsMinParHeure"  type="number" id="temps4" required="" readonly /></td>
+                                <td class="align-middle pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].totalTimeEnMin"  type="number" id="total4" required="" readonly /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text text-center" name="taskTimeParametersDTO[4].proportionTemps"  type="number" id="prop4" required="" readonly /></td>
                               </tr>
                               <tr>
                                 <td class="align-middle white-space-nowrap">
@@ -617,11 +618,11 @@
                                   <input class="form-check-input bg-danger" type="checkbox" checked data-bulk-select-row="data-bulk-select-row" disabled />
                                   </div>
                                 </td>
-                                <td class="align-middle text-center pe-2 other-text">NAN</td>
-                                <td class="align-middle pe-2 text-center other-text">NAN</td>
-                                <td class="align-middle pe-2 text-center other-text">NAN</td>
+                                <td class="align-middle text-center pe-1 other-text">NAN</td>
+                                <td class="align-middle pe-1 text-center other-text">NAN</td>
+                                <td class="align-middle pe-1 text-center other-text">NAN</td>
                                 <td style="background-color: #77586f;" class="align-middle text-center text-white">Temps Total</td>
-                                <td class="align-middle white-space-nowrap text-end pe-2"><input class="form-control form-control-sm other-text border-0"  onchange="proportionTotalTempsChange()" id="proportionTpsTotal"  type="number"  required="" readonly /></td>
+                                <td class="align-middle white-space-nowrap text-end pe-1"><input class="form-control form-control-sm other-text border-0"  onchange="proportionTotalTempsChange()" id="proportionTpsTotal"  type="number"  required="" readonly /></td>
                               </tr>
                             </tbody>
                             </table>
@@ -3408,14 +3409,13 @@
                   </div>
                   <div class="p-4">
 
-                    <form class="row needs-validation" novalidate="">
+                    <form class="row needs-validation" novalidate="" th:action="@{/configTask}" method="post">
                       <div class="row">
                         <div class="col-12">
                           <label class="form-label" for="validationCustom11">Tâche</label>
-                          <select class="form-select" id="validationCustom11" required="">
+                          <select class="form-select" name="taskId" id="validationCustom11" required="">
                             <option selected=""  disabled="" value="">Choisi la tâche à configurer</option>
                             <option  th:each="task : ${tasks}" th:value="${task.id}" th:text="${task.TaskName}">tache 1</option>
-                           
                           </select>
                           <div class="invalid-feedback">Please select a valid state.</div>   
                         </div>
@@ -3424,27 +3424,25 @@
                       <div class="row mt-3">
                         <div class="col-4">
                           <label class="form-label" for="validationCustom12">Nom du Paramètre</label>
-                          <input class="form-control" id="validationCustom12" type="text" required="" />
+                          <input class="form-control" name="name" id="validationCustom12" type="text" required="" />
                           <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-4">
                           <label class="form-label" for="validationCustom13">Nombre [H/J]</label>
-                          <input class="form-control" id="validationCustom13" type="number"  required="" />
+                          <input class="form-control" name="nombreHeure" step="0.01" id="validationCustom13" type="number"  required="" />
                           <div class="valid-feedback">Looks good!</div>
                         </div>
                         <div class="col-4">
                           <label class="form-label" for="validationCustom14">Temps [Min/H]</label>
-                          <input class="form-control" id="validationCustom14" type="number"  required="" />
+                          <input class="form-control" name="tempsMinParHeure" step="0.01" id="validationCustom14" type="number"  required="" />
                           <div class="valid-feedback">Looks good!</div>
                         </div>
                       </div>
   
                       <div class="row mt-3">
                         <div class="col-12">
-                          <div class="form-check">
-                            <input class="form-check-input" id="invalidCheck" type="checkbox" value="" required="" />
-                            <label class="form-check-label mb-0" for="invalidCheck">Statut du paramètre</label>
-                          </div>
+                          <input class="form-check-input" name="status" data-bulk-select-row="data-bulk-select-row" type="checkbox">
+                          <label  class="form-label other-text">Statut du paramètre</label>
                         </div>
                       </div>
   
@@ -3470,7 +3468,7 @@
                 </div>
                 <div class="modal-body p-0">
                   <div style="background-color: #714B67; border-color: #714B67;" class="rounded-top-3 py-3 ps-4 pe-6">
-                    <h4 class="mb-1 text-white" id="staticBackdropLabelCreateSubTask">Creer une nouvelle Tâche</h4>
+                    <h4 class="mb-1 text-white" id="staticBackdropLabelCreateSubTask">Creer une nouvelle Sous Tâche</h4>
                   </div>
                   <div class="p-4">
 
@@ -4526,6 +4524,8 @@
     const tempsDeCycleCalculerSecond = document.getElementById('tempscyclecs');
     const tempsDeReglageHeur = document.getElementById('tempscycleh');
 
+
+
    
 
    
@@ -5494,13 +5494,13 @@
       calculDuPrixDeLaPiece();
       calculTempsDePassage();
       calculPrixDeRevient();
+      calculNombreDeJourDecolletage();
     }
   
-
-    categoriePiece.addEventListener('change', function(){
+    function selectCategoryChange(){
       calculQuantitPiecesFabrication(); 
       calculPrEnCHF();
-    });
+     }
 
     
 
@@ -5529,6 +5529,21 @@
         qtePiecesFabric.dispatchEvent(new Event('change'));
       } 
       
+    }
+
+    function calculNombreDeJourDecolletage(){
+
+      var TaskNameTab = document.querySelectorAll('[id^="TaskName"]');
+      var tempsDeReglageEnHeureTab = document.querySelectorAll('[id^="tempsDeReglageEnHeure"]');
+      var tempsDeProductionTab = document.querySelectorAll('[id^="tempsDeProduction"]');
+      const qteFabric = parseFloat(qtePiecesFabric.value);
+
+      for (var i = 0; i < TaskNameTab.length; i++) {
+
+        if(TaskNameTab[i].textContent.includes("Decolletage")){
+          nbreJourDecolletage.value = (parseFloat(tempsDeReglageEnHeureTab[i].value )/ 7 + (qteFabric * parseFloat(tempsDeProductionTab[i].value )) * 1.18 / 21).toFixed(1); 
+        }
+      }
     }
 
 

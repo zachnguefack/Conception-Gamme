@@ -27,6 +27,6 @@ public class SubOtherTask {
     private double calculPVenCHF;
     private double tempsDeReglage;
     private  double tempsDeProduction;
-    @ManyToMany(mappedBy = "subOtherTasks",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "subOtherTasks")
     private List<Task> tasks;
 }

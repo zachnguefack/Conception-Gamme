@@ -76,6 +76,8 @@ public class OffreGameApplication {
             taskRepository.save(task);
             */
 
+            //taskCategoryRepository.deleteById(19L);
+
 		};
 
     }

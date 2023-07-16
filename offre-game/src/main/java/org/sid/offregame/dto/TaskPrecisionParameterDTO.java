@@ -7,6 +7,7 @@ import lombok.Data;
 public class TaskPrecisionParameterDTO {
 
     private boolean status;
+    private String taskId;
     private double tempsOuvertureMin;
     private double nombrePieceParHeure;
     private double nombrePieceParHeureApresDeduction;
